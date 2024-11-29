@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  scrollbar-width: thin; /* Sử dụng từ khóa thin để làm thanh cuộn mỏng hơn */
+}
+:root {
+  --vh: 100%;
+}
 @font-face {
   font-family: 'SFUFutura';
   src: url('./public/font/SFUFuturaBook.ttf') format('truetype');
@@ -11,4 +17,18 @@ body {
     font-family: 'SFUFutura', sans-serif;
   }
 
-  
+.textBanner { @apply text-4xl md:text-5xl lg:text-6xl; }
+.textSubBanner { @apply text-3xl md:text-4xl lg:text-5xl; }
+.textTitle { @apply text-lg md:text-xl lg:text-3xl; }
+.textSubTitle { @apply text-lg md:text-xl lg:text-2xl text-gray-400; }
+.textCardTitle { @apply text-lg lg:text-xl; }
+.textCardItemTitle { @apply text-lg lg:text-xl; }
+.textCollectionItemTitle { @apply font-medium text-xl lg:text-2xl; }
+.textCollectionItemDescription { @apply text-base text-gray-500; }
+.textCardItemSubTitle { @apply text-sm lg:text-base text-gray-400; }
+.textTitleImage { @apply text-base md:text-lg lg:text-xl; }
+
+.bg-black-gray {
+  @apply bg-[#222222];
+}
+
