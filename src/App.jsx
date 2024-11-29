@@ -1,11 +1,11 @@
 import './App.css'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import Login from '../pages/Login'
-import Signup from '../pages/Signup'
-import Account from '../pages/accounts/Account'
-import Layout from './template/Layout'
-import Home from '../pages/home/Home'
 import 'daisyui/dist/full.css'
+import Layout from './template/Layout'
+import Home from './pages/home/Home'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import Account from './pages/accounts/Account'
 
 function App() {
   return (
