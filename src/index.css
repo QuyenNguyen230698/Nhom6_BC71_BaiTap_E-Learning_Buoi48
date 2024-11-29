@@ -8,6 +8,8 @@
 :root {
   --vh: 100%;
 }
+
+/* Default Font */
 @font-face {
   font-family: 'SFUFutura';
   src: url('./public/font/SFUFuturaBook.ttf') format('truetype');
@@ -28,7 +30,68 @@ body {
 .textCardItemSubTitle { @apply text-sm lg:text-base text-gray-400; }
 .textTitleImage { @apply text-base md:text-lg lg:text-xl; }
 
+/* Default Background */
 .bg-black-gray {
   @apply bg-[#222222];
 }
 
+/* Button styles */
+
+.btnLVT {
+  @apply btn bg-black border-none text-white rounded-none hover:bg-white hover:border hover:text-black hover:outline-1;
+}
+.btnLVT:hover{
+  border: 1px solid black;
+
+}
+.btnLVT-sm {
+  @apply btn-sm btnLVT;
+}
+
+.btnLVT-md {
+  @apply btn-md btnLVT;
+}
+
+.btnLVT-lg {
+  @apply btn-lg btnLVT;
+}
+
+.btnLVT-outline {
+  border: 1px solid black;
+  @apply border outline-1 border-black text-black bg-transparent hover:bg-black hover:text-white;
+}
+
+.btnLVT-dark {
+  @apply bg-white text-neutral hover:bg-gray-600 hover:text-white;
+}
+
+/* Focus and active states */
+.btnLVT:focus {
+  @apply outline-none ring-2 ring-offset-2 ring-[#222222];
+}
+
+.btnLVT:active {
+  @apply bg-stone-800 text-white;
+}
+
+/* Tùy chỉnh thanh cuộn */
+::-webkit-scrollbar {
+  width: 3px !important;
+}
+::-webkit-scrollbar:hover {
+  width: 3px !important; /* Kích thước khi hover */
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  width: 3px !important ;
+  background: #555;
+}
