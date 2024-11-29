@@ -1,14 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import Login from '../pages/Login'
+import Signup from '../pages/Signup'
+import Account from '../pages/accounts/Account'
+import Layout from './template/Layout'
+import Home from '../pages/home/Home'
+import 'daisyui/dist/full.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      check this comment
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout main={<Home />} />} />
+        <Route path="/login" element={<Layout main={<Login />} />} />
+        <Route path="/signup" element={<Layout main={<Signup />} />} />
+        <Route path="/account" element={<Layout main={<Account />} />} />
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }
