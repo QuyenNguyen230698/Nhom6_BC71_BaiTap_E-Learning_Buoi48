@@ -9,7 +9,7 @@ import Account from './pages/accounts/Account'
 
 function App() {
   return (
-    <>
+    <div>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout main={<Home />} />} />
@@ -18,7 +18,7 @@ function App() {
         <Route path="/account" element={<Layout main={<Account />} />} />
       </Routes>
     </BrowserRouter>
-    </>
+    </div>
   )
 }
 

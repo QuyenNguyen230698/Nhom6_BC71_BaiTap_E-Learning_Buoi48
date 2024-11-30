@@ -4,7 +4,7 @@ import Footer from '../components/Footer'
 
 export default function Layout({main}) {
   return (
-    <div className='container mx-auto'>
+    <div className='bg-white flex flex-col h-full w-full'>
       <Header />
       {main}
       <Footer />

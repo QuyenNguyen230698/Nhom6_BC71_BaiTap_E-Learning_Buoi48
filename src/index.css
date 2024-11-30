@@ -1,12 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 * {
   scrollbar-width: thin; /* Sử dụng từ khóa thin để làm thanh cuộn mỏng hơn */
 }
 :root {
   --vh: 100%;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 /* Default Font */
@@ -16,7 +15,14 @@
 }
 
 body {
-    font-family: 'SFUFutura', sans-serif;
+    font-family: 'SFUFutura';
+  }
+
+  h1, h2, h3{
+    font-family: 'SFUFuturaBook';
+  }
+  h4, h5, h6, p, small{
+    font-family: 'SFUFuturaBook';
   }
 
 .textBanner { @apply text-4xl md:text-5xl lg:text-6xl; }
@@ -33,6 +39,10 @@ body {
 /* Default Background */
 .bg-black-gray {
   @apply bg-[#222222];
+}
+
+.h-35r {
+  height: 35rem;
 }
 
 /* Button styles */
@@ -94,4 +104,24 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   width: 3px !important ;
   background: #555;
+}
+
+.nav-item {
+  position: relative;
+}
+.nav-item:hover:after {
+  width: 100%;
+}
+.nav-item:after {
+  bottom: 0;
+  content: "";
+  height: 0.125rem;
+  left: 0;
+  position: absolute;
+  width: 0;
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 34 34 / var(--tw-bg-opacity));
+  transition-duration: 0.5s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
