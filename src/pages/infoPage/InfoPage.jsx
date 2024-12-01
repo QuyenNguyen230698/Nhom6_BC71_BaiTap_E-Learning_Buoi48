@@ -5,8 +5,7 @@ export default function InfoPage() {
   return (
     <div>
       <CardBanner />
-      <div className="flex flex-col lg:flex-row items-stretch h-96 justify-start w-full">
-      
+      <div className="flex flex-col lg:flex-row gap-10 items-center h-full justify-center w-full overflow-hidden container mx-auto py-10">
         <div 
         className="flex flex-col lg:w-1/2 w-full">
           <h2>V learning ?</h2>
@@ -20,10 +19,11 @@ export default function InfoPage() {
             trực tuyến thú vị và hấp dẫn.
           </p>
         </div>
-        <div className="lg:w-1/2 w-full">
-          <img className="w-full h-auto object-contain bg-contain"
+        <div className="lg:w-1/2 w-full h-96">
+          <img 
             src="https://demo2.cybersoft.edu.vn/static/media/hero-flex.553afb64.png "
             alt=""
+            className="w-full h-full object-contain"
           />
         </div>
       </div>
