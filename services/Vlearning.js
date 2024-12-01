@@ -1,9 +1,19 @@
 import { http } from "./config"
 
-//#region API Movie
+
+//#region API Course
 export let VlearningService = {
     getListCourse: () => {
         return http.get("/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01")
+    },
+    getCourseCatalog: () => {
+        return http.get("/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc")
+    },
+    getCourseDetail: () => {
+        return http.get("/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=TuDuy&MaNhom=GP01")
+    },
+    getCoursePagination: () => {
+        return http.get("/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?page=1&pageSize=10&MaNhom=GP01")
     }
 }
 //#endregion

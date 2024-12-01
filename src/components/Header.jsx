@@ -61,7 +61,7 @@ export default function Header() {
                   </div>
                 </div>
                 <div className="navbar-center">
-                <NavLink to="/" className='textTitle uppercase tracking-widest'>VLEARNING</NavLink>
+                <NavLink to="/" className='textTitle uppercase tracking-widest'>V-LEARNING</NavLink>
                 </div>
                 <div className="navbar-end w-auto flex flex-row items-end gap-4">
                   <div className='w-fit'>
@@ -106,7 +106,7 @@ export default function Header() {
             </div>
           </div>
           <div className="navbar-center">
-          <NavLink to="/" className='textTitle uppercase tracking-widest nav-item'>VLEARNING</NavLink>
+          <NavLink to="/" className='textTitle uppercase tracking-widest nav-item'>V-LEARNING</NavLink>
           </div>
           <div className="navbar-end w-auto flex flex-row items-end gap-4">
             <div className='w-2/3'>
