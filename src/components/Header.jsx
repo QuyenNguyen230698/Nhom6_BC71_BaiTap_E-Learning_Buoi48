@@ -53,6 +53,7 @@ export default function Header() {
                       <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
                       <ul className="menu bg-white text-black min-h-full w-80 p-4">
                           <li><NavLink onClick={toggleDropdown} to="/">Trang Chủ</NavLink></li>
+                          <li><NavLink onClick={toggleDropdown} to="/infoPage">Thông tin</NavLink></li>
                           <li><NavLink onClick={toggleDropdown} to="/login">Đăng Nhập</NavLink></li>
                           <li><NavLink onClick={toggleDropdown} to="/signup">Đăng Ký</NavLink></li>
                           <li><NavLink onClick={toggleDropdown} to="/account">Tài Khoản</NavLink></li>
@@ -98,6 +99,7 @@ export default function Header() {
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-white text-black rounded-box z-[1] mt-3 w-52 p-2 shadow">
                   <li onClick={toggleDropdown}><NavLink to="/">Trang Chủ</NavLink></li>
+                  <li onClick={toggleDropdown}><NavLink  to="/infoPage">Thông tin</NavLink></li>
                   <li onClick={toggleDropdown}><NavLink to="/login">Đăng Nhập</NavLink></li>
                   <li onClick={toggleDropdown}><NavLink to="/signup">Đăng Ký</NavLink></li>
                   <li onClick={toggleDropdown}><NavLink to="/account">Tài Khoản</NavLink></li>
