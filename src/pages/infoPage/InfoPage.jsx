@@ -5,12 +5,11 @@ export default function InfoPage() {
   return (
     <div className="flex flex-col gap-10 ">
       <CardBanner />
-      <div className="flex flex-col lg:flex-row gap-10 items-center h-full justify-center w-full overflow-hidden container mx-auto py-10">
-        <div 
-        className="flex flex-col lg:w-1/2 w-full">
-          <h2>V learning ?</h2>
-          <h1>Nơi hội tụ kiến thức</h1>
-          <p>
+      <div className="flex flex-col lg:flex-row lg:gap-10 items-center h-full justify-center w-full overflow-hidden container mx-auto lg:py-10">
+        <div className="flex flex-col gap-3 lg:w-1/2 w-full p-5 order-2 lg:order-1">
+          <h2 className="textTitle text-green-500">V learning ?</h2>
+          <h1 className="textSubBanner">Nơi hội tụ kiến thức</h1>
+          <p className="text-justify textCardItemSubTitle ">
             Đây là nền tảng giảng dạy và học tập trực tuyến được xây dựng để hỗ
             trợ phát triển giáo dục trong thời đại công nghiệp 4.0, được xây
             dựng dựa trên cơ sở quan sát toàn bộ các nhu cầu cần thiết của một
@@ -19,12 +18,80 @@ export default function InfoPage() {
             trực tuyến thú vị và hấp dẫn.
           </p>
         </div>
-        <div className="lg:w-1/2 w-full h-96">
-          <img 
+        <div className="lg:w-1/2 w-full h-96 order-1 lg:order-2">
+          <img
             src="https://demo2.cybersoft.edu.vn/static/media/hero-flex.553afb64.png "
             alt=""
             className="w-full h-full object-contain"
           />
+        </div>
+      </div>
+      <div className="flex flex-col lg:flex-row lg:gap-10 items-center h-full justify-center w-full overflow-hidden container mx-auto lg:py-10">
+        <div className="lg:w-1/2 w-full h-96">
+          <img
+            src="https://demo2.cybersoft.edu.vn/static/media/education-hero.62147e5c.png "
+            alt=""
+            className="w-full h-full object-contain"
+          />
+        </div>
+        <div className="flex flex-col gap-3 lg:w-1/2 w-full p-5">
+          <h2 className="textTitle text-green-500">
+            Chương trình học V learning
+          </h2>
+          <h1 className="textSubBanner">Hệ thống học hàng đầu</h1>
+          <p className="text-justify textCardItemSubTitle ">
+            Giảng viên đều là các chuyên viên thiết kế đồ họa và giảng viên của
+            các trường đại học danh tiếng trong thành phố: Đại học CNTT, KHTN,
+            Bách Khoa,…Trang thiết bị phục vụ học tập đầy đủ, phòng học máy
+            lạnh, màn hình LCD, máy cấu hình mạnh, mỗi học viên thực hành trên
+            một máy riêng.100% các buổi học đều là thực hành trên máy tính. Đào
+            tạo với tiêu chí: “học để làm được việc”, mang lại cho học viên
+            những kiến thức hữu ích nhất, sát với thực tế nhất.
+          </p>
+        </div>
+      </div>
+      <div className="flex flex-col lg:flex-row lg:gap-10 items-center h-full justify-center w-full overflow-hidden container mx-auto lg:py-10">
+        <div className="flex flex-col gap-3 lg:w-1/2 w-full p-5 order-2 lg:order-1">
+          <h2 className="textTitle text-green-500">Tầm nhìn V learning</h2>
+          <h1 className="textSubBanner">Đào tạo lập trình chuyên sâu</h1>
+          <p className="text-justify textCardItemSubTitle ">
+            Trở thành hệ thống đào tạo lập trình chuyên sâu theo nghề hàng đầu
+            khu vực, cung cấp nhân lực có tay nghề cao, chuyên môn sâu cho sự
+            phát triển công nghiệp phần mềm trong thời đại công nghệ số hiện
+            nay, góp phần giúp sự phát triển của xã hội, đưa Việt Nam thành
+            cường quốc về phát triển phần mềm.giúp người học phát triển cả tư
+            duy, phân tích, chuyên sâu nghề nghiệp, học tập suốt đời, sẵn sàng
+            đáp ứng mọi nhu cầu của doanh nghiệp.
+          </p>
+        </div>
+        <div className="lg:w-1/2 w-full h-96 order-1 lg:order-2">
+          <img
+            src="https://demo2.cybersoft.edu.vn/static/media/olstudy.96378086.png "
+            alt=""
+            className="w-full h-full object-contain"
+          />
+        </div>
+      </div>
+      <div className="flex flex-col lg:flex-row lg:gap-10 items-center h-full justify-center w-full overflow-hidden container mx-auto lg:py-10">
+        <div className="lg:w-1/2 w-full h-96">
+          <img
+            src="https://demo2.cybersoft.edu.vn/static/media/students.fc2d9ab7.png "
+            alt=""
+            className="w-full h-full object-contain"
+          />
+        </div>
+        <div className="flex flex-col gap-3 lg:w-1/2 w-full p-5">
+          <h2 className="textTitle text-green-500">Sứ mệnh V learning</h2>
+          <h1 className="textSubBanner">Phương pháp đào tạo hiện đại</h1>
+          <p className="text-justify textCardItemSubTitle ">
+            Sử dụng các phương pháp đào tạo tiên tiến và hiện đại trên nền tảng
+            công nghệ giáo dục, kết hợp phương pháp truyền thống, phương pháp
+            trực tuyến, lớp học đảo ngược và học tập dựa trên dự án thực tế,
+            phối hợp giữa đội ngũ training nhiều kinh nghiệm và yêu cầu từ các
+            công ty, doanh nghiệp. Qua đó, V learning giúp người học phát triển
+            cả tư duy, phân tích, chuyên sâu nghề nghiệp, học tập suốt đời, sẵn
+            sàng đáp ứng mọi nhu cầu của doanh nghiệp.
+          </p>
         </div>
       </div>
     </div>
