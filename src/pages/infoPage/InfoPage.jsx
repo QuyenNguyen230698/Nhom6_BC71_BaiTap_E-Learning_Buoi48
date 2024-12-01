@@ -3,7 +3,7 @@ import CardBanner from "../../components/card/CardBanner";
 
 export default function InfoPage() {
   return (
-    <div>
+    <div className="flex flex-col gap-10 ">
       <CardBanner />
       <div className="flex flex-col lg:flex-row gap-10 items-center h-full justify-center w-full overflow-hidden container mx-auto py-10">
         <div 
