@@ -7,10 +7,12 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Account from './pages/accounts/Account'
 import InfoPage from './pages/infoPage/InfoPage'
+import Loading from './components/Loading'
 
 function App() {
   return (
     <div>
+      <Loading/>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout main={<Home />} />} />

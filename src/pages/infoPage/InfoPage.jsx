@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardBanner from "../../components/card/CardBanner";
+import { useDispatch } from "react-redux";
+import { turnOnLoading } from "../../redux/loadingSlice";
 
 export default function InfoPage() {
+
   return (
     <div className="flex flex-col gap-10 ">
       <CardBanner />

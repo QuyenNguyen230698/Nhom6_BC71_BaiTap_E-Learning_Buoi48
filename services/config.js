@@ -1,5 +1,6 @@
 import axios from "axios"
 import { store } from "../src/main"
+import { turnOffLoading, turnOnLoading } from "../src/redux/loadingSlice";
 
 export let http = axios.create({
     baseURL: "https://elearningnew.cybersoft.edu.vn",
@@ -12,18 +13,18 @@ export let http = axios.create({
 })
 
 //#region Interceptors Axios
-// http.interceptors.request.use(function (config) {
-//     store.dispatch(turnOnloading())
-//     return config;
-//   }, function (error) {
-//     store.dispatch(turnOffLoading())
-//     return Promise.reject(error);
-//   });
+http.interceptors.request.use(function (config) {
+    store.dispatch(turnOnLoading())
+    return config;
+  }, function (error) {
+    store.dispatch(turnOffLoading())
+    return Promise.reject(error);
+  });
 
-//   http.interceptors.response.use(function (response) {
-//     store.dispatch(turnOffLoading())
-//     return response;
-//   }, function (error) {
-//     return Promise.reject(error);
-//   });
+http.interceptors.response.use(function (response) {
+    store.dispatch(turnOffLoading())
+    return response;
+  }, function (error) {
+    return Promise.reject(error);
+  });
 //#endregion
