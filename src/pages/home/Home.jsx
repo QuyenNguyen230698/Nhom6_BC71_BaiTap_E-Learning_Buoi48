@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import CardBanner from '../../components/card/CardBanner'
 import { VlearningService } from '../../../services/Vlearning';
+import { useDispatch } from 'react-redux';
+import { turnOffLoading, turnOnLoading } from '../../redux/loadingSlice';
 
 
 export default function Home() {
   const [listCourse, setListCourse] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     VlearningService.getListCourse()
     .then((result) => {
       setListCourse(result.data);
       console.log(result.data);
+      dispatch(turnOffLoading())
     }).catch((err) => {
-      console.log(err);
+      dispatch(turnOffLoading())
+    }).finally(() => {
+      
     });
   }, [])
 
