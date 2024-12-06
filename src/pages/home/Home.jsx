@@ -13,7 +13,6 @@ export default function Home() {
     VlearningService.getListCourse()
     .then((result) => {
       setListCourse(result.data);
-      console.log(result.data);
       dispatch(turnOffLoading())
     }).catch((err) => {
       dispatch(turnOffLoading())
@@ -23,17 +22,24 @@ export default function Home() {
   }, [])
 
   return (
-    <div>
+    <div className='w-full h-full flex flex-col gap-10'>
        <CardBanner />
-       <div className='grid grid-cols-4 items-start justify-center w-full h-full container mx-auto'>
-        {listCourse?.map((item, index) => {
-          return <div key={index} className='col-span-4 md:col-span-2 lg:col-span-1 w-full h-full items-start justify-start'>
-            <div className='flex flex-col w-fit h-full overflow-hidden'>
-              <img src={item.hinhAnh} alt="" className='w-full h-full object-cover bg-contain'/>
-              <h5 className='text-justify textTitleImage'>{item.tenKhoaHoc}</h5>
-              <h6 className='textCardItemSubTitle'>{item.tenDanhMucKhoaHoc}</h6>
-              <p className='text-xs text-justify'>{item.moTa}</p>
+       
+       <div className='grid grid-cols-4 items-start justify-center w-full h-full gap-3 container mx-auto'>
+        {listCourse?.slice(0, 16).map((item, index) => {
+          return <div key={index} className="card w-full overflow-hidden shadow-xl col-span-4 md:col-span-2 lg:col-span-1 h-full flex flex-col items-start justify-start bg-white">
+          <div className='w-full h-full'>
+            <img
+              src="https://funix.edu.vn/wp-content/uploads/2023/02/cung-cap-%C4%91ay-%C4%91u-kien-thuc-va-ky-nang-co-ban.jpg"
+              alt="img" className='w-full h-full object-cover'/>
+          </div>
+          <div className="card-body w-full leading-none">
+            <h6 className='textCardItemSubTitle'>{item.danhMucKhoaHoc.tenDanhMucKhoaHoc}</h6>
+            <p className='text-xs text-justify'>{item.danhMucKhoaHoc.maDanhMucKhoahoc}</p>
+            <div className="card-actions w-full h-10 items-end justify-end">
+              <button className="btn btn-success">Xem thêm</button>
             </div>
+          </div>
         </div>
         })}
        </div>
