@@ -35,10 +35,13 @@ body {
 .textCollectionItemDescription { @apply text-base text-gray-500; }
 .textCardItemSubTitle { @apply text-sm lg:text-base text-gray-400; }
 .textTitleImage { @apply text-base md:text-lg lg:text-xl; }
-
+.textSearch { @apply text-base lg:text-lg; }
 /* Default Background */
 .bg-black-gray {
   @apply bg-[#222222];
+}
+.text-black-gray {
+  @apply text-[#222222];
 }
 
 .h-35r {

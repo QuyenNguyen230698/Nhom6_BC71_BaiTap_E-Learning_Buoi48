@@ -51,7 +51,7 @@ export default function Header() {
       {/* header mobile */}
       <header className='w-full fixed text-black top-0 z-40 bg-white block md:hidden'>
         <div className="navbar container mx-auto">
-          <div className="navbar-start">
+          <div data-aos="fade-down" data-aos-delay="100" className="navbar-start">
             <div className="drawer">
               <input id="my-drawer" onChange={toggleDropdown} checked={isDropdownOpen} type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
@@ -76,10 +76,10 @@ export default function Header() {
               </div>
             </div>
           </div>
-          <div className="navbar-center">
+          <div data-aos="fade-down" data-aos-delay="100" className="navbar-center">
             <NavLink to="/" className='textTitle uppercase tracking-widest'>V-LEARNING</NavLink>
           </div>
-          <div className="navbar-end w-auto flex flex-row items-end gap-4">
+          <div data-aos="fade-down" data-aos-delay="100" className="navbar-end w-auto flex flex-row items-end gap-4">
             <div className='w-fit'>
               <NavLink to="/account">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -93,7 +93,7 @@ export default function Header() {
       {/* header desktop */}
       <header className={`w-full fixed top-0 left-0 right-0 z-40 hidden md:block shadow hover:bg-white hover:text-black duration-700 ease-in-out ${isScrolled ? 'bg-white text-black' : 'bg-transparent text-white'}`}>
         <div className="navbar container mx-auto">
-          <div className="navbar-start">
+          <div data-aos="fade-down" data-aos-delay="100" className="navbar-start">
             <div className="dropdown">
               <div tabIndex={0} role="button" className="btn btn-ghost btn-circle" onClick={toggleDropdown}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -107,13 +107,13 @@ export default function Header() {
               )}
             </div>
           </div>
-          <div className="navbar-center">
+          <div data-aos="fade-down" data-aos-delay="100" className="navbar-center">
             <NavLink to="/" className='textTitle uppercase tracking-widest nav-item'>V-LEARNING</NavLink>
           </div>
-          <div className="navbar-end w-auto flex flex-row items-end gap-4">
+          <div data-aos="fade-down" data-aos-delay="100" className="navbar-end w-auto flex flex-row items-end gap-4">
             <div className='w-2/3'>
               <label className="border-b flex items-center gap-2">
-                <input type="text" className="grow text-base focus:outline-none bg-transparent" placeholder="What are you looking for" />
+                <input type="text" className="grow text-base focus:outline-none bg-transparent" placeholder="Tìm kiếm..." />
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-4 w-4 opacity-70">
                   <path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" />
                 </svg>
