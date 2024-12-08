@@ -4,6 +4,7 @@ import CardListCourse from '../../components/card/CardListCourse'
 import CardCommunicate from '../../components/card/CardCommunicate'
 import CardCourse from '../../components/card/CardCourse'
 import CardUser from '../../components/card/CardUser'
+import CardCountingUp from '../../components/card/CardCountingUp'
 
 
 
@@ -29,6 +30,7 @@ export default function Home() {
   return (
     <div className='w-full h-full flex flex-col bg-white' >
        <CardBanner dataBanner={dataBanner} />
+       <CardCountingUp/>
        <CardCourse/>
        <CardCommunicate />
        <CardListCourse dataImg={dataImg}/>
