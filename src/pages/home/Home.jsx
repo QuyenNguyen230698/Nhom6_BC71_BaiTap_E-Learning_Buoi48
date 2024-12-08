@@ -1,6 +1,8 @@
 import React from 'react'
 import CardBanner from '../../components/card/CardBanner'
 import CardListCourse from '../../components/card/CardListCourse'
+import CardCommunicate from '../../components/card/CardCommunicate'
+import CardCourse from '../../components/card/CardCourse'
 
 
 
@@ -26,6 +28,8 @@ export default function Home() {
   return (
     <div className='w-full h-full flex flex-col bg-white' >
        <CardBanner dataBanner={dataBanner} />
+       <CardCourse/>
+       {/* <CardCommunicate /> */}
        <CardListCourse dataImg={dataImg}/>
     </div>
   )

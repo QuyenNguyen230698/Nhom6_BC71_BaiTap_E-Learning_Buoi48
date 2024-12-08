@@ -1,23 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 export default function CardCommunicate() {
-    const listBrand = [
-        {src: '/img/brand1.png', alt: 'brand1'},
-        {src: '/img/brand2.png', alt: 'brand2'},
-        {src: '/img/brand3.avif', alt: 'brand3'},
-        {src: '/img/brand4.avif', alt: 'brand4'},
-        {src: '/img/brand5.avif', alt: 'brand5'},
-        {src: '/img/brand6.avif', alt: 'brand6'},
-        {src: '/img/brand7.avif', alt: 'brand7'},
-        {src: '/img/brand8.png', alt: 'brand8'},
-      ]
+
+  const listBrand = [
+    { src: '/img/communicate1.avif', alt: 'brand1' },
+    { src: '/img/communicate2.png', alt: 'brand2' },
+    { src: '/img/communicate3.png', alt: 'brand3' },
+    { src: '/img/communicate4.png', alt: 'brand4' },
+    { src: '/img/communicate5.png', alt: 'brand5' },
+    { src: '/img/communicate6.png', alt: 'brand6' },
+    { src: '/img/communicate7.png', alt: 'brand7' },
+    { src: '/img/communicate8.png', alt: 'brand8' },
+    { src: '/img/communicate9.png', alt: 'brand9' },
+    { src: '/img/communicate10.png', alt: 'brand10' },
+    { src: '/img/communicate11.png', alt: 'brand11' },
+    { src: '/img/communicate12.png', alt: 'brand12' }
+  ];
+
   return (
     <div>
-        <div className='flex flex-wrap items-center justify-center gap-10 py-4 w-full bg-cover bg-center' style={{backgroundImage: 'url(https://res.cloudinary.com/dbcr9t1rd/image/upload/v1733579716/The-World-Map-scaled_ewwm05.jpg)'}}>
-          {listBrand.map((brand, index) => (
-            <img src={brand.src} alt={brand.alt} key={index} className='w-20 h-20 object-contain' />
-          ))}
+      <div className="w-full h-full overflow-hidden bg-cover bg-center py-10" style={{ backgroundImage: 'url(https://res.cloudinary.com/dbcr9t1rd/image/upload/v1733579716/The-World-Map-scaled_ewwm05.jpg)' }}>
+        <div
+          className="w-full h-auto container mx-auto px-4">
+          <div className="grid grid-cols-4 w-full h-full justify-center items-center gap-4 lg:gap-8">
+            {listBrand?.map((image, idx) => (
+              <div data-aos="fade-up" data-aos-delay="100" key={idx} className="w-full h-full flex justify-center items-center col-span-1">
+                <img src={image.src} alt={image.alt} aria-label="slideimage" className="w-40 h-12 lg:h-16 object-contain" />
+              </div>
+            ))}
+          </div>
         </div>
+      </div>
     </div>
-  )
+  );
 }
