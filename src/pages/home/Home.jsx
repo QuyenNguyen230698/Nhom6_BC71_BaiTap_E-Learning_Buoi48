@@ -3,6 +3,7 @@ import CardBanner from '../../components/card/CardBanner'
 import CardListCourse from '../../components/card/CardListCourse'
 import CardCommunicate from '../../components/card/CardCommunicate'
 import CardCourse from '../../components/card/CardCourse'
+import CardUser from '../../components/card/CardUser'
 
 
 
@@ -31,6 +32,7 @@ export default function Home() {
        <CardCourse/>
        {/* <CardCommunicate /> */}
        <CardListCourse dataImg={dataImg}/>
+       <CardUser/>
     </div>
   )
 }
