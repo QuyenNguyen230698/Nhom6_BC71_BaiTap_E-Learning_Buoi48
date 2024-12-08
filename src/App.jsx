@@ -9,6 +9,7 @@ import Account from './pages/accounts/Account'
 import InfoPage from './pages/infoPage/InfoPage'
 import Loading from './components/Loading'
 import EventPage from './pages/event/EventPage'
+import SearchCourse from './pages/home/SearchCourse'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/signup" element={<Layout main={<Signup />} />} />
         <Route path="/account" element={<Layout main={<Account />} />} />
         <Route path="/event" element={<Layout main={<EventPage />} />} />
+        <Route path="/searchCourse/:maDanhMuc" element={<Layout main={<SearchCourse />} />} />
         </Routes>
       </BrowserRouter>
     </div>
