@@ -9,8 +9,8 @@ export let VlearningService = {
     getCourseCatalog: () => {
         return http.get("/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc")
     },
-    getCourseDetail: () => {
-        return http.get("/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=TuDuy&MaNhom=GP01")
+    getCourseDetail: (maDanhMuc) => {
+        return http.get(`/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${maDanhMuc}&MaNhom=GP01`)
     },
     getCoursePagination: () => {
         return http.get("/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?page=1&pageSize=10&MaNhom=GP01")

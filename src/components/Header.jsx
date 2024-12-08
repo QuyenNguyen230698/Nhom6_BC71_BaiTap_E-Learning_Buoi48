@@ -42,7 +42,7 @@ export default function Header() {
       <li><NavLink onClick={toggleDropdown} to="/account">Tài Khoản</NavLink></li>
       <li className='font-bold text-yellow-500 p-1' onClick={toggleDropdown}>Danh Mục</li>
       {listCourseCatalog?.map((item, index) => (
-        <li key={index}><NavLink onClick={toggleDropdown} to={`/course/${item.maDanhMuc}`}>{item.tenDanhMuc}</NavLink></li>
+        <li key={index}><NavLink onClick={toggleDropdown} to={`/searchCourse/${item.maDanhMuc}`}>{item.tenDanhMuc}</NavLink></li>
       ))}
     </>
   );
