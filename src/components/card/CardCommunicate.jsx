@@ -19,12 +19,12 @@ export default function CardCommunicate() {
 
   return (
     <div>
-      <div className="w-full h-full overflow-hidden bg-cover bg-center py-10" style={{ backgroundImage: 'url(https://res.cloudinary.com/dbcr9t1rd/image/upload/v1733579716/The-World-Map-scaled_ewwm05.jpg)' }}>
-        <div
-          className="w-full h-auto container mx-auto px-4">
+      <div className="relative w-full h-full overflow-hidden bg-cover bg-center py-10 overflow-hidden" style={{ backgroundImage: 'url(https://res.cloudinary.com/dbcr9t1rd/image/upload/v1732874597/Contact_uoiab3.jpg)' }}>
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="relative w-full h-auto container mx-auto px-4">
           <div className="grid grid-cols-4 w-full h-full justify-center items-center gap-4 lg:gap-8">
             {listBrand?.map((image, idx) => (
-              <div data-aos="fade-up" data-aos-delay="100" key={idx} className="w-full h-full flex justify-center items-center col-span-1">
+              <div data-aos="fade-up" data-aos-delay="200" key={idx} className="w-full h-full flex justify-center items-center col-span-1">
                 <img src={image.src} alt={image.alt} aria-label="slideimage" className="w-40 h-12 lg:h-16 object-contain" />
               </div>
             ))}

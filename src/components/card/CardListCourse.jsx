@@ -18,10 +18,10 @@ export default function CardListCourse({dataImg}) {
         });
       }, [])
   return (
-    <div className='w-full lg:max-w-6xl h-full flex flex-col gap-4 justify-center items-center pb-10 container mx-auto px-3'>
+    <div className='w-full  h-full flex flex-col gap-4 justify-center items-center pb-10 container mx-auto px-3 bg-home'>
         <div data-aos="fade-up" data-aos-delay="100" className='uppercase text-2xl lg:text-4xl text-black-gray font-light text-center w-full py-8'>Danh sách khóa học</div>
         {/* nav search */}
-        <div data-aos="fade-up" data-aos-delay="100" className='flex flex-col lg:flex-row items-start lg:items-center justify-between w-full gap-3'>
+        <div data-aos="fade-up" data-aos-delay="100" className='flex flex-col lg:flex-row items-start lg:items-center justify-between w-full lg:max-w-6xl gap-3'>
         <div className="w-auto flex flex-row items-center justify-center gap-4 border-b border-black">
             <h2 className='text-black-gray textCardItemTitle'>Danh mục khóa học</h2>
             <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-black-gray">

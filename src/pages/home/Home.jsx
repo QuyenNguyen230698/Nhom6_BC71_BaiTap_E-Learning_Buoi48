@@ -11,7 +11,7 @@ export default function Home() {
     title: 'V-learning',
     subTitle: 'Cùng nhau khám phá những điều mới mẻ',
     description: 'Học đi đôi với hành',
-    img: 'https://res.cloudinary.com/dbcr9t1rd/image/upload/v1732874660/news-banner_brgtw2.webp'
+    img: 'https://res.cloudinary.com/dmd3qqgum/image/upload/v1733651444/123_rpthnm.jpg'
   }
   const dataImg = [
     { src: '/img/content1.webp', description: 'Lập trình hiện đang là xu hướng trên toàn thế giới...' },
@@ -29,7 +29,7 @@ export default function Home() {
     <div className='w-full h-full flex flex-col bg-white' >
        <CardBanner dataBanner={dataBanner} />
        <CardCourse/>
-       {/* <CardCommunicate /> */}
+       <CardCommunicate />
        <CardListCourse dataImg={dataImg}/>
     </div>
   )

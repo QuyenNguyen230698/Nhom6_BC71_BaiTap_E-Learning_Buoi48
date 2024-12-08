@@ -19,7 +19,7 @@ export default function CardCourse() {
         })
     }, [])
   return (
-    <div className='w-full h-full flex flex-col justify-center items-center bg-white py-10 px-3'>
+    <div className='w-full h-full flex flex-col justify-center items-center bg-home py-10 px-3'>
         <div className='w-full flex justify-center items-center py-4'>
             <h2 className='text-2xl lg:text-4xl font-light text-black-gray uppercase pb-5 lg:pb-10'>Khóa học phổ biến</h2>
         </div>
