@@ -8,6 +8,7 @@ import Signup from './pages/Signup'
 import Account from './pages/accounts/Account'
 import InfoPage from './pages/infoPage/InfoPage'
 import Loading from './components/Loading'
+import EventPage from './pages/event/EventPage'
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
         <Route path="/infoPage" element={<Layout main={<InfoPage />} />} />
         <Route path="/signup" element={<Layout main={<Signup />} />} />
         <Route path="/account" element={<Layout main={<Account />} />} />
-      </Routes>
-    </BrowserRouter>
+        <Route path="/event" element={<Layout main={<EventPage />} />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }

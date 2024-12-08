@@ -36,6 +36,7 @@ export default function Header() {
     <>
       <li className='bg-white'><NavLink onClick={toggleDropdown} to="/">Trang Chủ</NavLink></li>
       <li><NavLink onClick={toggleDropdown} to="/infoPage">Về Chúng Tôi</NavLink></li>
+      <li><NavLink onClick={toggleDropdown} to="/event">Sự Kiện</NavLink></li>
       <li><NavLink onClick={toggleDropdown} to="/login">Đăng Nhập</NavLink></li>
       <li><NavLink onClick={toggleDropdown} to="/signup">Đăng Ký</NavLink></li>
       <li><NavLink onClick={toggleDropdown} to="/account">Tài Khoản</NavLink></li>
