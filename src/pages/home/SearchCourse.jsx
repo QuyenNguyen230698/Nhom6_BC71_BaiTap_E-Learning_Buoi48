@@ -9,7 +9,6 @@ export default function SearchCourse() {
   const { maDanhMuc } = useParams();
   const [listCourse, setListCourse] = useState([]);
   const [title, setTitle] = useState('');
-  const [index, setIndex] = useState([]);
   const dispatch = useDispatch();
   const arrImg = [
     {src:'/img/content1.webp',alt:"Khóa học lập trình"},
@@ -31,7 +30,6 @@ const dataBanner = {
       setListCourse(res.data);
       setTitle(res.data[0].danhMucKhoaHoc.tenDanhMucKhoaHoc);
       dispatch(turnOffLoading());
-      console.log(index);
     }).catch(err => {
       console.log(err);
     })
@@ -44,9 +42,9 @@ const dataBanner = {
             <div className='w-full flex justify-center items-center py-4'>
                 <h2 className='text-2xl lg:text-4xl font-light text-black-gray uppercase pb-5 lg:pb-10'>{title}</h2>
             </div>
-        <div className='w-full max-w-5xl h-full container mx-auto grid grid-cols-6 items-center justify-stretch gap-5'>
+        <div className='w-full max-w-7xl h-full container mx-auto grid grid-cols-8 items-center justify-stretch gap-5'>
             {listCourse?.map((course, idx) => (
-            <div key={idx} data-aos="fade-up" data-aos-delay="100" className='w-full h-full leading-none flex flex-col justify-stretch col-span-3 lg:col-span-2 shadow-lg rounded-lg overflow-hidden'>
+            <div key={idx} data-aos="fade-up" data-aos-delay="100" className='w-full h-full leading-none flex flex-col justify-stretch col-span-4 lg:col-span-2 shadow-lg rounded-lg overflow-hidden'>
                 <div className='w-full h-full'>
                     <img src={arrImg[idx % arrImg.length].src} alt={arrImg[idx % arrImg.length].alt} className='w-full h-full object-cover'/>
                 </div>
