@@ -45,12 +45,12 @@ body {
 }
 .bg-home {
   background-image: url(https://res.cloudinary.com/dbcr9t1rd/image/upload/v1733652400/bg-main_idgxey.jpg);
-  background-size: cover;
+  background-size: contain;
   background-repeat: repeat;
 }
 
 .h-35r {
-  height: 35rem;
+   height: 35rem;
 }
 
 /* Button styles */

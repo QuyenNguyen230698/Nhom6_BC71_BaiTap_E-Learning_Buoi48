@@ -10,6 +10,7 @@ import InfoPage from './pages/infoPage/InfoPage'
 import Loading from './components/Loading'
 import EventPage from './pages/event/EventPage'
 import SearchCourse from './pages/home/SearchCourse'
+import ClassDetail from './pages/home/ClassDetail'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/account" element={<Layout main={<Account />} />} />
         <Route path="/event" element={<Layout main={<EventPage />} />} />
         <Route path="/searchCourse/:maDanhMuc" element={<Layout main={<SearchCourse />} />} />
+        <Route path="/classDetail/:maKhoaHoc" element={<Layout main={<ClassDetail />} />} />
         </Routes>
       </BrowserRouter>
     </div>
