@@ -14,6 +14,9 @@ export let VlearningService = {
     },
     getCoursePagination: () => {
         return http.get("/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?page=1&pageSize=10&MaNhom=GP01")
+    },
+    getCourseProduct:(maKhoaHoc) => {
+        return http.get(`/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${maKhoaHoc}`)
     }
 }
 //#endregion

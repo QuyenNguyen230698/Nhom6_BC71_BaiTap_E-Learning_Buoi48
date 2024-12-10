@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { VlearningService } from '../../../services/Vlearning';
 import { useDispatch } from 'react-redux';
 import { turnOffLoading, turnOnLoading } from '../../redux/loadingSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function CardListCourse({dataImg}) {
     const [listCourse, setListCourse] = useState([]);
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     useEffect(() => {
         VlearningService.getListCourse()
         .then((result) => {
@@ -71,7 +73,7 @@ export default function CardListCourse({dataImg}) {
                     </div>
                 </div>
                 <div className="w-auto flex flex-row items-center justify-center gap-4">
-                    <button className='btnLVT-sm'>Đăng Ký Ngay</button>
+                    <button className='btnLVT-sm' onClick={() => navigate(`/classDetail/${item.maKhoaHoc}`)}>Đăng Ký Ngay</button>
                 </div>
                 </div>)
             })}

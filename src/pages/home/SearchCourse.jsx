@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { VlearningService } from '../../../services/Vlearning';
 import { useDispatch } from 'react-redux';
 import { turnOffLoading } from '../../redux/loadingSlice';
@@ -9,8 +9,8 @@ export default function SearchCourse() {
   const { maDanhMuc } = useParams();
   const [listCourse, setListCourse] = useState([]);
   const [title, setTitle] = useState('');
-  const [index, setIndex] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const arrImg = [
     {src:'/img/content1.webp',alt:"Khóa học lập trình"},
     {src:'/img/content2.webp',alt:"Khóa học lập trình"},
@@ -18,12 +18,12 @@ export default function SearchCourse() {
     {src:'/img/content4.webp',alt:"Khóa học lập trình"},
 ]
 const dataBanner = {
-    "BackEnd":{title:'BackEnd',img: "https://res.cloudinary.com/dmd3qqgum/image/upload/v1733651444/123_rpthnm.jpg"},
-    "Design":{title:'Design',img: "https://res.cloudinary.com/dmd3qqgum/image/upload/v1733651444/123_rpthnm.jpg"},
-    "DiDong":{title:'Di Động',img: "https://res.cloudinary.com/dmd3qqgum/image/upload/v1733651444/123_rpthnm.jpg"},
-    "FrontEnd":{title:'FrontEnd',img: "https://res.cloudinary.com/dmd3qqgum/image/upload/v1733651444/123_rpthnm.jpg"},
-    "FullStack":{title:'FullStack',img: "https://res.cloudinary.com/dmd3qqgum/image/upload/v1733651444/123_rpthnm.jpg"},
-    "TuDuy":{title:'Tư Duy',img: "https://res.cloudinary.com/dmd3qqgum/image/upload/v1733651444/123_rpthnm.jpg"},
+    "BackEnd":{title:'BackEnd',img: "https://www.vietnamworks.com/hrinsider/wp-content/uploads/2024/05/lap-trinh-web.jpg"},
+    "Design":{title:'Design',img: "https://media.licdn.com/dms/image/D4D12AQE8eKTPZ6S7fQ/article-cover_image-shrink_600_2000/0/1718365066490?e=2147483647&v=beta&t=-TPoVU15S6YHi8zUOridsXRY1ZHP14-2AasDfWfj34Q"},
+    "DiDong":{title:'Di Động',img: "https://res.cloudinary.com/dmd3qqgum/image/upload/v1733669268/Web-Development_lqmebs.jpg"},
+    "FrontEnd":{title:'FrontEnd',img: "https://websitechuyennghiep.vn/data/images/lap-trinh-web-la-gi-cac-buoc-lap-trinh-web-co-ban.jpeg"},
+    "FullStack":{title:'FullStack',img: "https://tuhoclaptrinh.edu.vn/upload/post/2022/07/04/hoc-lap-trinh-can-luu-y-nhung-gi-20220704102621-884273.jpg"},
+    "TuDuy":{title:'Tư Duy',img: "https://swinburne-vn.edu.vn/wp-content/uploads/nganh-lap-trinh-mobile3.jpg"},
 }
 
   useEffect(() => {
@@ -31,7 +31,6 @@ const dataBanner = {
       setListCourse(res.data);
       setTitle(res.data[0].danhMucKhoaHoc.tenDanhMucKhoaHoc);
       dispatch(turnOffLoading());
-      console.log(index);
     }).catch(err => {
       console.log(err);
     })
@@ -42,11 +41,11 @@ const dataBanner = {
         <CardBanner dataBanner={dataBanner[maDanhMuc]} />
         <div className='w-full h-full flex flex-col justify-center items-center bg-home py-10 lg:py-20 px-3'>
             <div className='w-full flex justify-center items-center py-4'>
-                <h2 className='text-2xl lg:text-4xl font-light text-black-gray uppercase pb-5 lg:pb-10'>{title}</h2>
+                <h2 data-aos="fade-up" data-aos-delay="100" className='text-2xl lg:text-4xl font-light text-black-gray uppercase pb-5 lg:pb-10'>{title}</h2>
             </div>
-        <div className='w-full max-w-5xl h-full container mx-auto grid grid-cols-6 items-center justify-stretch gap-5'>
+        <div className='w-full max-w-7xl h-full container mx-auto grid grid-cols-8 items-center justify-stretch gap-5'>
             {listCourse?.map((course, idx) => (
-            <div key={idx} data-aos="fade-up" data-aos-delay="100" className='w-full h-full leading-none flex flex-col justify-stretch col-span-3 lg:col-span-2 shadow-lg rounded-lg overflow-hidden'>
+            <div key={idx} data-aos="fade-up" data-aos-delay="100" className='w-full h-full leading-none flex flex-col justify-stretch col-span-4 lg:col-span-2 shadow-lg rounded-lg overflow-hidden'>
                 <div className='w-full h-full'>
                     <img src={arrImg[idx % arrImg.length].src} alt={arrImg[idx % arrImg.length].alt} className='w-full h-full object-cover'/>
                 </div>
@@ -69,7 +68,7 @@ const dataBanner = {
                     </div>
                     <div className='flex flex-col lg:flex-row w-full h-auto items-center justify-between gap-2'>
                         <p className='text-base font-bold text-green-500 underline'>2,000,000 <sup className='underline'>đ</sup></p>
-                        <button className='btnLVT'>Xem chi tiết</button>
+                        <button className='btnLVT' onClick={() => navigate(`/classDetail/${course.maKhoaHoc}`)}>Xem chi tiết</button>
                     </div>
                 </div>
             </div>
