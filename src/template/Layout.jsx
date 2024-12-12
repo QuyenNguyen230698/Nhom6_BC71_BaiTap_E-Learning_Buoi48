@@ -45,7 +45,7 @@ export default function Layout({main}) {
       }; 
     }, []);
   return (
-    <div className='bg-white flex flex-col h-full w-full'>
+    <div className='bg-white text-black-gray flex flex-col h-full w-full'>
       <Header />
       {main}
       <Footer />
