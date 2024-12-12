@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { VlearningService } from '../../services/Vlearning';
 import { useDispatch } from 'react-redux';
 import { turnOffLoading } from '../redux/loadingSlice';
@@ -9,6 +9,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [listCourseCatalog, setListCourseCatalog] = useState([]);
   const dispatch = useDispatch();
+  const location = useLocation();
   const toggleDropdown = () => setIsDropdownOpen(prev => !prev);
   const openDrawer = () => setIsDropdownOpen(true);
   const closeDrawer = () => setIsDropdownOpen(false);
@@ -27,11 +28,19 @@ export default function Header() {
 
     fetchCourseCatalog();
 
-    const handleScroll = () => setIsScrolled(window.scrollY > 0);
+    const handleScroll = () => {
+      const isAccountPage = location.pathname === '/account' 
+      || location.pathname === '/accountAdmin' 
+      || location.pathname === '/login' 
+      || location.pathname === '/signup';
+      setIsScrolled(isAccountPage || window.scrollY > 0);
+    };
+
+    handleScroll();
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [dispatch]);
+  }, [dispatch, location.pathname]);
 
   const renderNavLinks = () => (
     <>    
@@ -109,7 +118,7 @@ export default function Header() {
             <ul className="menu bg-white text-black-gray min-h-full w-2/5 p-4">
                 <h2 className='text-2xl py-2 flex flex-row justify-between w-full border-b border-black'>
                   <span>V_LEARNING</span>
-                  <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay" onClick={closeDrawer}>
+                  <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay backdrop-blur-xl" onClick={closeDrawer}>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.0} stroke="currentColor" className="size-6 text-black">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                       </svg>

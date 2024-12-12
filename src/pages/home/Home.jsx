@@ -14,7 +14,7 @@ export default function Home() {
     title: 'V-learning',
     subTitle: 'Cùng nhau khám phá những điều mới mẻ',
     description: 'Học đi đôi với hành',
-    img: 'https://res.cloudinary.com/dmd3qqgum/image/upload/v1733651444/123_rpthnm.jpg'
+    img: '/img/bannerHome.jpg'
   }
   const dataImg = [
     { src: '/img/content1.webp', description: 'Lập trình hiện đang là xu hướng trên toàn thế giới...' },

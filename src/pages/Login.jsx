@@ -13,27 +13,27 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center overflow-hidden py-16 bg-base-200 h-35r">
+    <div className="flex justify-center items-center overflow-hidden py-16 bg-white h-35r">
       <div className="w-full max-w-md p-4">
         <div className="flex flex-col w-full h-full">
           <div className="mb-6 flex flex-col gap-1">
-            <label className="block mb-2 text-sm font-semibold text-white">Account</label>
+            <label className="block mb-2 text-sm font-semibold text-black-gray">Account</label>
             <input
               type="Account"
               value={account}
               onChange={(e) => setAccount(e.target.value)}
-              className="w-full px-4 py-3 border-2 rounded focus:outline-none bg-white"
+              className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
               placeholder="Enter your account"
               required
             />
           </div>
           <div className="mb-6 flex flex-col gap-1">
-            <label className="block mb-2 text-sm font-semibold text-white">Password</label>
+            <label className="block mb-2 text-sm font-semibold text-black-gray">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 border-2 rounded focus:outline-none bg-white"
+              className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
               placeholder="Enter your password"
               required
             />
@@ -41,7 +41,7 @@ export default function Login() {
           <div className="flex gap-5">
             <h4 className="text-gray-500 text-base">Already have an account?</h4>
             <NavLink to="/signup">
-              <h4 className="text-base underline underline-offset-4 text-white">Sign up</h4>
+              <h4 className="text-base underline underline-offset-4 text-black-gray">Sign up</h4>
             </NavLink>
           </div>
           <button

@@ -136,3 +136,30 @@ body {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
+.nav-hidden {
+  animation: slideUp 0.7s ease-in-out forwards;
+}
+.nav-show {
+  animation: slideDown 0.7s ease-in-out forwards;
+}
+@keyframes slideUp {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+#header-desktop {
+  z-index: 1000;
+}
