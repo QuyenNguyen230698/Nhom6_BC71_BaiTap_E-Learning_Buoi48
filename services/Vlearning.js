@@ -23,8 +23,20 @@ export let VlearningService = {
 
 //#region API Admin
 export let adminService = {
+    loginUser: (data) => {
+        return http.post("/api/QuanLyNguoiDung/DangNhap",data)
+    },
+    registerUser: (data) => {
+        return http.post("/api/QuanLyNguoiDung/DangKy",data)
+    },
     getListUser: () => {
         return http.get("/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01")
+    },
+    getUserDetail: () => {
+        return http.get(`/api/QuanLyNguoiDung/ThongTinTaiKhoan`)
+    },
+    getUserDetailByAccount: (account) => {
+        return http.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=${account}`)
     },
     deleteUser: (user) => {
         return http.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${user}`);

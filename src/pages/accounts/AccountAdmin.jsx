@@ -1,26 +1,40 @@
 import React, { useState, useEffect } from 'react'
 import { turnOffLoading } from '../../redux/loadingSlice';
 import { adminService } from '../../../services/Vlearning';
+import { useDispatch } from 'react-redux';
 
 export default function AccountAdmin() {
     const [listAccount, setListAccount] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const dispatch = useDispatch()
+    const itemsPerPage = 30;
 
     useEffect(() => {
         adminService.getListUser().then((result) => {
             setListAccount(result.data);
-            turnOffLoading()
+            dispatch(turnOffLoading())
         }).catch((err) => {
-            console.error(err);
+            dispatch(turnOffLoading())
         });
     }, []);
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = listAccount?.slice(indexOfFirstItem, indexOfLastItem);
+
+    const totalPages = Math.ceil((listAccount?.length || 0) / itemsPerPage);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
     return (
-        <div className='py-20'>
-            <div className="overflow-x-auto">
+        <div className='py-20 flex flex-col gap-10 w-full h-full'>
+            <div data-aos="fade-up" data-aos-delay="100" className="overflow-x-auto container mx-auto">
                 <table className="table table-xs">
                     <thead>
-                        <tr>
-                            <th></th>
+                        <tr className='text-black-gray text-base'>
+                            <th>Stt</th>
                             <th>Tài khoản</th>
                             <th>Họ tên</th>
                             <th>Email</th>
@@ -30,9 +44,9 @@ export default function AccountAdmin() {
                         </tr>
                     </thead>
                     <tbody>
-                        {listAccount.map((user, index) => (
+                    {currentItems?.map((user, index) => (
                             <tr key={user.taiKhoan}>
-                                <th>{index + 1}</th>
+                                <th>{indexOfFirstItem + index + 1}</th>
                                 <td>{user.taiKhoan}</td>
                                 <td>{user.hoTen}</td>
                                 <td>{user.email}</td>
@@ -48,6 +62,17 @@ export default function AccountAdmin() {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div className="join w-full bg-white rounded-none text-black-gray container mx-auto flex flex-wrap items-center justify-center lg:justify-end">
+                {[...Array(totalPages)].map((_, index) => (
+                    <button
+                        key={index + 1}
+                        className={`join-item rounded-none btn ${currentPage === index + 1 ? 'btn-active' : ''}`}
+                        onClick={() => handlePageChange(index + 1)}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
             </div>
         </div>
     )

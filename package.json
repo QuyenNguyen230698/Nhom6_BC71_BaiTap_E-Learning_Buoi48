@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.4.0",
     "@tailwindcss/typography": "^0.5.15",
+    "antd": "^5.22.4",
     "aos": "^2.3.4",
     "axios": "^1.7.8",
     "countup.js": "^2.8.0",

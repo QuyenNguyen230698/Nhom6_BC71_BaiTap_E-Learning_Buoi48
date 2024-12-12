@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { adminService } from '../../services/Vlearning';
+import { turnOffLoading } from '../redux/loadingSlice';
+import { useDispatch } from 'react-redux';
+import { message } from 'antd';
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -7,11 +11,11 @@ export default function Signup() {
     matKhau: '',
     hoTen: '',
     soDT: '',
-    maLoaiNguoiDung: 'KhachHang', // Giá trị mặc định
     maNhom: 'GP01', // Giá trị mặc định
     email: ''
   });
   const [isActiveClick, setIsActiveClick] = useState(false);
+  const dispatch = useDispatch()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,10 +29,25 @@ export default function Signup() {
     e.preventDefault();
     setIsActiveClick(true);
     // Xử lý logic đăng ký ở đây
+    const data = {
+      taiKhoan: formData.taiKhoan,
+      matKhau: formData.matKhau,
+      hoTen: formData.hoTen,
+      soDT: formData.soDT,
+      email: formData.email,
+      maNhom: "GP01"
+    }
+    adminService.registerUser(data).then((result) => {
+      message.success("Đăng ký thành công")
+      dispatch(turnOffLoading())
+    }).catch((err) => {
+      message.error("Đăng ký thất bại")
+      dispatch(turnOffLoading())
+    });
   };
 
   return (
-    <div className="flex justify-center items-center overflow-hidden py-16 bg-white h-55r">
+    <div className="flex justify-center items-center overflow-hidden py-10 bg-white h-55r">
       <div className="w-full max-w-md p-4">
         <div className="flex flex-col w-full h-full">
           <div className="mb-6 flex flex-col gap-1">

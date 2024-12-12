@@ -1,15 +1,42 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { adminService } from '../../services/Vlearning';
+import { turnOffLoading } from '../redux/loadingSlice';
+import { useDispatch } from 'react-redux';
+import { message } from 'antd';
 
 export default function Login() {
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const [isActiveClick, setIsActiveClick] = useState(false);
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsActiveClick(true);
-    // Xử lý logic đăng nhập ở đây
+    try {
+      const data = {
+        taiKhoan: account,
+        matKhau: password
+      }
+      const res = await adminService.loginUser(data)
+      dispatch(turnOffLoading())
+      let dataUser = JSON.stringify(res.data);
+      localStorage.setItem("DATA_USER", dataUser);
+      if (res.data.maLoaiNguoiDung == "GV") {
+        message.success("Đăng nhập thành công")
+        navigate("/accountAdmin");
+      } else {
+        message.success("Đăng nhập thành công")
+        navigate("/account");
+      }
+    } catch (error) {
+      message.error(error.response?.data || "Đăng nhập thất bại. Vui lòng thử lại!");
+      dispatch(turnOffLoading())
+    } finally {
+      setIsActiveClick(false);
+    }
   };
 
   return (
