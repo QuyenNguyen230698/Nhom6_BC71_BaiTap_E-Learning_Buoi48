@@ -64,15 +64,9 @@ export default function AccountAdmin() {
                 </table>
             </div>
             <div className="join w-full bg-white rounded-none text-black-gray container mx-auto flex flex-wrap items-center justify-center lg:justify-end">
-                {[...Array(totalPages)].map((_, index) => (
-                    <button
-                        key={index + 1}
-                        className={`join-item rounded-none btn ${currentPage === index + 1 ? 'btn-active' : ''}`}
-                        onClick={() => handlePageChange(index + 1)}
-                    >
-                        {index + 1}
-                    </button>
-                ))}
+                <button className="join-item btn" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>«</button>
+                <button className="join-item btn">Page {currentPage}</button>
+                <button className="join-item btn" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>»</button>
             </div>
         </div>
     )

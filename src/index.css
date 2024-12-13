@@ -1,11 +1,18 @@
 
 * {
   scrollbar-width: thin; /* Sử dụng từ khóa thin để làm thanh cuộn mỏng hơn */
+
 }
 :root {
   --vh: 100%;
   background-color: #ffffff;
   color: #000000;
+  background-color: #ffffff;
+  background: #ffffff;
+  background-image: url('https://netzero.tranduc.com/cdn/netzero/background/bg-white-color.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* Default Font */
