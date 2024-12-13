@@ -41,6 +41,12 @@ export let adminService = {
     deleteSignupCourse: (data) => {
         return http.post(`/api/QuanLyKhoaHoc/HuyGhiDanh`,data)
     },
+    updateUserCourse: (data) => {
+        return http.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,data)
+    },
+    registerCourse: (data) => {
+        return http.post(`/api/QuanLyKhoaHoc/DangKyKhoaHoc`,data)
+    },
 
 
 

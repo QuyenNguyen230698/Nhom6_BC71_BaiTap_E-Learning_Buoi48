@@ -1,18 +1,40 @@
 import React, { useEffect, useState } from 'react'
-import { VlearningService } from '../../../services/Vlearning'
+import { adminService, VlearningService } from '../../../services/Vlearning'
 import { turnOffLoading } from '../../redux/loadingSlice'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import CardBanner from '../../components/card/CardBanner'
 import CardCourse from '../../components/card/CardCourse'
 import { useDispatch } from 'react-redux'
+import { message } from 'antd'
 
 export default function ClassDetail() {
     const {maKhoaHoc} = useParams()
     const [course, setCourse] = useState([])
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const dataBanner = {
         title: course.tenKhoaHoc,
         img: 'https://websitechuyennghiep.vn/data/images/lap-trinh-web-la-gi-cac-buoc-lap-trinh-web-co-ban.jpeg'
+    }
+
+    const registerCourseUser = () => {
+        let dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
+        if (!dataUser) {
+            message.warning("Vui lòng đăng nhập để sử dụng chức năng này");
+            navigate("/login");
+          }
+        const formData = JSON.stringify({
+            maKhoaHoc: maKhoaHoc,
+            taiKhoan: dataUser.taiKhoan
+          });
+          adminService.registerCourse(formData).then((result) => {
+            message.success("Đăng ký khóa học thành công")
+            dispatch(turnOffLoading())
+          }).catch((err) => {
+            console.log(err)
+            dispatch(turnOffLoading())
+            message.error("Bạn đã đăng ký khóa học này rồi")
+          });
     }
 
     useEffect(() => {
@@ -344,7 +366,7 @@ export default function ClassDetail() {
                         </span>
                     </div>
                     <div className='w-full'>
-                        <button className='w-full btnLVT'>Ghi danh ngay</button>
+                        <button onClick={registerCourseUser} className='w-full btnLVT'>Ghi danh ngay</button>
                     </div>
                 </div>
             </div>

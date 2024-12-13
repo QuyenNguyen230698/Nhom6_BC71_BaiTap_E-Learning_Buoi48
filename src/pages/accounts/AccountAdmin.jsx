@@ -8,6 +8,7 @@ import { message } from 'antd';
 export default function AccountAdmin() {
     const [listAccount, setListAccount] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [showPersonalInfo, setShowPersonalInfo] = useState(true)
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const itemsPerPage = 30;
@@ -37,40 +38,57 @@ export default function AccountAdmin() {
     };
 
     return (
-        <div className='py-20 flex flex-col gap-10 w-full h-full'>
-            <div data-aos="fade-up" data-aos-delay="100" className="overflow-x-auto container mx-auto">
-                <table className="table table-xs">
-                    <thead>
-                        <tr className='text-black-gray text-base'>
-                            <th>Stt</th>
-                            <th>Tài khoản</th>
-                            <th>Họ tên</th>
-                            <th>Email</th>
-                            <th>Số điện thoại</th>
-                            <th>Loại người dùng</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {currentItems?.map((user, index) => (
-                            <tr key={user.taiKhoan}>
-                                <th>{indexOfFirstItem + index + 1}</th>
-                                <td>{user.taiKhoan}</td>
-                                <td>{user.hoTen}</td>
-                                <td>{user.email}</td>
-                                <td>{user.soDt}</td>
-                                <td>{user.maLoaiNguoiDung}</td>
-                                <td>
-                                    <div className="flex gap-2">
-                                        <button className="btn btn-warning btn-xs">Sửa</button>
-                                        <button className="btn btn-error btn-xs">Xóa</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+        <div className='py-20 flex flex-col gap-6 w-full h-full'>
+            <div className='w-full flex items-center container mx-auto gap-2'>
+                <button className='btn btn-success'>Thêm Người Dùng</button>
+                <button 
+                className={`btn btn-primary ${showPersonalInfo ? 'font-bold uppercase text-green-500' : ''}`} 
+                onClick={() => setShowPersonalInfo(true)}
+                >
+                Quản lí người dùng
+                </button>
+                <button 
+                className={`btn btn-warning ${!showPersonalInfo ? 'font-bold uppercase text-green-500' : ''}`} 
+                onClick={() => setShowPersonalInfo(false)}
+                >
+                Quản lí khóa học
+                </button>
             </div>
+            {showPersonalInfo ? (
+                <div data-aos="fade-up" data-aos-delay="100" className="overflow-x-auto container mx-auto">
+                    <table className="table table-xs">
+                        <thead>
+                            <tr className='text-black-gray text-base'>
+                                <th>Stt</th>
+                                <th>Tài khoản</th>
+                                <th>Họ tên</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Loại người dùng</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {currentItems?.map((user, index) => (
+                                <tr key={user.taiKhoan}>
+                                    <th>{indexOfFirstItem + index + 1}</th>
+                                    <td>{user.taiKhoan}</td>
+                                    <td>{user.hoTen}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.soDt}</td>
+                                    <td>{user.maLoaiNguoiDung}</td>
+                                    <td>
+                                        <div className="flex gap-2">
+                                            <button className="btn btn-warning btn-xs">Sửa</button>
+                                            <button className="btn btn-error btn-xs">Xóa</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            ):(<p>Quản lí khóa học</p>)}
             <div className="join w-full bg-white rounded-none text-black-gray container mx-auto flex flex-wrap items-center justify-center lg:justify-end">
                 <button className="join-item btn" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>«</button>
                 <button className="join-item btn">Page {currentPage}</button>
