@@ -17,6 +17,7 @@ export default function Account() {
       navigate("/login")
     }
   }, [])
+
   return (
     <div>
       <p>Đây là account</p>

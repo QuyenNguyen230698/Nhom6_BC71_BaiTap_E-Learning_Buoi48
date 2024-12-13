@@ -38,10 +38,10 @@ export default function Signup() {
       maNhom: "GP01"
     }
     adminService.registerUser(data).then((result) => {
-      message.success("Đăng ký thành công")
+      message.success("Đăng ký thành công, vui lòng đăng nhập để sử dụng tài khoản")
       dispatch(turnOffLoading())
     }).catch((err) => {
-      message.error("Đăng ký thất bại")
+      message.error("Đăng ký thất bại, vui lòng thử lại")
       dispatch(turnOffLoading())
     });
   };

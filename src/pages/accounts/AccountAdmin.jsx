@@ -2,14 +2,22 @@ import React, { useState, useEffect } from 'react'
 import { turnOffLoading } from '../../redux/loadingSlice';
 import { adminService } from '../../../services/Vlearning';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 
 export default function AccountAdmin() {
     const [listAccount, setListAccount] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const navigate = useNavigate();
     const dispatch = useDispatch()
     const itemsPerPage = 30;
 
     useEffect(() => {
+        const dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
+        if (dataUser.maLoaiNguoiDung !== "GV") {
+            message.warning("Tài khoản của bạn không có quyền truy cập chức năng này")
+            navigate("/")
+        }
         adminService.getListUser().then((result) => {
             setListAccount(result.data);
             dispatch(turnOffLoading())
