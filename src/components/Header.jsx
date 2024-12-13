@@ -24,7 +24,7 @@ export default function Header() {
       } catch (err) {
         console.error(err);
       } finally {
-        turnOffLoading()
+        dispatch(turnOffLoading())
       }
     };
 

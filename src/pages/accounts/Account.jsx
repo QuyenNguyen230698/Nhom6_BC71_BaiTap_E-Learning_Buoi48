@@ -11,6 +11,25 @@ export default function Account() {
   const [showPersonalInfo, setShowPersonalInfo] = useState(true)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const handleDeleteSignupCourse = (maKhoaHoc) => {
+    const formData = JSON.stringify({
+      maKhoaHoc: maKhoaHoc,
+      taiKhoan: users.taiKhoan
+    });
+    adminService.deleteSignupCourse(formData)
+      .then(response => {
+        dispatch(turnOffLoading())
+        message.success("Đã hủy đăng ký khóa học thành công");
+        // Update the courseSignup state if necessary
+      })
+      .catch(error => {
+        dispatch(turnOffLoading())
+        message.error("Có lỗi xảy ra khi hủy đăng ký khóa học");
+        console.error(error);
+      });
+  }
+
   useEffect(() => {
     let dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
     setUsers(dataUser)
@@ -65,9 +84,14 @@ export default function Account() {
         <div className='w-full container mx-auto max-w-6xl py-10'>
           {courseSignup.length > 0 ? (
             courseSignup.map((course, index) => (
-              <div key={index} className='course-item py-2 border-b border-black'>
-                <p className='text-black-gray text-lg font-bold'>Tên Khóa Học: {course.tenKhoaHoc}</p>
-                <p className='text-black-gray text-lg'>Mô Tả: {course.moTa}</p>
+              <div key={index} className='course-item flex flex-row justify-between items-center py-2 border-b border-black'>
+                <div className='w-4/6 py-2'>
+                  <p className='text-black-gray text-lg font-bold'>Tên Khóa Học: {course.tenKhoaHoc}</p>
+                  <p className='text-black-gray text-lg text-justify'>Mô Tả: {course.moTa}</p>
+                </div>
+                <div className='w-fit py-2'>
+                  <button onClick={() => handleDeleteSignupCourse(course.maKhoaHoc)} className='btn btn-warning text-white'>Huỷ đăng ký khóa học</button>
+                </div>
               </div>
             ))
           ) : (

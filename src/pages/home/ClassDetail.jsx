@@ -4,10 +4,12 @@ import { turnOffLoading } from '../../redux/loadingSlice'
 import { useParams } from 'react-router-dom'
 import CardBanner from '../../components/card/CardBanner'
 import CardCourse from '../../components/card/CardCourse'
+import { useDispatch } from 'react-redux'
 
 export default function ClassDetail() {
     const {maKhoaHoc} = useParams()
     const [course, setCourse] = useState([])
+    const dispatch = useDispatch()
     const dataBanner = {
         title: course.tenKhoaHoc,
         img: 'https://websitechuyennghiep.vn/data/images/lap-trinh-web-la-gi-cac-buoc-lap-trinh-web-co-ban.jpeg'
@@ -16,9 +18,9 @@ export default function ClassDetail() {
     useEffect(() => {
         VlearningService.getCourseProduct(maKhoaHoc).then((result) => {
             setCourse(result.data)
-            turnOffLoading()
+            dispatch(turnOffLoading())
         }).catch((err) => {
-            turnOffLoading()
+            dispatch(turnOffLoading())
         });
     }, [maKhoaHoc])
   return (

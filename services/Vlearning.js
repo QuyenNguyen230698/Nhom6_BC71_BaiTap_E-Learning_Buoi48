@@ -38,6 +38,14 @@ export let adminService = {
     getUserDetailByAccount: (account) => {
         return http.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=${account}`)
     },
+    deleteSignupCourse: (data) => {
+        return http.post(`/api/QuanLyKhoaHoc/HuyGhiDanh`,data)
+    },
+
+
+
+
+
     deleteUser: (user) => {
         return http.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${user}`);
     },
