@@ -32,8 +32,8 @@ export let adminService = {
     getListUser: () => {
         return http.get("/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01")
     },
-    getUserDetail: () => {
-        return http.get(`/api/QuanLyNguoiDung/ThongTinTaiKhoan`)
+    getUserDetail: (TaiKhoan) => {
+        return http.post(`/api/QuanLyNguoiDung/ThongTinTaiKhoan`,TaiKhoan)
     },
     getUserDetailByAccount: (account) => {
         return http.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=${account}`)
