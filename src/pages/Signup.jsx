@@ -47,7 +47,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center overflow-hidden py-10 bg-white h-55r">
+    <div className="flex justify-center items-center overflow-hidden py-5 bg-white h-50r">
       <div className="w-full max-w-md p-4">
         <div className="flex flex-col w-full h-full">
           <div className="mb-6 flex flex-col gap-1">

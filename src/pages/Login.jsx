@@ -44,7 +44,7 @@ export default function Login() {
       <div className="w-full max-w-md p-4">
         <div className="flex flex-col w-full h-full">
           <div className="mb-6 flex flex-col gap-1">
-            <label className="block mb-2 text-sm font-semibold text-black-gray">Account</label>
+            <label className="block mb-2 text-sm font-semibold text-black-gray">Tài Khoản</label>
             <input
               type="Account"
               value={account}
@@ -55,7 +55,7 @@ export default function Login() {
             />
           </div>
           <div className="mb-6 flex flex-col gap-1">
-            <label className="block mb-2 text-sm font-semibold text-black-gray">Password ( asdasdasd )</label>
+            <label className="block mb-2 text-sm font-semibold text-black-gray">Mật Khẩu ( asdasdasd )</label>
             <input
               type="password"
               value={password}
@@ -66,9 +66,9 @@ export default function Login() {
             />
           </div>
           <div className="flex gap-5">
-            <h4 className="text-gray-500 text-base">Already have an account?</h4>
+            <h4 className="text-gray-500 text-base">Bạn chưa có tài khoản?</h4>
             <NavLink to="/signup">
-              <h4 className="text-base underline underline-offset-4 text-black-gray">Sign up</h4>
+              <h4 className="text-base underline underline-offset-4 text-black-gray">Đăng ký</h4>
             </NavLink>
           </div>
           <button
@@ -77,7 +77,7 @@ export default function Login() {
             className="btnLVT btnLVT-sm w-full mt-3"
             onClick={handleLogin}
           >
-            {isActiveClick ? 'Logging in...' : 'Login'}
+            {isActiveClick ? 'Đăng nhập...' : 'Đăng nhập'}
           </button>
         </div>
       </div>

@@ -175,7 +175,7 @@ const handleUpdateUser = (event) => {
 
     return (
         <div className='py-20 flex flex-col gap-6 w-full h-full'>
-            <div className='w-full flex items-center container mx-auto gap-2'>
+            <div className='w-full flex flex-wrap items-center container mx-auto gap-2'>
                 <button onClick={handleAddUserClick} className='btn btn-success'>Thêm Người Dùng</button>
                 <button className='btn btn-error'>Thêm khoá Học</button>
                 <button 
