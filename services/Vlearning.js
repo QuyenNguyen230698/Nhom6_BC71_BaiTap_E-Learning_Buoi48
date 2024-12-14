@@ -47,6 +47,12 @@ export let adminService = {
     registerCourse: (data) => {
         return http.post(`/api/QuanLyKhoaHoc/DangKyKhoaHoc`,data)
     },
+    addUsers: (data) => {
+        return http.post(`/QuanLyNguoiDung/ThemNguoiDung`,data)
+    },
+    deleteUsers: (taiKhoan) => {
+        return http.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
+    },
 
 
 

@@ -14,9 +14,6 @@ export let store = configureStore({
     loadingSlice: loadingSlice,
   }
 })
-if (!root) {
-  root = createRoot(rootElement);
-}
 root.render(
   <Provider store={store}>
     <App/>
