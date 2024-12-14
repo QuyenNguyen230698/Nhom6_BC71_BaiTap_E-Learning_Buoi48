@@ -9,11 +9,11 @@ import CardInfoClass from "../../components/card/CardInfoClass";
 
 export default function Home() {
   const dataBanner = {
-    title: "V-learning",
-    subTitle: "Cùng nhau khám phá những điều mới mẻ",
-    description: "Học đi đôi với hành",
-    img: "https://res.cloudinary.com/dmd3qqgum/image/upload/v1733651444/123_rpthnm.jpg",
-  };
+    title: 'V-learning',
+    subTitle: 'Cùng nhau khám phá những điều mới mẻ',
+    description: 'Học đi đôi với hành',
+    img: 'https://res.cloudinary.com/dmd3qqgum/image/upload/v1733651444/123_rpthnm.jpg'
+  }
   const dataImg = [
     {
       src: "/img/content1.webp",

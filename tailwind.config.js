@@ -66,7 +66,14 @@ export default {
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: [],
+    themes: [{
+      light: {
+        ...require("daisyui/src/theming/themes")["light"],
+        primary: "blue",
+        secondary: "teal",
+      },
+    },],
+    darkMode: ['selector', '[data-theme="night"]']
   },
 }
 

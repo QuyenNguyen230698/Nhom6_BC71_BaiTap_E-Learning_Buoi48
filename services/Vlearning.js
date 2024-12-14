@@ -23,9 +23,41 @@ export let VlearningService = {
 
 //#region API Admin
 export let adminService = {
-    getListUser: () => {
-        return http.get("/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP00")
+    loginUser: (data) => {
+        return http.post("/api/QuanLyNguoiDung/DangNhap",data)
     },
+    registerUser: (data) => {
+        return http.post("/api/QuanLyNguoiDung/DangKy",data)
+    },
+    getListUser: () => {
+        return http.get("/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01")
+    },
+    getUserDetail: (TaiKhoan) => {
+        return http.post(`/api/QuanLyNguoiDung/ThongTinTaiKhoan`,TaiKhoan)
+    },
+    getUserDetailByAccount: (account) => {
+        return http.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=${account}`)
+    },
+    deleteSignupCourse: (data) => {
+        return http.post(`/api/QuanLyKhoaHoc/HuyGhiDanh`,data)
+    },
+    updateUserCourse: (data) => {
+        return http.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,data)
+    },
+    registerCourse: (data) => {
+        return http.post(`/api/QuanLyKhoaHoc/DangKyKhoaHoc`,data)
+    },
+    addUsers: (data) => {
+        return http.post(`/QuanLyNguoiDung/ThemNguoiDung`,data)
+    },
+    deleteUsers: (taiKhoan) => {
+        return http.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
+    },
+
+
+
+
+
     deleteUser: (user) => {
         return http.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${user}`);
     },

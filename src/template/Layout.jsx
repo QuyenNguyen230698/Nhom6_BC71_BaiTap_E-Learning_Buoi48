@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import ButtonScrollToTop from '../components/button/ButtonScrollToTop'
 
 export default function Layout({main}) {
     // AOS animation
@@ -45,10 +46,11 @@ export default function Layout({main}) {
       }; 
     }, []);
   return (
-    <div className='bg-white flex flex-col h-full w-full'>
+    <div className='bg-white text-black-gray flex flex-col h-full w-full'>
       <Header />
       {main}
       <Footer />
+      <ButtonScrollToTop />
     </div>
   )
 }

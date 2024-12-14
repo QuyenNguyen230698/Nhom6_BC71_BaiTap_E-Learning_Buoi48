@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import userSlice from './redux/userSlice';
 import loadingSlice from './redux/loadingSlice';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+let root = ReactDOM.createRoot(document.getElementById('root'));
 export let store = configureStore({
   reducer: {
     userSlice: userSlice,

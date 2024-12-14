@@ -25,7 +25,7 @@ export default function CardCourse() {
         <div data-aos="fade-up" data-aos-delay="100" className='w-full flex justify-center items-center py-4'>
             <h2 className='text-2xl lg:text-4xl font-light text-black-gray uppercase pb-5 lg:pb-10'>Khóa học phổ biến</h2>
         </div>
-      <div className='w-full max-w-6xl h-full items-stretch justify-stretch container mx-auto grid grid-cols-6  gap-5'>
+      <div className='w-full max-w-6xl h-full items-stretch justify-stretch container mx-auto grid grid-cols-6 gap-5'>
         {listCourseCatalog?.map((course, idx) => (
           <div key={idx} data-aos="fade-up" data-aos-delay="100" className='w-full h-full leading-none flex flex-col justify-stretch col-span-3 lg:col-span-2 shadow-lg rounded-lg overflow-hidden'>
             <div className='w-full h-full'>

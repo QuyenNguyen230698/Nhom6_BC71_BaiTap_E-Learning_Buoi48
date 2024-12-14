@@ -2,12 +2,11 @@ import React from "react";
 
 export default function CardInfoClass() {
   return (
-    <div className="py-10 grid grid-cols-3 w-full h-full gap-3 ">
-      <div className="col-span-1 w-full bg-teal-400 text-white h-full p-3 rounded-md">
-        <h3 className="font-bold text-3xl uppercase ">Khóa học</h3>
+    <div className="py-10 grid grid-cols-3 w-full h-full gap-3 container mx-auto">
+      <div data-aos="fade-up" data-aos-delay="100" className="col-span-3 lg:col-span-1 w-full bg-teal-400 text-white h-full p-3 rounded-md">
+        <h3 className="font-bold text-2xl uppercase ">Khóa học</h3>
         <p>
-          <span className="uppercase font-bold">Học qua dự án thực tế, </span>
-          học đi đôi với hành, không lý thuyết lan man, phân tích cội nguồn của
+        Học qua dự án thực tế, học đi đôi với hành, không lý thuyết lan man, phân tích cội nguồn của vấn đề, xây dựng từ các ví dụ nhỏ đến thực thi một dự án lớn ngoài thực tế để học viên học xong làm được ngay
           vấn đề, xây dựng từ các ví dụ nhỏ đến thực thi một dự án lớn ngoài
           thực tế để học viên học xong làm được ngay
         </p>
@@ -29,9 +28,9 @@ export default function CardInfoClass() {
         </p>
       </div>
 
-      <div className="col-span-1 w-full text-white flex flex-col gap-5 ">
-        <div className="bg-yellow-500 h-full p-3 rounded-md">
-          <h3 className=" text-3xl uppercase font-bold">Lộ trình phù hợp</h3>
+      <div className="col-span-3 lg:col-span-1 w-full text-white flex flex-col gap-5 ">
+        <div data-aos="fade-up" data-aos-delay="100" className="bg-yellow-500 h-full p-3 rounded-md">
+          <h3  className="font-bold text-2xl uppercase ">Lộ trình phù hợp</h3>
           <p className="font-light text-base">
             {" "}
             Lộ trình bài bản từ zero tới chuyên nghiệp, nâng cao
@@ -43,8 +42,8 @@ export default function CardInfoClass() {
             Huấn luyện để phát triển năng lực và niềm đam mê lập trình
           </p>
         </div>
-        <div className="bg-yellow-500 h-full p-3 rounded-md">
-          <h3 className="font-bold text-3xl uppercase">Giảng viên</h3>
+        <div data-aos="fade-up" data-aos-delay="100" className="bg-yellow-500 h-full p-3 rounded-md">
+          <h3 className="font-bold text-2xl uppercase ">Giảng viên</h3>
           <p className="font-light text-base">
             Tương tác cùng mentor và giảng viên qua phần thảo luận
           </p>
@@ -56,9 +55,9 @@ export default function CardInfoClass() {
           </p>
         </div>
       </div>
-      <div className="col-span-1 w-full flex flex-col gap-5">
-        <div className="bg-gray-500 text-white h-full p-3 rounded-md">
-          <h3 className="font-bold text-3xl uppercase">Hệ thống học tập</h3>
+      <div className="col-span-3 lg:col-span-1 w-full flex flex-col gap-5">
+        <div data-aos="fade-up" data-aos-delay="100" className="bg-gray-500 text-white h-full p-3 rounded-md">
+          <h3 className="font-bold text-2xl uppercase ">Hệ thống học tập</h3>
           <p className="font-light text-base">
             Tự động chấm điểm trắc nghiệm và đưa câu hỏi tùy theo mức độ học
             viên
@@ -71,8 +70,8 @@ export default function CardInfoClass() {
             mục tiêu học tập
           </p>
         </div>
-        <div className="bg-teal-400 text-white h-full p-3 rounded-md">
-          <h3 className="font-bold text-3xl uppercase">Chứng nhận</h3>
+        <div data-aos="fade-up" data-aos-delay="100" className="bg-teal-400 text-white h-full p-3 rounded-md">
+          <h3 className="font-bold text-2xl uppercase ">Chứng nhận</h3>
           <p className="font-light text-base">
             Chấm bài và có thể vấn đáp trực tuyến để review
           </p>
