@@ -51,6 +51,97 @@ export default function event() {
         </div>
       </div>
 
+      <div>
+        <h1 className="text-center text-3xl text-yellow-400 font-bold ">Các nhà đồng sáng tạo</h1>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 px-4 md:grid-cols-2 md:px-16">
+          <div>
+          <img className="w-40 h-40 bg-contain"
+            src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923492/1_c46vi1.jpg"
+            alt=""
+          />
+          </div>
+          <h2 className="text-lg font-bold text-white">Nguyễn Nhật</h2>
+          <p className="text-sm font-bold text-white">Ceo TechViet Production</p>
+        </div>
+
+        <div className="bg-white p-4 text-center rounded-lg">
+          <div>
+          <img className="w-40 h-40 bg-contain"
+            src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923497/2_ji8j7j.jpg"
+            alt=""
+          />
+          </div>
+          <h2 className="text-lg font-bold text-white">Nguyễn Nhật Nam</h2>
+          <p className="text-lg text-white font-bold">Ceo TechViet Production</p>
+        </div>
+
+        <div>
+        <div className="flex flex-col w-full h-full col-span-2 lg:col-span-1 gap-1">
+        <img className="w-40 h-40 rounded-xl overflow-hidden "
+            src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923507/3_kw3po9.jpg"
+            alt=""
+          />
+        </div> 
+          <h2 className="text-center lg:text-2xl uppercase font-bold">Nguyễn Nam</h2>
+          <p >Ceo TechViet Production</p>
+        </div>
+
+        <div>
+          <div>
+          <img
+            src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923511/4_l3o8xh.jpg"
+            alt=""
+          />
+          </div>
+          <h2>Jhonny Đặng</h2>
+          <p>Ceo TechViet Production</p>
+        </div>
+
+        <div>
+          <div>
+          <img
+            src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923514/5_wocfie.jpg"
+            alt=""
+          />
+          </div>
+          <h2>Ngô Henry</h2>
+          <p>Ceo TechViet Production</p>
+        </div>
+
+        <div>
+          <div>
+          <img
+            src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923529/6_av2opv.jpg"
+            alt=""
+          />
+          </div>
+          <h2>Vương Phạm Vn</h2>
+          <p>Ceo TechViet Production</p>
+        </div>
+
+        <div>
+          <div>
+          <img
+            src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923534/7_phjkmn.jpg"
+            alt=""
+          />
+          </div>
+          <h2>Rober Imacu</h2>
+          <p>Ceo TechViet Production</p>
+        </div>
+
+        <div>
+          <div>
+          <img className="w-40 h-40 bg-contain"
+            src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923538/8_lpvpy4.jpg"
+            alt=""
+          />
+          </div>
+          <h2>Khoa Pug</h2>
+          <p>Ceo TechViet Production</p>
+        </div>
+      </div>
+
       <div className="grid grid-cols-4 w-full h-full items-stretch justify-stretch container mx-auto gap-5 px-3 py-10">
         <div className="flex flex-col w-full h-full col-span-2 lg:col-span-1 gap-1">
           <div className="w-full h-full rounded-xl overflow-hidden  ">
