@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { turnOffLoading } from '../../redux/loadingSlice';
-import { adminService } from '../../../services/Vlearning';
+import { adminService, VlearningService } from '../../../services/Vlearning';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import event from '../event/EventPage';
+import AccountListCourse from './AccountListCourse';
+import AccountListUser from './AccountListUser';
 
 export default function AccountAdmin() {
     const [listAccount, setListAccount] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [showData, setShowData] = useState({})
+    const [listCourse, setListCourse] = useState([])
     const [showPersonalInfo, setShowPersonalInfo] = useState(true)
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -30,6 +32,28 @@ export default function AccountAdmin() {
           [name]: value
         }));
       };
+
+      //#region add users
+      const addUsersAdmin = (event) => {
+        event.preventDefault();
+        const dataUpdate = {
+            taiKhoan: formData.taiKhoan,
+            matKhau: formData.matKhau,
+            hoTen: formData.hoTen,
+            soDT: formData.soDT,
+            email: formData.email,
+            maNhom: "GP01",
+            maLoaiNguoiDung: formData.maLoaiNguoiDung
+        };
+        adminService.addUsers(dataUpdate).then((result) => {
+            message.success("Thêm Người Dùng Thành Công")
+            dispatch(turnOffLoading())
+          }).catch((err) => {
+            message.error("Thêm thất bại, vui lòng thử lại")
+            dispatch(turnOffLoading())
+          });
+      }
+      //#endregion
 
  //#region pagination
       const indexOfLastItem = currentPage * itemsPerPage;
@@ -107,6 +131,7 @@ const handleUpdateUser = (event) => {
 //#endregion
 
     const [copiedListAccount, setCopiedListAccount] = useState([]);
+    const [activeButton, setActiveButton] = useState(null);
 
     const reloadUserList = () => {
         adminService.getListUser().then((result) => {
@@ -117,6 +142,15 @@ const handleUpdateUser = (event) => {
             dispatch(turnOffLoading());
         });
     }
+    const reloadCourseList = () => {
+        VlearningService.getListCourse().then((result) => {
+            setListCourse(result.data)
+            dispatch(turnOffLoading());
+        }).catch((err) => {
+            console.log(err)
+            dispatch(turnOffLoading());
+        });
+    }
 
     useEffect(() => {
         const dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
@@ -124,13 +158,26 @@ const handleUpdateUser = (event) => {
             message.warning("Tài khoản của bạn không có quyền truy cập chức năng này");
             navigate("/");
         }
+        reloadCourseList()
         reloadUserList();
     }, []);
+
+    const handleAddUserClick = () => {
+        setActiveButton('add');
+        document.getElementById('my_modal_1').showModal();
+    };
+
+    const handleEditUserClick = (taiKhoan) => {
+        pushData(taiKhoan);
+        setActiveButton('update');
+        document.getElementById('my_modal_1').showModal();
+    };
 
     return (
         <div className='py-20 flex flex-col gap-6 w-full h-full'>
             <div className='w-full flex items-center container mx-auto gap-2'>
-                <button className='btn btn-success'>Thêm Người Dùng</button>
+                <button onClick={handleAddUserClick} className='btn btn-success'>Thêm Người Dùng</button>
+                <button className='btn btn-error'>Thêm khoá Học</button>
                 <button 
                 className={`btn btn-primary ${showPersonalInfo ? 'font-bold uppercase text-green-500' : ''}`} 
                 onClick={() => setShowPersonalInfo(true)}
@@ -145,48 +192,8 @@ const handleUpdateUser = (event) => {
                 </button>
             </div>
             {showPersonalInfo ? (
-                <div data-aos="fade-up" data-aos-delay="100" className="overflow-x-auto container mx-auto">
-                    <table className="table table-xs">
-                        <thead>
-                            <tr className='text-black-gray text-base'>
-                                <th>Stt</th>
-                                <th>Tài khoản</th>
-                                <th>Họ tên</th>
-                                <th>Email</th>
-                                <th>Số điện thoại</th>
-                                <th>Loại người dùng</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {currentItems?.map((user, index) => (
-                                <tr key={user.taiKhoan}>
-                                    <th>{indexOfFirstItem + index + 1}</th>
-                                    <td>{user.taiKhoan}</td>
-                                    <td>{user.hoTen}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.soDt}</td>
-                                    <td>{user.maLoaiNguoiDung}</td>
-                                    <td>
-                                        <div className="flex gap-2">
-                                            <button 
-                                                onClick={() => {
-                                                    pushData(user.taiKhoan); // Call the handleShowUpdate function
-                                                    document.getElementById('my_modal_1').showModal();
-                                                }} 
-                                                className="btn btn-warning btn-xs"
-                                            >
-                                                Sửa
-                                            </button>
-                                            <button onClick={()=>handleDeleteUsers(user.taiKhoan)}  className="btn btn-error btn-xs">Xóa</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            ):(<p className='text-center'>Quản lí khóa học</p>)}
+               <AccountListUser currentItems={currentItems} indexOfFirstItem={indexOfFirstItem} handleEditUserClick={handleEditUserClick} handleDeleteUsers={handleDeleteUsers}/>
+            ):(<AccountListCourse listCourse={listCourse}/>)}
             <div className="join w-full bg-white rounded-none text-black-gray container mx-auto flex flex-wrap items-center justify-center lg:justify-end">
                 <button className="join-item btn" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>«</button>
                 <button className="join-item btn">Page {currentPage}</button>
@@ -277,9 +284,16 @@ const handleUpdateUser = (event) => {
                     </div>
                     </div>
                     <div className=" w-full">
-                    <form method="dialog w-full">
-                        <button onClick={handleUpdateUser} className="btnLVT w-full font-thin">Cập Nhật</button>
-                    </form>
+                        {activeButton === 'update' && (
+                            <form method="dialog w-full">
+                                <button onClick={handleUpdateUser} className="btnLVT w-full font-thin">Cập Nhật</button>
+                            </form>
+                        )}
+                        {activeButton === 'add' && (
+                            <form method="dialog w-full">
+                                <button onClick={addUsersAdmin} className="btnLVT w-full font-thin">Thêm Người Dùng</button>
+                            </form>
+                        )}
                     </div>
                 </div>
                 <form method="dialog" className="modal-backdrop w-full h-full absolute inset-1 cursor-pointer">

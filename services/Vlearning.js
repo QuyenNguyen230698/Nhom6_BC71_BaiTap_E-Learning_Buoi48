@@ -17,6 +17,9 @@ export let VlearningService = {
     },
     getCourseProduct:(maKhoaHoc) => {
         return http.get(`/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${maKhoaHoc}`)
+    },
+    deleteCourse: (maKhoaHoc) => {
+        return http.delete(`/api/QuanLyKhoaHoc/XoaKhoaHoc`,maKhoaHoc)
     }
 }
 //#endregion
@@ -48,7 +51,7 @@ export let adminService = {
         return http.post(`/api/QuanLyKhoaHoc/DangKyKhoaHoc`,data)
     },
     addUsers: (data) => {
-        return http.post(`/QuanLyNguoiDung/ThemNguoiDung`,data)
+        return http.post(`/api/QuanLyNguoiDung/ThemNguoiDung`,data)
     },
     deleteUsers: (taiKhoan) => {
         return http.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
