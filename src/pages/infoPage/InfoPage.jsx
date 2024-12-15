@@ -4,7 +4,7 @@ import CardBanner from "../../components/card/CardBanner";
 export default function InfoPage() {
   const dataBanner = {
     title: 'V-learning',
-    subTitle: 'Cùng nhau khám phá những điều mới mẻ',
+    subTitle: '"Sự khác biệt giữa giấc mơ và thành công là hành động."',
     description: 'Học đi đôi với hành',
     img: 'https://demo2.cybersoft.edu.vn/static/media/bgAbout.19ac825c.png'
   };

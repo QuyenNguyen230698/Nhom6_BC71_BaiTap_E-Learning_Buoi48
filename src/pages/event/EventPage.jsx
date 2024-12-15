@@ -28,7 +28,7 @@ const BrandImage = ({ src }) => (
 
 export default function Event() {
   const dataBanner = {
-    title: 'Sự kiện công nghệ lớn nhất 2025',
+    title: '“Sự kiện công nghệ lớn nhất 2025”',
     subTitle: '01 tháng 01, 2025, Việt Nam',
     description: 'Học đi đôi với hành',
     img: 'https://res.cloudinary.com/dmd3qqgum/image/upload/v1733644310/backroundTech_kaznk9.jpg'

@@ -18,12 +18,12 @@ export default function SearchCourse() {
     {src:'/img/content4.webp',alt:"Khóa học lập trình"},
 ]
 const dataBanner = {
-    "BackEnd":{title:'BackEnd',img: "https://www.vietnamworks.com/hrinsider/wp-content/uploads/2024/05/lap-trinh-web.jpg"},
-    "Design":{title:'Design',img: "https://media.licdn.com/dms/image/D4D12AQE8eKTPZ6S7fQ/article-cover_image-shrink_600_2000/0/1718365066490?e=2147483647&v=beta&t=-TPoVU15S6YHi8zUOridsXRY1ZHP14-2AasDfWfj34Q"},
-    "DiDong":{title:'Di Động',img: "https://res.cloudinary.com/dmd3qqgum/image/upload/v1733669268/Web-Development_lqmebs.jpg"},
-    "FrontEnd":{title:'FrontEnd',img: "https://websitechuyennghiep.vn/data/images/lap-trinh-web-la-gi-cac-buoc-lap-trinh-web-co-ban.jpeg"},
-    "FullStack":{title:'FullStack',img: "https://tuhoclaptrinh.edu.vn/upload/post/2022/07/04/hoc-lap-trinh-can-luu-y-nhung-gi-20220704102621-884273.jpg"},
-    "TuDuy":{title:'Tư Duy',img: "https://swinburne-vn.edu.vn/wp-content/uploads/nganh-lap-trinh-mobile3.jpg"},
+    "BackEnd":{title:'BackEnd',img: "https://www.vietnamworks.com/hrinsider/wp-content/uploads/2024/05/lap-trinh-web.jpg",subTitle:"“Lập trình đỉnh cao – Chạm tay vào tương lai triệu đô.”"},
+    "Design":{title:'Design',img: "https://media.licdn.com/dms/image/D4D12AQE8eKTPZ6S7fQ/article-cover_image-shrink_600_2000/0/1718365066490?e=2147483647&v=beta&t=-TPoVU15S6YHi8zUOridsXRY1ZHP14-2AasDfWfj34Q",subTitle:"“Khai phá tiềm năng – Xây dựng đế chế công nghệ của bạn.”"},
+    "DiDong":{title:'Di Động',img: "https://res.cloudinary.com/dmd3qqgum/image/upload/v1733669268/Web-Development_lqmebs.jpg",subTitle:"“Không chỉ học, hãy làm chủ ngôn ngữ của tương lai.”"},
+    "FrontEnd":{title:'FrontEnd',img: "https://websitechuyennghiep.vn/data/images/lap-trinh-web-la-gi-cac-buoc-lap-trinh-web-co-ban.jpeg",subTitle:"“Từ số 0 đến siêu coder – Thay đổi cuộc chơi công nghệ.”"},
+    "FullStack":{title:'FullStack',img: "https://tuhoclaptrinh.edu.vn/upload/post/2022/07/04/hoc-lap-trinh-can-luu-y-nhung-gi-20220704102621-884273.jpg",subTitle:"“Học lập trình, sống đẳng cấp – Tương lai là của bạn!”"},
+    "TuDuy":{title:'Tư Duy',img: "https://swinburne-vn.edu.vn/wp-content/uploads/nganh-lap-trinh-mobile3.jpg",subTitle:"“Thành công không dành cho kẻ lười biếng, chỉ dành cho người kiên định.”"},
 }
 
   useEffect(() => {

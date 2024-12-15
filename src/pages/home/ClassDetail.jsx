@@ -14,6 +14,8 @@ export default function ClassDetail() {
     const navigate = useNavigate()
     const dataBanner = {
         title: course.tenKhoaHoc,
+        subTitle: '"Bạn không cần hoàn hảo để bắt đầu, nhưng cần bắt đầu để hoàn hảo."',
+        description: 'Học đi đôi với hành',
         img: 'https://websitechuyennghiep.vn/data/images/lap-trinh-web-la-gi-cac-buoc-lap-trinh-web-co-ban.jpeg'
     }
 
@@ -52,7 +54,7 @@ export default function ClassDetail() {
         <div data-aos="fade-up" data-aos-delay="100" className='w-full flex flex-col items-start justify-center h-full py-10 my-10 bg-yellow-500'>
             <div className='w-full max-w-6xl container mx-auto '>
             <h2 className='text-2xl lg:text-4xl text-white font-light text-black-gray uppercase'>Thông tin khóa học {course.tenKhoaHoc}</h2>
-            <p className='text-black-gray text-lg text-white uppercase'>Tiến lên và không chần chừ !!!</p>
+            <p className='text-black-gray text-lg text-white uppercase'>“Mở lối thành công – Định hình tương lai cùng lập trình đẳng cấp.”</p>
             </div>
         </div>
         <div className='grid grid-cols-12 w-full justify-stretch container mx-auto'>
@@ -61,7 +63,7 @@ export default function ClassDetail() {
                 <h2 data-aos="fade-up" data-aos-delay="100" className='text-black-gray uppercase font-bold text-2xl lg:text-4xl py-6'>{course.tenKhoaHoc}</h2>
                 <div data-aos="fade-up" data-aos-delay="100" className='w-full flex justify-evenly py-6'>
                     <div className='flex gap-2 w-full justify-start items-center'>
-                    <img src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923497/2_ji8j7j.jpg" className='w-10 h-10 rounded-full object-cover object-center ' alt="" />
+                    <img src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923529/6_av2opv.jpg" className='w-10 h-10 rounded-full object-cover object-center ' alt="" />
                         <div className='flex flex-col w-fit'>
                             <p className='text-gray-500 text-base lg:text-lg'>Giảng viên</p>
                             <h3 className='text-black-gray font-bold text-base lg:text-lg'>Trần Quang Sỹ</h3>
@@ -86,6 +88,34 @@ export default function ClassDetail() {
                         </svg>
                         </div>
                         <h3 className='text-nowrap text-black-gray font-bold'>100 đánh giá</h3>
+                    </div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" className='w-full flex justify-evenly py-2'>
+                    <div className='flex gap-2 w-full justify-start items-center'>
+                    <img src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923492/1_c46vi1.jpg" className='w-10 h-10 rounded-full object-cover object-center ' alt="" />
+                        <div className='flex flex-col w-fit'>
+                            <p className='text-gray-500 text-base lg:text-lg'>Mentor</p>
+                            <h3 className='text-black-gray font-bold text-base lg:text-lg'>Đỗ Văn Phúc</h3>
+                        </div>
+                    </div>
+                    <div className='flex gap-2 w-full justify-stretch items-center'>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" className="size-8">
+                    <path d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 0 0-1.032-.211 50.89 50.89 0 0 0-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 0 0 2.433 3.984L7.28 21.53A.75.75 0 0 1 6 21v-4.03a48.527 48.527 0 0 1-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979Z" />
+                    <path d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.507 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.782 2.781a.75.75 0 0 0 1.28-.53v-2.39l.33-.026c1.542-.125 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0 0 15.75 7.5Z" />
+                    </svg>
+                        <div className='flex flex-col w-fit'>
+                            <p className='text-gray-500'>Lĩnh vực</p>
+                            <h3 className='text-black-gray font-bold'>Lập trình Frontend</h3>
+                        </div>
+                    </div>
+                    <div className='flex flex-col w-fit justify-stretch items-center'>
+                        <div className='flex items-center gap-2'>
+                        <h3 className='text-nowrap font-bold text-black-gray'>4</h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="yellow" className="size-6">
+                        <path fillRule="evenodd" d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z" clipRule="evenodd" />
+                        </svg>
+                        </div>
+                        <h3 className='text-nowrap text-black-gray font-bold'>50 đánh giá</h3>
                     </div>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="100" className='w-full text-justify py-6 border-b border-black'>
@@ -130,7 +160,7 @@ export default function ClassDetail() {
                 <div className='flex flex-col w-full h-full py-6'>
                     <h2 data-aos="fade-up" data-aos-delay="100" className='text-black-gray text-lg lg:text-xl font-bold py-2'>Nội dung khóa học</h2>
                     <div data-aos="fade-up" data-aos-delay="100" className='flex flex-col w-full h-full items-start justify-center py-6 gap-3'>
-                        <h2 className='text-black-gray text-lg lg:text-xl font-bold w-full py-2 bg-slate-300'>Mục 1: Giới thiệu</h2>
+                        <h2 className='text-black-gray text-lg lg:text-xl font-bold w-full py-2 bg-teal-100'>Mục 1: Giới thiệu</h2>
                         <p className='text-black-gray text-base lg:text-lg font-bold'>Bài học</p>
                         <div className='flex justify-between w-full border-b border-yellow-400'>
                             <div className='flex items-center gap-1'>
@@ -194,7 +224,7 @@ export default function ClassDetail() {
                         </div>
                     </div>
                     <div data-aos="fade-up" data-aos-delay="100" className='flex flex-col w-full h-full items-start justify-center py-6 gap-3'>
-                            <h2 className='text-black-gray text-lg lg:text-xl font-bold w-full py-2 bg-slate-300'>Mục 2: Kiến thức căn bản</h2>
+                            <h2 className='text-black-gray text-lg lg:text-xl font-bold w-full py-2 bg-teal-100'>Mục 2: Kiến thức căn bản</h2>
                             <p className='text-black-gray text-base lg:text-lg font-bold'>Bài học</p>
                             <div className='flex justify-between w-full border-b border-yellow-400'>
                                 <div className='flex items-center gap-1'>
@@ -273,7 +303,7 @@ export default function ClassDetail() {
                             </div>
                     </div>
                     <div data-aos="fade-up" data-aos-delay="100" className='flex flex-col w-full h-full items-start justify-center py-6 gap-3'>
-                        <h2 className='text-black-gray text-lg lg:text-xl font-bold w-full py-2 bg-slate-300'>Mục 3: Kiến thức chuyên sâu</h2>
+                        <h2 className='text-black-gray text-lg lg:text-xl font-bold w-full py-2 bg-teal-100'>Mục 3: Kiến thức chuyên sâu</h2>
                         <p className='text-black-gray text-base lg:text-lg font-bold'>Bài học</p>
                         <div className='flex justify-between w-full border-b border-yellow-400'>
                             <div className='flex items-center gap-1'>
@@ -325,7 +355,7 @@ export default function ClassDetail() {
             </div>
             {/* right */}
             <div data-aos="fade-up" data-aos-delay="100" className='col-span-12 md:col-span-6 lg:col-span-4 w-full'>
-                <div className='md:ml-6 flex flex-col h-fit w-full p-2 bg-slate-50 shadow gap-2'>
+                <div className='md:ml-6 flex flex-col h-fit w-full p-2 shadow-xl gap-2'>
                     <img src={course.hinhAnh} alt="" className='w-full h-full object-cover'/>
                     <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-4'>
                         <p className='text-black-gray text-lg'>Ghi danh: <span className='font-bold text-black-gray text-lg'>10 học viên</span></p>
