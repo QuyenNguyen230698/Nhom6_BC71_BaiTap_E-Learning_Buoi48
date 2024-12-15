@@ -7,13 +7,18 @@ import { Provider } from 'react-redux';
 import userSlice from './redux/userSlice';
 import loadingSlice from './redux/loadingSlice';
 
-let root = ReactDOM.createRoot(document.getElementById('root'));
+let root;
+if (!root) {
+  root = ReactDOM.createRoot(document.getElementById('root'));
+}
+
 export let store = configureStore({
   reducer: {
     userSlice: userSlice,
     loadingSlice: loadingSlice,
   }
-})
+});
+
 root.render(
   <Provider store={store}>
     <App/>

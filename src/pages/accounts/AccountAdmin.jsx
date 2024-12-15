@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { turnOffLoading } from '../../redux/loadingSlice';
-import { adminService } from '../../../services/Vlearning';
+import { adminService, VlearningService } from '../../../services/Vlearning';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import event from '../event/EventPage';
+import AccountListCourse from './AccountListCourse';
+import AccountListUser from './AccountListUser';
+import { useFormik } from 'formik';
 
 export default function AccountAdmin() {
     const [listAccount, setListAccount] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [showData, setShowData] = useState({})
+    const [listCourse, setListCourse] = useState([]);
+    const [previewImage,setPreviewImage] = useState(null)
     const [showPersonalInfo, setShowPersonalInfo] = useState(true)
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -30,6 +34,93 @@ export default function AccountAdmin() {
           [name]: value
         }));
       };
+      const formik = useFormik({
+       initialValues:{
+        maKhoaHoc: "",
+        biDanh: "",
+        tenKhoaHoc: "",
+        moTa: "",
+        luotXem: 0,
+        danhGia: 0,
+        maNhom: "",
+        ngayTao: "",
+        maDanhMucKhoaHoc: "",
+        taiKhoanNguoiTao:"",
+        hinhAnh: ""
+       },
+       onSubmit: (values) => {
+        let dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
+        values.taiKhoanNguoiTao = dataUser.taiKhoan
+
+        let formData = new FormData();
+        for (let key in values) {
+          if (key !== "hinhAnh") {
+            formData.append(key, values[key]);
+          } else {
+            formData.append("File", values.hinhAnh, values.hinhAnh.name);
+          }
+        }
+        VlearningService.addCourse(formData).then((result) => {
+            dispatch(turnOffLoading())
+            message.success("Success")
+        }).catch((err) => {
+            message.error("Thông tin khoá học không hợp lệ")
+            console.log(err)
+            dispatch(turnOffLoading())
+        });
+      }
+      })
+      let handleFileChange = (e) => {
+        let file = e.target.files[0];
+    
+        if (
+          file.type === "image/png" ||
+          file.type === "image/jpeg" ||
+          file.type === "image/gif" ||
+          file.type === "image/jpg"
+        ) {
+          if (file.size <= 1024 * 1024) {
+            // Check if file size is less than or equal to 1 MB
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => {
+              setPreviewImage(e.target.result);
+            };
+            formik.setFieldValue("hinhAnh", file);
+          } else {
+            message.error(t("Image size must be less than 1 MB"));
+            e.target.value = null; // Reset the file input
+          }
+        } else {
+          message.error(
+            t("Please upload a valid image file (PNG, JPEG, GIF, or JPG)")
+          );
+          e.target.value = null; // Reset the file input
+        }
+      };
+
+
+      //#region add users
+      const addUsersAdmin = (event) => {
+        event.preventDefault();
+        const dataUpdate = {
+            taiKhoan: formData.taiKhoan,
+            matKhau: formData.matKhau,
+            hoTen: formData.hoTen,
+            soDT: formData.soDT,
+            email: formData.email,
+            maNhom: "GP01",
+            maLoaiNguoiDung: formData.maLoaiNguoiDung
+        };
+        adminService.addUsers(dataUpdate).then((result) => {
+            message.success("Thêm Người Dùng Thành Công")
+            dispatch(turnOffLoading())
+          }).catch((err) => {
+            message.error("Thêm thất bại, vui lòng thử lại")
+            dispatch(turnOffLoading())
+          });
+      }
+      //#endregion
 
  //#region pagination
       const indexOfLastItem = currentPage * itemsPerPage;
@@ -107,6 +198,7 @@ const handleUpdateUser = (event) => {
 //#endregion
 
     const [copiedListAccount, setCopiedListAccount] = useState([]);
+    const [activeButton, setActiveButton] = useState(null);
 
     const reloadUserList = () => {
         adminService.getListUser().then((result) => {
@@ -117,6 +209,15 @@ const handleUpdateUser = (event) => {
             dispatch(turnOffLoading());
         });
     }
+    const reloadCourseList = () => {
+        VlearningService.getListCourse().then((result) => {
+            setListCourse(result.data)
+            dispatch(turnOffLoading());
+        }).catch((err) => {
+            console.log(err)
+            dispatch(turnOffLoading());
+        });
+    }
 
     useEffect(() => {
         const dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
@@ -124,13 +225,30 @@ const handleUpdateUser = (event) => {
             message.warning("Tài khoản của bạn không có quyền truy cập chức năng này");
             navigate("/");
         }
+        reloadCourseList()
         reloadUserList();
     }, []);
 
+    const handleAddUserClick = () => {
+        setActiveButton('add');
+        document.getElementById('my_modal_1').showModal();
+    };
+
+    const handleEditUserClick = (taiKhoan) => {
+        pushData(taiKhoan);
+        setActiveButton('update');
+        document.getElementById('my_modal_1').showModal();
+    };
+
+    const handleAddCourse = () => {
+        formik.handleSubmit(); // This will trigger the formik onSubmit function
+    };
+
     return (
         <div className='py-20 flex flex-col gap-6 w-full h-full'>
-            <div className='w-full flex items-center container mx-auto gap-2'>
-                <button className='btn btn-success'>Thêm Người Dùng</button>
+            <div className='w-full flex flex-wrap items-center container mx-auto gap-2'>
+                <button onClick={handleAddUserClick} className='btn btn-success'>Thêm Người Dùng</button>
+                <button onClick={()=>document.getElementById('my_modal_2').showModal()} className='btn btn-error'>Thêm khoá Học</button>
                 <button 
                 className={`btn btn-primary ${showPersonalInfo ? 'font-bold uppercase text-green-500' : ''}`} 
                 onClick={() => setShowPersonalInfo(true)}
@@ -145,59 +263,20 @@ const handleUpdateUser = (event) => {
                 </button>
             </div>
             {showPersonalInfo ? (
-                <div data-aos="fade-up" data-aos-delay="100" className="overflow-x-auto container mx-auto">
-                    <table className="table table-xs">
-                        <thead>
-                            <tr className='text-black-gray text-base'>
-                                <th>Stt</th>
-                                <th>Tài khoản</th>
-                                <th>Họ tên</th>
-                                <th>Email</th>
-                                <th>Số điện thoại</th>
-                                <th>Loại người dùng</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {currentItems?.map((user, index) => (
-                                <tr key={user.taiKhoan}>
-                                    <th>{indexOfFirstItem + index + 1}</th>
-                                    <td>{user.taiKhoan}</td>
-                                    <td>{user.hoTen}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.soDt}</td>
-                                    <td>{user.maLoaiNguoiDung}</td>
-                                    <td>
-                                        <div className="flex gap-2">
-                                            <button 
-                                                onClick={() => {
-                                                    pushData(user.taiKhoan); // Call the handleShowUpdate function
-                                                    document.getElementById('my_modal_1').showModal();
-                                                }} 
-                                                className="btn btn-warning btn-xs"
-                                            >
-                                                Sửa
-                                            </button>
-                                            <button onClick={()=>handleDeleteUsers(user.taiKhoan)}  className="btn btn-error btn-xs">Xóa</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            ):(<p className='text-center'>Quản lí khóa học</p>)}
+               <AccountListUser currentItems={currentItems} indexOfFirstItem={indexOfFirstItem} handleEditUserClick={handleEditUserClick} handleDeleteUsers={handleDeleteUsers}/>
+            ):(<AccountListCourse listCourse={listCourse}/>)}
             <div className="join w-full bg-white rounded-none text-black-gray container mx-auto flex flex-wrap items-center justify-center lg:justify-end">
                 <button className="join-item btn" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>«</button>
                 <button className="join-item btn">Page {currentPage}</button>
                 <button className="join-item btn" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>»</button>
             </div>
 
+            {/* modal Admin */}
             <dialog id="my_modal_1" className="modal w-full h-full flex justify-center items-center backdrop-blur-xl ">
                 <div className="h-auto py-6 px-10 w-full max-w-2xl bg-white rounded-md z-50">
                     <div className="flex flex-col items-start leading-none w-full">
 
-                    <div className="mb-6 flex flex-col gap-1">
+                    <div className="mb-2 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">tài khoản</label>
                         <input
                         type="text"
@@ -210,7 +289,7 @@ const handleUpdateUser = (event) => {
                         />
                     </div>
 
-                    <div className="mb-6 flex flex-col gap-1">
+                    <div className="mb-2 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Họ tên</label>
                         <input
                         type="text"
@@ -223,7 +302,7 @@ const handleUpdateUser = (event) => {
                         />
                     </div>
 
-                    <div className="mb-6 flex flex-col gap-1">
+                    <div className="mb-2 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Mật khẩu</label>
                         <input
                         type="password"
@@ -236,7 +315,7 @@ const handleUpdateUser = (event) => {
                         />
                     </div>
 
-                    <div className="mb-6 flex flex-col gap-1">
+                    <div className="mb-2 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Số điện thoại</label>
                         <input
                         type="tel"
@@ -249,7 +328,7 @@ const handleUpdateUser = (event) => {
                         />
                     </div>
 
-                    <div className="mb-6 flex flex-col gap-1">
+                    <div className="mb-2 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Email</label>
                         <input
                         type="email"
@@ -261,7 +340,7 @@ const handleUpdateUser = (event) => {
                         required
                         />
                     </div>
-                    <div className="mb-6 flex flex-col gap-1">
+                    <div className="mb-2 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Người dùng</label>
                         <select
                         name="maLoaiNguoiDung"
@@ -277,8 +356,172 @@ const handleUpdateUser = (event) => {
                     </div>
                     </div>
                     <div className=" w-full">
-                    <form method="dialog w-full">
-                        <button onClick={handleUpdateUser} className="btnLVT w-full font-thin">Cập Nhật</button>
+                        {activeButton === 'update' && (
+                            <form method="dialog w-full">
+                                <button onClick={handleUpdateUser} className="btnLVT w-full font-thin">Cập Nhật</button>
+                            </form>
+                        )}
+                        {activeButton === 'add' && (
+                            <form method="dialog w-full">
+                                <button onClick={addUsersAdmin} className="btnLVT w-full font-thin">Thêm Người Dùng</button>
+                            </form>
+                        )}
+                    </div>
+                </div>
+                <form method="dialog" className="modal-backdrop w-full h-full absolute inset-1 cursor-pointer">
+                    <button>close</button>
+                </form> 
+                </dialog>
+            {/* modal Course */}
+                <dialog id="my_modal_2" className="modal w-full h-full flex justify-center items-center backdrop-blur-xl ">
+                <div className="h-full min-h-screen overflow-y-auto py-6 px-10 w-full max-w-2xl bg-white rounded-md z-50">
+                    <div className="flex flex-wrap gap-2 items-start leading-none w-11/12">
+
+                    <div className="mb-2 flex flex-col gap-1">
+                        <label className="block mb-2 text-sm font-semibold text-black-gray">Mã Khoá Học</label>
+                        <input
+                        type="text"
+                        name="maKhoaHoc"
+                        value={formik.maKhoaHoc}
+                        onChange={formik.handleChange}
+                        className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
+                        placeholder="Nhập mã khoá học"
+                        required
+                        />
+                    </div>
+                    <div className="mb-2 flex flex-col gap-1">
+                        <label className="block mb-2 text-sm font-semibold text-black-gray">Danh Mục Khoá Học</label>
+                        <select
+                        name="maDanhMucKhoaHoc"
+                        value={formik.maDanhMucKhoaHoc}
+                        onChange={formik.handleChange}
+                        className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
+                        required
+                        >
+                            <option value="">Chọn Danh Mục Khoá Học</option>
+                            <option value="BackEnd">Lập trình Backend</option>
+                            <option value="Design">Thiết kế Web</option>
+                            <option value="DiDong">Lập trình di động</option>
+                            <option value="FrontEnd">Lập trình Front end</option>
+                            <option value="FullStack">Lập trình Full Stack</option>
+                            <option value="TuDuy">Tư duy lập trình</option>
+                        </select>
+                    </div>
+                    <div className="mb-2 flex flex-col gap-1">
+                        <label className="block mb-2 text-sm font-semibold text-black-gray">Tên Khoá Học</label>
+                        <input
+                        type="text"
+                        name="tenKhoaHoc"
+                        value={formik.tenKhoaHoc}
+                        onChange={formik.handleChange}
+                        className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
+                        placeholder="Nhập tên khoá học"
+                        required
+                        />
+                    </div>
+                    <div className="mb-2 flex flex-col gap-1">
+                        <label className="block mb-2 text-sm font-semibold text-black-gray">Ngày Tạo</label>
+                        <input
+                        type="text"
+                        name="ngayTao"
+                        format={"DD/MM/YYYY"}
+                        value={formik.ngayTao}
+                        onChange={formik.handleChange}
+                        className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
+                        placeholder="Nhập mật khẩu"
+                        required
+                        />
+                    </div>
+                    <div className="mb-2 flex flex-col gap-1">
+                        <label className="block mb-2 text-sm font-semibold text-black-gray">Đánh Giá</label>
+                        <input
+                        type="number"
+                        name="danhGia"
+                        value={formik.danhGia}
+                        onChange={formik.handleChange}
+                        className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
+                        placeholder="Nhập Số Đánh Giá"
+                        required
+                        />
+                    </div>
+                    <div className="mb-2 flex flex-col gap-1">
+                        <label className="block mb-2 text-sm font-semibold text-black-gray">Lượt Xem</label>
+                        <input
+                        type="number"
+                        name="luotXem"
+                        value={formik.luotXem}
+                        onChange={formik.handleChange}
+                        className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
+                        placeholder="Nhập Số Lượt xem"
+                        required
+                        />
+                    </div>
+                    {/* <div className="mb-2 flex flex-col gap-1">
+                        <label className="block mb-2 text-sm font-semibold text-black-gray">Người Tạo</label>
+                        <input
+                        type="text"
+                        name="taiKhoanNguoiTao"
+                        value={formCourse.taiKhoanNguoiTao}
+                        onChange={formik.handleChange}
+                        className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
+                        placeholder="Họ tên"
+                        required
+                        />
+                    </div> */}
+                    <div className="mb-2 flex flex-col gap-1">
+                        <label className="block mb-2 text-sm font-semibold text-black-gray">Bí Danh</label>
+                        <input
+                        type="text"
+                        name="biDanh"
+                        value={formik.biDanh}
+                        onChange={formik.handleChange}
+                        className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
+                        placeholder="Nhập bí danh"
+                        required
+                        />
+                    </div>
+                    <div className="mb-2 flex flex-col gap-1">
+                        <label className="block mb-2 text-sm font-semibold text-black-gray">Mã Nhóm</label>
+                        <select
+                        name="maNhom"
+                        value={formik.maNhom}
+                        onChange={formik.handleChange}
+                        className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
+                        required
+                        >
+                            <option value="">Mã Nhóm</option>
+                            <option value="GP01">GP01</option>
+                        </select>
+                    </div>
+                    <div className="mb-2 flex flex-col gap-1">
+                        <label className="block mb-2 text-sm font-semibold text-black-gray">Mô tả</label>
+                        <input
+                        type="text"
+                        name="moTa"
+                        value={formik.moTa}
+                        onChange={formik.handleChange}
+                        className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
+                        placeholder="Nhập mô tả"
+                        required
+                        />
+                    </div>
+                    <div className="mb-2 flex flex-col gap-1">
+                        <input type="file" onChange={handleFileChange} className="file-input file-input-bordered file-input-sm w-full max-w-sm" />
+                    </div>
+                    </div>
+                    <div className="mt-2">
+                        <img
+                          src={previewImage}
+                          alt="Movie Poster Preview"
+                          className="max-w-xs max-h-64 object-contain rounded-lg shadow-md"
+                        />
+                      </div>
+                    <div className=" w-full">
+                    <form method="dialog w-full" onSubmit={(e) => {
+                        e.preventDefault(); // Prevent default form submission
+                        handleAddCourse(); // Call the existing function
+                    }}>
+                        <button type="submit" className="btnLVT w-full font-thin">Thêm Khoá Học</button>
                     </form>
                     </div>
                 </div>

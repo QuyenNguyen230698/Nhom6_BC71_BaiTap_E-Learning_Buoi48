@@ -105,23 +105,23 @@ export default function Account() {
 
   return (
     <div className='py-32 flex flex-col w-full h-full'>
-      <div className='w-full flex justify-evenly gap-6'>
+      <div className='w-full flex justify-center container mx-auto gap-6'>
         {users.maLoaiNguoiDung === "GV" ? (
           <button 
-            className="nav-item" 
+            className="btn btn-outline btn-error" 
             onClick={() => navigate("/accountAdmin")}
           >
             Trang Quản Lý User
           </button>
         ) : null}
         <button 
-          className={`nav-item ${showPersonalInfo ? 'font-bold uppercase text-green-500' : ''}`} 
+          className={`btn btn-outline btn-success ${showPersonalInfo ? 'font-bold uppercase ' : ''}`} 
           onClick={() => setShowPersonalInfo(true)}
         >
           Thông tin cá nhân
         </button>
         <button 
-          className={`nav-item ${!showPersonalInfo ? 'font-bold uppercase text-green-500' : ''}`} 
+          className={`btn btn-outline btn-info ${!showPersonalInfo ? 'font-bold uppercase ' : ''}`} 
           onClick={() => setShowPersonalInfo(false)}
         >
           Khóa học
