@@ -20,6 +20,9 @@ export let VlearningService = {
     },
     deleteCourse: (maKhoaHoc) => {
         return http.delete(`/api/QuanLyKhoaHoc/XoaKhoaHoc`,maKhoaHoc)
+    },
+    addCourse: (dataForm) => {
+        return http.post(`/api/QuanLyKhoaHoc/ThemKhoaHoc`,dataForm)
     }
 }
 //#endregion
