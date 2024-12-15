@@ -6,6 +6,9 @@ export let VlearningService = {
     getListCourse: () => {
         return http.get("/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01")
     },
+    searchCourse: (tenKhoaHoc) => {
+        return http.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${tenKhoaHoc}`)
+    },
     getCourseCatalog: () => {
         return http.get("/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc")
     },
@@ -23,6 +26,9 @@ export let VlearningService = {
     },
     addCourse: (dataForm) => {
         return http.post(`/api/QuanLyKhoaHoc/ThemKhoaHoc`,dataForm)
+    },
+    updateCourse: (dataForm) => {
+        return http.put(`/api/QuanLyKhoaHoc/CapNhatKhoaHoc`,dataForm)
     }
 }
 //#endregion
@@ -58,6 +64,9 @@ export let adminService = {
     },
     deleteUsers: (taiKhoan) => {
         return http.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
+    },
+    searchUser:(hoTen) => {
+        return http.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=${hoTen}`)
     },
 
 

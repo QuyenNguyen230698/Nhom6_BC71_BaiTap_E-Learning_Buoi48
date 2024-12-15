@@ -1,8 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { adminService } from '../../../services/Vlearning';
+import { useDispatch } from 'react-redux';
+import { turnOffLoading } from '../../redux/loadingSlice';
 
 export default function AccountListUser({currentItems,indexOfFirstItem,handleEditUserClick,handleDeleteUsers}) {
+    const [searchuser, setSearchUser] = useState([])
+    const dispatch = useDispatch()
+    const autoSearch = (event) => {
+        const inputValue = event.target.value;
+        adminService.searchUser(inputValue)
+            .then((result) => {
+                setSearchUser(result.data);
+                dispatch(turnOffLoading());
+            })
+            .catch((err) => {
+                console.log(err);
+                dispatch(turnOffLoading());
+            })
+            .finally(() => {
+                dispatch(turnOffLoading());
+            });
+    };
+    const clearInput = () => {
+        setSearchUser('')
+    }
   return (
     <div data-aos="fade-up" data-aos-delay="100" className="overflow-x-auto w-full px-6 mx-auto">
+                <div className="join items-center justify-center w-full max-w-4xl">
+                    <input onChange={autoSearch} className="input input-bordered join-item text-gray-400" placeholder="Search" />
+                    <button onClick={clearInput} className="btn join-item text-gray-400">Clear</button>
+                </div>
         <table className="table table-xs">
             <thead>
                 <tr className='text-black-gray text-base'>
@@ -16,7 +43,7 @@ export default function AccountListUser({currentItems,indexOfFirstItem,handleEdi
                 </tr>
             </thead>
             <tbody>
-            {currentItems?.map((user, index) => (
+            {(searchuser.length > 0 ? searchuser : currentItems)?.map((user, index) => (
                     <tr key={user.taiKhoan}>
                         <th>{indexOfFirstItem + index + 1}</th>
                         <td>{user.taiKhoan}</td>

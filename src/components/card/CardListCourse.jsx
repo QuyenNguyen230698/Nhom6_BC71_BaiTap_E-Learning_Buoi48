@@ -100,7 +100,7 @@ export default function CardListCourse({dataImg}) {
                 <div data-aos="fade-up" data-aos-delay="100" className='flex flex-col lg:flex-row items-start lg:items-center justify-between w-full h-full lg:max-w-7xl gap-3'>
                     <div className="w-auto flex flex-row items-center justify-center gap-4">
                         <div className='w-fit text-black-gray '>
-                            <button className='btnLVT'>Nhận Thêm Thông Tin</button>
+                        <a href="#footerID"><button className='btnLVT'>Nhận Thêm Thông Tin</button></a>
                         </div>
                     </div>
                     <div data-aos="fade-up" data-aos-delay="100" className="w-auto h-full flex flex-row items-center justify-center gap-4">

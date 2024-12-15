@@ -44,7 +44,7 @@ export default function InfoPage() {
     <div className="flex flex-col gap-10">
       <CardBanner dataBanner={dataBanner} />
       {sections.map((section, index) => (
-        <div key={index} className="flex flex-col lg:flex-row lg:gap-10 h-full justify-center items-stretch w-full overflow-hidden container mx-auto lg:py-10">
+        <div key={index} className="flex flex-col lg:flex-row bg-home lg:gap-10 h-full justify-center items-stretch w-full overflow-hidden container mx-auto lg:py-10">
           <div data-aos="fade-right" data-aos-delay="100" className={`flex flex-col gap-3 lg:w-1/2 w-full p-5 ${section.order}`}>
             <h2 className="textTitle text-green-500 uppercase">{section.title}</h2>
             <h1 className="textSubBanner font-normal text-yellow-500">{section.subTitle}</h1>

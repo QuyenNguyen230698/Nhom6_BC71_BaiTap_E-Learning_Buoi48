@@ -34,70 +34,72 @@ export default function AccountAdmin() {
           [name]: value
         }));
       };
-      const formik = useFormik({
-       initialValues:{
-        maKhoaHoc: "",
-        biDanh: "",
-        tenKhoaHoc: "",
-        moTa: "",
-        luotXem: 0,
-        danhGia: 0,
-        maNhom: "",
-        ngayTao: "",
-        maDanhMucKhoaHoc: "",
-        taiKhoanNguoiTao:"",
-        hinhAnh: ""
-       },
-       onSubmit: (values) => {
-        let dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
-        values.taiKhoanNguoiTao = dataUser.taiKhoan
+//#region add Course
+const formik = useFormik({
+    initialValues:{
+     maKhoaHoc: "",
+     biDanh: "",
+     tenKhoaHoc: "",
+     moTa: "",
+     luotXem: 0,
+     danhGia: 0,
+     maNhom: "",
+     ngayTao: "",
+     maDanhMucKhoaHoc: "",
+     taiKhoanNguoiTao:"",
+     hinhAnh: ""
+    },
+    onSubmit: (values) => {
+     let dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
+     values.taiKhoanNguoiTao = dataUser.taiKhoan
 
-        let formData = new FormData();
-        for (let key in values) {
-          if (key !== "hinhAnh") {
-            formData.append(key, values[key]);
-          } else {
-            formData.append("File", values.hinhAnh, values.hinhAnh.name);
-          }
-        }
-        VlearningService.addCourse(formData).then((result) => {
-            dispatch(turnOffLoading())
-            message.success("Success")
-        }).catch((err) => {
-            message.error("Thông tin khoá học không hợp lệ")
-            console.log(err)
-            dispatch(turnOffLoading())
-        });
-      }
-      })
-      let handleFileChange = (e) => {
-        let file = e.target.files[0];
-    
-        if (
-          file.type === "image/png" ||
-          file.type === "image/jpeg" ||
-          file.type === "image/gif" ||
-          file.type === "image/jpg"
-        ) {
-          if (file.size <= 1024 * 1024) {
-            // Check if file size is less than or equal to 1 MB
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = (e) => {
-              setPreviewImage(e.target.result);
-            };
-            formik.setFieldValue("hinhAnh", file);
-          } else {
-            message.error(t("Image size must be less than 1 MB"));
-            e.target.value = null; // Reset the file input
-          }
-        } else {
-          message.error(
-            t("Please upload a valid image file (PNG, JPEG, GIF, or JPG)")
-          );
-          e.target.value = null; // Reset the file input
-        }
-      };
+     let formData = new FormData();
+     for (let key in values) {
+       if (key !== "hinhAnh") {
+         formData.append(key, values[key]);
+       } else {
+         formData.append("File", values.hinhAnh, values.hinhAnh.name);
+       }
+     }
+     VlearningService.addCourse(formData).then((result) => {
+         dispatch(turnOffLoading())
+         message.success("Success")
+     }).catch((err) => {
+         message.error("Thông tin khoá học không hợp lệ")
+         console.log(err)
+         dispatch(turnOffLoading())
+     });
+   }
+   })
+   let handleFileChange = (e) => {
+     let file = e.target.files[0];
+ 
+     if (
+       file.type === "image/png" ||
+       file.type === "image/jpeg" ||
+       file.type === "image/gif" ||
+       file.type === "image/jpg"
+     ) {
+       if (file.size <= 1024 * 1024) {
+         // Check if file size is less than or equal to 1 MB
+         let reader = new FileReader();
+         reader.readAsDataURL(file);
+         reader.onload = (e) => {
+           setPreviewImage(e.target.result);
+         };
+         formik.setFieldValue("hinhAnh", file);
+       } else {
+         message.error(t("Image size must be less than 1 MB"));
+         e.target.value = null; // Reset the file input
+       }
+     } else {
+       message.error(
+         t("Please upload a valid image file (PNG, JPEG, GIF, or JPG)")
+       );
+       e.target.value = null; // Reset the file input
+     }
+   };
+//#endregion
 
 
       //#region add users
@@ -184,16 +186,16 @@ const handleUpdateUser = (event) => {
             ));
             message.success("Cập nhật thông tin thành công");
         } else {
-            message.error("Cập nhật thất bại");
+            message.success("Cập nhật thông tin thành công");
         }
-        reloadUserList()
-        dispatch(turnOffLoading());
+        dispatch(turnOffLoading())
     })
     .catch(error => {
-        dispatch(turnOffLoading());
+        dispatch(turnOffLoading())
         message.error("Có lỗi xảy ra khi cập nhật thông tin");
-        console.error(error);
+        console.error(error)
     });
+    window.location.href = "/accountAdmin"
 };
 //#endregion
 
@@ -226,7 +228,7 @@ const handleUpdateUser = (event) => {
             navigate("/");
         }
         reloadCourseList()
-        reloadUserList();
+        reloadUserList()
     }, []);
 
     const handleAddUserClick = () => {
@@ -241,8 +243,10 @@ const handleUpdateUser = (event) => {
     };
 
     const handleAddCourse = () => {
-        formik.handleSubmit(); // This will trigger the formik onSubmit function
+        formik.handleSubmit()
     };
+
+
 
     return (
         <div className='py-20 flex flex-col gap-6 w-full h-full'>
@@ -264,7 +268,7 @@ const handleUpdateUser = (event) => {
             </div>
             {showPersonalInfo ? (
                <AccountListUser currentItems={currentItems} indexOfFirstItem={indexOfFirstItem} handleEditUserClick={handleEditUserClick} handleDeleteUsers={handleDeleteUsers}/>
-            ):(<AccountListCourse listCourse={listCourse}/>)}
+            ):(<AccountListCourse listCourse={listCourse} previewImage={previewImage}/>)}
             <div className="join w-full bg-white rounded-none text-black-gray container mx-auto flex flex-wrap items-center justify-center lg:justify-end">
                 <button className="join-item btn" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>«</button>
                 <button className="join-item btn">Page {currentPage}</button>
@@ -272,13 +276,14 @@ const handleUpdateUser = (event) => {
             </div>
 
             {/* modal Admin */}
-            <dialog id="my_modal_1" className="modal w-full h-full flex justify-center items-center backdrop-blur-xl ">
+            <dialog id="my_modal_1" className="modal w-full h-auto flex justify-center items-center backdrop-blur-xl ">
                 <div className="h-auto py-6 px-10 w-full max-w-2xl bg-white rounded-md z-50">
                     <div className="flex flex-col items-start leading-none w-full">
 
                     <div className="mb-2 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">tài khoản</label>
                         <input
+                        disabled
                         type="text"
                         name="taiKhoan"
                         value={formData.taiKhoan}
@@ -373,8 +378,8 @@ const handleUpdateUser = (event) => {
                 </form> 
                 </dialog>
             {/* modal Course */}
-                <dialog id="my_modal_2" className="modal w-full h-full flex justify-center items-center backdrop-blur-xl ">
-                <div className="h-full min-h-screen overflow-y-auto py-6 px-10 w-full max-w-2xl bg-white rounded-md z-50">
+                <dialog id="my_modal_2" className="modal w-full h-auto flex justify-center items-center backdrop-blur-xl ">
+                <div className="h-auto overflow-y-auto py-6 px-10 w-full max-w-2xl bg-white rounded-md z-50">
                     <div className="flex flex-wrap gap-2 items-start leading-none w-11/12">
 
                     <div className="mb-2 flex flex-col gap-1">
