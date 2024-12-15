@@ -18,7 +18,7 @@ export default function event() {
           </p>
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row lg:gap-10 h-full justify-center items-stretch w-full overflow-hidden container mx-auto lg:py-10">
+      <div className="flex flex-col lg:flex-row lg:gap-10 h-full justify-center items-stretch w-full overflow-hidden container mx-auto lg:py-20">
         <div
           data-aos="fade-right"
           data-aos-delay="100"
@@ -27,7 +27,7 @@ export default function event() {
           <h2 className="textTitle text-green-500 uppercase">
             Sự kiện công nghệ dành cho startup
           </h2>
-          <h1 className="textSubBanner font-normal text-yellow-500">
+          <h1 className="text-2xl font-bold text-yellow-500">
             Nơi gặp gỡ của những tư tưởng lớn
           </h1>
           <p className="text-justify textCardTitle text-gray-600">
@@ -41,7 +41,7 @@ export default function event() {
         <div
           data-aos="fade-left"
           data-aos-delay="100"
-          className="lg:w-1/2 w-full h-96 order-1 lg:order-2"
+          className="lg:w-1/2 w-full h-96 order-1 lg:order-2 lg:animate-bounce "
         >
           <img
             src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733644168/1_isuj17.png "
@@ -51,94 +51,128 @@ export default function event() {
         </div>
       </div>
 
-      <div>
-        <h1 className="text-center text-3xl text-yellow-400 font-bold ">Các nhà đồng sáng tạo</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 px-4 md:grid-cols-2 md:px-16">
-          <div>
-          <img className="w-40 h-40 bg-contain"
+      <div className="lg:py-20 ">
+      <div className=" flex flex-wrap h-full justify-center items-center w-full overflow-hidden py-6 px-4  bg-gray-600 ">
+      <div className="flex flex-wrap justify-between gap-4 p-2">
+        <img className="w-36 h-auto bg-contain" 
+        src="/img/brand1.png" alt="" />
+      </div>
+
+      <div className="flex flex-wrap justify-between gap-4 p-2" >
+        <img className="w-36 h-auto bg-contain" 
+        src="/img/brand2.png" alt="" />
+      </div>
+
+      <div className="flex flex-wrap justify-between gap-4 p-2">
+        <img className="w-36 h-auto bg-contain"
+         src="/img/brand3.avif" alt="" />
+      </div>
+
+      <div className="flex flex-wrap justify-between gap-4 p-2">
+        <img className="w-36 h-auto bg-contain"
+         src="/img/brand4.avif" alt="" />
+      </div>
+
+      <div className="flex flex-wrap justify-between gap-4 p-2">
+        <img className="w-36 h-auto bg-contain" 
+        src="/img/brand5.avif" alt="" />
+      </div>
+
+      <div className="flex flex-wrap justify-between gap-4 p-2">
+        <img className="w-36 h-auto bg-contain" 
+        src="/img/brand6.avif" alt="" />
+      </div>
+
+      <div className="flex flex-wrap justify-between gap-4 p-2">
+        <img className="w-36 h-auto bg-contain"
+        src="/img/brand7.avif" alt="" />
+      </div>
+
+      <div className="flex flex-wrap justify-between gap-4 p-2">
+      <img className="w-36 h-auto bg-contain"
+      src="/img/brand8.png" alt="" />
+      </div>
+
+      </div>
+
+      </div> 
+
+      <div
+        className="flex flex-wrap h-full justify-stretch items-stretch w-full overflow-hidden mx-auto py-10 "
+        style={{
+          backgroundImage: `url('https://res.cloudinary.com/dmd3qqgum/image/upload/v1734246220/1_fea7tu.jpg')`,
+        }}
+      >
+        <div className="lg:w-1/4 flex flex-col items-start  w-full p-4 ">
+          <img
             src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923492/1_c46vi1.jpg"
             alt=""
           />
-          </div>
-          <h2 className="text-lg font-bold text-white">Nguyễn Nhật</h2>
-          <p className="text-sm font-bold text-white">Ceo TechViet Production</p>
+          <h2 className="uppercase text-white font-bold">Nguyễn Nhật</h2>
+          <p className="uppercase text-white">Ceo TechViet Production</p>
         </div>
 
-        <div className="bg-white p-4 text-center rounded-lg">
-          <div>
-          <img className="w-40 h-40 bg-contain"
+        <div className="lg:w-1/4 flex flex-col items-start  w-full p-4">
+          <img
             src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923497/2_ji8j7j.jpg"
             alt=""
           />
-          </div>
-          <h2 className="text-lg font-bold text-white">Nguyễn Nhật Nam</h2>
-          <p className="text-lg text-white font-bold">Ceo TechViet Production</p>
+          <h2 className="uppercase text-white font-bold">Nguyễn Nhật Nam</h2>
+          <p className="uppercase text-white">Ceo TechViet Production</p>
         </div>
 
-        <div>
-        <div className="flex flex-col w-full h-full col-span-2 lg:col-span-1 gap-1">
-        <img className="w-40 h-40 rounded-xl overflow-hidden "
+        <div className="lg:w-1/4 flex flex-col items-start  w-full p-4">
+          <img
             src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923507/3_kw3po9.jpg"
             alt=""
           />
-        </div> 
-          <h2 className="text-center lg:text-2xl uppercase font-bold">Nguyễn Nam</h2>
-          <p >Ceo TechViet Production</p>
+          <h2 className="uppercase text-white font-bold">Nguyễn Nam</h2>
+          <p className="uppercase text-white">Ceo TechViet Production</p>
         </div>
 
-        <div>
-          <div>
+        <div className="lg:w-1/4 flex flex-col items-start  w-full p-4">
           <img
             src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923511/4_l3o8xh.jpg"
             alt=""
           />
-          </div>
-          <h2>Jhonny Đặng</h2>
-          <p>Ceo TechViet Production</p>
+          <h2 className="uppercase text-white font-bold">Jhonny Đặng</h2>
+          <p className="uppercase text-white">Ceo TechViet Production</p>
         </div>
 
-        <div>
-          <div>
+        <div className="lg:w-1/4 flex flex-col items-start  w-full p-4">
           <img
             src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923514/5_wocfie.jpg"
             alt=""
           />
-          </div>
-          <h2>Ngô Henry</h2>
-          <p>Ceo TechViet Production</p>
+          <h2 className="uppercase text-white font-bold">Ngô Henry</h2>
+          <p className="uppercase text-white">Ceo TechViet Production</p>
         </div>
 
-        <div>
-          <div>
+        <div className="lg:w-1/4 flex flex-col items-start  w-full p-4">
           <img
             src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923529/6_av2opv.jpg"
             alt=""
           />
-          </div>
-          <h2>Vương Phạm Vn</h2>
-          <p>Ceo TechViet Production</p>
+          <h2 className="uppercase text-white font-bold">Vương Phạm Vn</h2>
+          <p className="uppercase text-white">Ceo TechViet Production</p>
         </div>
 
-        <div>
-          <div>
+        <div className="lg:w-1/4 flex flex-col items-start  w-full p-4">
           <img
             src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923534/7_phjkmn.jpg"
             alt=""
           />
-          </div>
-          <h2>Rober Imacu</h2>
-          <p>Ceo TechViet Production</p>
+          <h2 className="uppercase text-white font-bold">Rober Imacu</h2>
+          <p className="uppercase text-white">Ceo TechViet Production</p>
         </div>
 
-        <div>
-          <div>
-          <img className="w-40 h-40 bg-contain"
+        <div className="lg:w-1/4 flex flex-col items-start  w-full p-4">
+          <img
             src="https://res.cloudinary.com/dmd3qqgum/image/upload/v1733923538/8_lpvpy4.jpg"
             alt=""
           />
-          </div>
-          <h2>Khoa Pug</h2>
-          <p>Ceo TechViet Production</p>
+          <h2 className="uppercase text-white font-bold">Khoa Pug</h2>
+          <p className="uppercase text-white">Ceo TechViet Production</p>
         </div>
       </div>
 
@@ -198,3 +232,4 @@ export default function event() {
     </div>
   );
 }
+
