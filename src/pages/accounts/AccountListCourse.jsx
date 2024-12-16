@@ -5,12 +5,13 @@ import { message } from 'antd';
 import { turnOffLoading } from '../../redux/loadingSlice';
 import { useFormik } from 'formik';
 
-export default function AccountListCourse({ listCourse }) {
+export default function AccountListCourse({ listCourse,onButtonClick,searchuser }) {
     const dispatch = useDispatch()
     const [previewImage,setPreviewImage] = useState(null)
     const handleDeleteCourse = (maKhoaHoc) => {
         VlearningService.deleteCourse(maKhoaHoc).then((result) => {
             message.success("Xoá Khoá Học Thành Công")
+            onButtonClick()
             dispatch(turnOffLoading())
         }).catch((err) => {
             message.error("Khóa học đã ghi danh học viên không thể xóa!")
@@ -41,29 +42,25 @@ export default function AccountListCourse({ listCourse }) {
 
     const formik = useFormik({
         initialValues:{
-         maKhoaHoc: "",
-         biDanh: "",
-         tenKhoaHoc: "",
-         moTa: "",
-         luotXem: 0,
-         danhGia: 0,
-         maNhom: "",
-         ngayTao: "",
-         maDanhMucKhoaHoc: "",
-         taiKhoanNguoiTao:"",
-         hinhAnh: ""
-        },
+     maKhoaHoc: "",
+     biDanh: "",
+     tenKhoaHoc: "",
+     moTa: "",
+     luotXem: 0,
+     danhGia: 0,
+     maNhom: "",
+     ngayTao: "",
+     maDanhMucKhoaHoc: "",
+     taiKhoanNguoiTao:"",
+     hinhAnh: ""
+    },
         onSubmit: (values) => {
          values.taiKhoanNguoiTao = dataUser.taiKhoan
  
          let formData = new FormData();
          for (let key in values) {
-           if (key !== "hinhAnh") {
-             formData.append(key, values[key]);
-           } else {
-             formData.append("File", values.hinhAnh, values.hinhAnh.name);
-           }
-         }
+            formData.append(key, values[key]);
+        }
          VlearningService.updateCourse(formData).then((result) => {
              dispatch(turnOffLoading())
              message.success("Success")
@@ -75,63 +72,42 @@ export default function AccountListCourse({ listCourse }) {
        }
        })
        let handleFileChange = (e) => {
-         let file = e.target.files[0];
-     
-         if (
-           file.type === "image/png" ||
-           file.type === "image/jpeg" ||
-           file.type === "image/gif" ||
-           file.type === "image/jpg"
-         ) {
-           if (file.size <= 1024 * 1024) {
-             // Check if file size is less than or equal to 1 MB
-             let reader = new FileReader();
-             reader.readAsDataURL(file);
-             reader.onload = (e) => {
-               setPreviewImage(e.target.result);
-             };
-             formik.setFieldValue("hinhAnh", file);
-           } else {
-             message.error(t("Image size must be less than 1 MB"));
-             e.target.value = null; // Reset the file input
-           }
-         } else {
-           message.error(
-             t("Please upload a valid image file (PNG, JPEG, GIF, or JPG)")
-           );
-           e.target.value = null; // Reset the file input
-         }
+        let file = e.target.files[0];
+ 
+        if (
+          file.type === "image/png" ||
+          file.type === "image/jpeg" ||
+          file.type === "image/gif" ||
+          file.type === "image/jpg"
+        ) {
+          if (file.size <= 1024 * 1024) {
+            let reader = new FileReader();
+            reader.readAsArrayBuffer(file);
+            reader.onload = (e) => {
+              const blob = new Blob([e.target.result], { type: file.type });
+              const blobUrl = URL.createObjectURL(blob);
+              const fileExtension = file.type.split('/')[1];
+              const blobUrlWithExtension = `${blobUrl}.${fileExtension}`;
+              setPreviewImage(blobUrlWithExtension);
+              formik.setFieldValue("hinhAnh", blobUrlWithExtension);
+            };
+          } else {
+            message.error("Image size must be less than 1 MB");
+            e.target.value = null;
+          }
+        } else {
+          message.error("Please upload a valid image file (PNG, JPEG, GIF, or JPG)");
+          e.target.value = null;
+        }
        };
        const handleUpdateCourse = () => {
         formik.handleSubmit()
        }
 
-       const [searchuser, setSearchUser] = useState([])
-       const autoSearch = (event) => {
-           const inputValue = event.target.value;
-           VlearningService.searchCourse(inputValue)
-               .then((result) => {
-                   setSearchUser(result.data);
-                   dispatch(turnOffLoading());
-               })
-               .catch((err) => {
-                   console.log(err);
-                   dispatch(turnOffLoading());
-               })
-               .finally(() => {
-                   dispatch(turnOffLoading());
-               });
-       };
-       const clearInput = () => {
-           setSearchUser('')
-       }
 
     return (
         <div data-aos="fade-up" data-aos-delay="100" className="overflow-x-auto w-full px-6 mx-auto">
-                <div className="join items-center justify-center w-full max-w-4xl">
-                    <input onChange={autoSearch} className="input input-bordered join-item text-gray-400" placeholder="Search" />
-                    <button onClick={clearInput} className="btn join-item text-gray-400">Clear</button>
-                </div>
+
             <table className="table table-xs">
                 <thead>
                     <tr className='text-black-gray text-base'>
@@ -171,12 +147,18 @@ export default function AccountListCourse({ listCourse }) {
                 </tbody>
             </table>
             <dialog id="my_modal_3" className="modal w-full h-auto flex justify-center items-center backdrop-blur-xl ">
-                <div className="h-auto overflow-y-auto py-6 px-10 w-full max-w-2xl bg-white rounded-md z-50">
-                    <div className="flex flex-wrap gap-2 items-start leading-none w-11/12">
+                <div className="h-full min-h-screen lg:h-auto overflow-y-auto pt-6 pb-24 px-10 w-full max-w-2xl bg-white rounded-md z-50">
+                    <div className="grid grid-cols-2 gap-2 items-start leading-none h-auto w-11/12">
+                    <div className='flex w-full col-span-2 justify-end'>
+                        <form method="dialog">
+                            <button className='btnLVT'>x</button>
+                        </form> 
+                    </div>
 
-                    <div className="mb-2 flex flex-col gap-1">
+                    <div className="mb-2 col-span-2 lg:col-span-1 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Mã Khoá Học</label>
                         <input
+                        disabled
                         type="text"
                         name="maKhoaHoc"
                         value={formik.values.maKhoaHoc}
@@ -186,7 +168,7 @@ export default function AccountListCourse({ listCourse }) {
                         required
                         />
                     </div>
-                    <div className="mb-2 flex flex-col gap-1">
+                    <div className="mb-2 col-span-2 lg:col-span-1 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Danh Mục Khoá Học</label>
                         <select
                         name="maDanhMucKhoaHoc"
@@ -204,7 +186,7 @@ export default function AccountListCourse({ listCourse }) {
                             <option value="TuDuy">Tư duy lập trình</option>
                         </select>
                     </div>
-                    <div className="mb-2 flex flex-col gap-1">
+                    <div className="mb-2 col-span-2 lg:col-span-1 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Tên Khoá Học</label>
                         <input
                         type="text"
@@ -216,7 +198,7 @@ export default function AccountListCourse({ listCourse }) {
                         required
                         />
                     </div>
-                    <div className="mb-2 flex flex-col gap-1">
+                    <div className="mb-2 col-span-2 lg:col-span-1 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Ngày Tạo</label>
                         <input
                         type="text"
@@ -225,11 +207,11 @@ export default function AccountListCourse({ listCourse }) {
                         value={formik.values.ngayTao}
                         onChange={formik.handleChange}
                         className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
-                        placeholder="Nhập mật khẩu"
+                        placeholder="Nhập ngày tạo DD/MM/YYYY"
                         required
                         />
                     </div>
-                    <div className="mb-2 flex flex-col gap-1">
+                    <div className="mb-2 col-span-2 lg:col-span-1 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Đánh Giá</label>
                         <input
                         type="number"
@@ -241,7 +223,7 @@ export default function AccountListCourse({ listCourse }) {
                         required
                         />
                     </div>
-                    <div className="mb-2 flex flex-col gap-1">
+                    <div className="mb-2 col-span-2 lg:col-span-1 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Lượt Xem</label>
                         <input
                         type="number"
@@ -253,7 +235,7 @@ export default function AccountListCourse({ listCourse }) {
                         required
                         />
                     </div>
-                    <div className="mb-2 flex flex-col gap-1">
+                    <div className="mb-2 col-span-2 lg:col-span-1 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Bí Danh</label>
                         <input
                         type="text"
@@ -265,7 +247,7 @@ export default function AccountListCourse({ listCourse }) {
                         required
                         />
                     </div>
-                    <div className="mb-2 flex flex-col gap-1">
+                    <div className="mb-2 col-span-2 lg:col-span-1 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Mã Nhóm</label>
                         <select
                         name="maNhom"
@@ -278,7 +260,7 @@ export default function AccountListCourse({ listCourse }) {
                             <option value="GP01">GP01</option>
                         </select>
                     </div>
-                    <div className="mb-2 flex flex-col gap-1">
+                    <div className="mb-2 col-span-2 lg:col-span-1 flex flex-col gap-1">
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Mô tả</label>
                         <input
                         type="text"
@@ -290,11 +272,11 @@ export default function AccountListCourse({ listCourse }) {
                         required
                         />
                     </div>
-                    <div className="mb-2 flex flex-col gap-1">
+                    <div className="mb-2 col-span-2 lg:col-span-1 h-full items-center justify-center flex flex-col gap-1">
                         <input type="file" onChange={handleFileChange} className="file-input file-input-bordered file-input-sm w-full max-w-sm" />
                     </div>
                     </div>
-                    <div className="mt-2">
+                    <div className="mt-2 col-span-2 lg:col-span-1">
                         <img
                           src={previewImage}
                           alt="Movie Poster Preview"
@@ -303,7 +285,7 @@ export default function AccountListCourse({ listCourse }) {
                       </div>
                     <div className=" w-full">
                     <form method="dialog w-full" onSubmit={(e) => {
-                        
+                        e.preventDefault();
                         handleUpdateCourse(); // Call the existing function
                     }}>
                         <button type="submit" className="btnLVT w-full font-thin">Thêm Khoá Học</button>

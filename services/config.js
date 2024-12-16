@@ -13,18 +13,18 @@ export let http = axios.create({
 })
 
 //#region Interceptors Axios
-http.interceptors.request.use(function (config) {
-    store.dispatch(turnOnLoading())
-    return config;
-  }, function (error) {
-    store.dispatch(turnOffLoading())
-    return Promise.reject(error);
-  });
+// http.interceptors.request.use(function (config) {
+//     store.dispatch(turnOnLoading())
+//     return config;
+//   }, function (error) {
+//     store.dispatch(turnOffLoading())
+//     return Promise.reject(error);
+//   });
 
-http.interceptors.response.use(function (response) {
-    store.dispatch(turnOffLoading())
-    return response;
-  }, function (error) {
-    return Promise.reject(error);
-  });
+// http.interceptors.response.use(function (response) {
+//     store.dispatch(turnOffLoading())
+//     return response;
+//   }, function (error) {
+//     return Promise.reject(error);
+//   });
 //#endregion

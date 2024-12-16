@@ -22,7 +22,7 @@ export let VlearningService = {
         return http.get(`/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${maKhoaHoc}`)
     },
     deleteCourse: (maKhoaHoc) => {
-        return http.delete(`/api/QuanLyKhoaHoc/XoaKhoaHoc`,maKhoaHoc)
+        return http.delete(`/api/QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${maKhoaHoc}`)
     },
     addCourse: (dataForm) => {
         return http.post(`/api/QuanLyKhoaHoc/ThemKhoaHoc`,dataForm)
@@ -67,46 +67,6 @@ export let adminService = {
     },
     searchUser:(hoTen) => {
         return http.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=${hoTen}`)
-    },
-
-
-
-
-
-    deleteUser: (user) => {
-        return http.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${user}`);
-    },
-    findUser: () => {
-        return http.get("/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP00")
-    },
-    updateUser: (data) => {
-        return http.put("/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",data)
-    },
-    deleteMovie: (maPhim) => {
-        return http.delete(`/api/QuanLyPhim/XoaPhim?MaPhim=${maPhim}`)
-    },
-    addMovie: (formData) => {
-        return http.post(`/api/QuanLyPhim/ThemPhimUploadHinh`,formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          })
-    },
-    editMovie: (formData) => {
-        return http.post(`/api/QuanLyPhim/CapNhatPhimUpload`,formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          })
-    },
-    getTheaterSystem: () => {
-        return http.get("/api/QuanLyRap/LayThongTinHeThongRap")
-    },
-    getTheater: (maHeThongRap) => {
-        return http.get(`/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${maHeThongRap}`)
-    },
-    addShow: (formData) => {
-        return http.post("/api/QuanLyDatVe/TaoLichChieu", formData)
     }
 }
 //#endregion

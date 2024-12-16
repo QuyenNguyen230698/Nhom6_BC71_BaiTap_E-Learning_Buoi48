@@ -21,7 +21,6 @@ export default function Account() {
       .then(response => {
         dispatch(turnOffLoading())
         message.success("Đã hủy đăng ký khóa học thành công");
-        // Reload courseSignup data
         adminService.getUserDetail(users.taiKhoan).then((result) => {
           setCourseSignup(result.data.chiTietKhoaHocGhiDanh);
         });
@@ -50,7 +49,7 @@ export default function Account() {
     }));
   };
   const handleUpdateUser = (event) => {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault();
     const dataUpdate = {
       taiKhoan: users.taiKhoan,
       matKhau: formData.matKhau,
@@ -83,7 +82,6 @@ export default function Account() {
       message.warning("Vui lòng đăng nhập để sử dụng chức năng này");
       navigate("/login");
     } else {
-      // Set initial form data from localStorage
       setFormData({
         taiKhoan: dataUser.taiKhoan || '',
         matKhau: dataUser.matKhau || '',
@@ -104,8 +102,8 @@ export default function Account() {
   }, []);
 
   return (
-    <div className='py-32 flex flex-col w-full h-full'>
-      <div className='w-full flex justify-center container mx-auto gap-6'>
+    <div className='py-32 flex flex-col w-full h-full bg-home'>
+      <div className='w-full flex flex-col lg:flex-row justify-center container mx-auto gap-6 px-6'>
         {users.maLoaiNguoiDung === "GV" ? (
           <button 
             className="btn btn-outline btn-error" 
@@ -128,16 +126,16 @@ export default function Account() {
         </button>
       </div>
       {showPersonalInfo ? (
-        <div className='w-full container mx-auto max-w-4xl h-full py-10'>
-          <div className='flex w-full justify-between items-center py-2 border-b border-black'>
+        <div className='w-full container mx-auto max-w-4xl h-full py-10 flex flex-col'>
+          <div className='flex flex-col lg:flex-row w-full lg:justify-between lg:items-center py-2 border-b border-black'>
           <p className='text-black-gray text-lg font-bold'>Email: {users.email}</p>
           <p className='text-black-gray text-lg font-bold'>Họ Tên: {users.hoTen}</p>
           </div>
-          <div className='flex w-full justify-between items-center py-2 border-b border-black'>
+          <div className='flex flex-col lg:flex-row w-full lg:justify-between lg:items-center py-2 border-b border-black'>
           <p className='text-black-gray text-lg font-bold'>Tài Khoản: {users.taiKhoan}</p>
           <p className='text-black-gray text-lg font-bold'>Tên Loại Người Dùng: {users.maLoaiNguoiDung === "HV" ? "Học Viên" : users.maLoaiNguoiDung === "GV" ? "Giáo Viên" : users.tenLoaiNguoiDung}</p>
           </div>
-          <div className='flex w-full justify-between items-center py-2 border-b border-black'>
+          <div className='flex flex-col lg:flex-row w-full lg:justify-between lg:items-center py-2 border-b border-black'>
           <p className='text-black-gray text-lg font-bold'>Số ĐT: {users.soDT}</p>
           <p className='text-black-gray text-lg font-bold'>Mã Loại Người Dùng: GP01</p>
           </div>
@@ -152,7 +150,7 @@ export default function Account() {
               <div key={index} className='course-item flex flex-row justify-between items-center py-2 border-b border-black'>
                 <div className='w-4/6 py-2'>
                   <p className='text-black-gray text-lg font-bold'>Tên Khóa Học: {course.tenKhoaHoc}</p>
-                  <p className='text-black-gray text-lg text-justify'>Mô Tả: {course.moTa}</p>
+                  <p className='text-black-gray text-lg text-justify line-clamp-4 lg:line-clamp-none'>Mô Tả: {course.moTa}</p>
                 </div>
                 <div className='w-fit py-2'>
                   <button onClick={() => handleDeleteSignupCourse(course.maKhoaHoc)} className='btn btn-warning text-white'>Huỷ đăng ký khóa học</button>
