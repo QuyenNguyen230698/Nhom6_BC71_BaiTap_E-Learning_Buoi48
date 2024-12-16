@@ -1,10 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react';
+import axios from 'axios';
 
 export default function Footer() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:8000/test', {
+        email: formData.email,
+        name: formData.name,
+        phone: formData.phone
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      console.log('Response:', response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <>
       <div id='footerID' className='bg-black-gray'>
-      <div className="grid grid-cols-4 gap-4 p-4 items-stretch md:container mx-auto">
+        <div className="grid grid-cols-4 gap-4 p-4 items-stretch md:container mx-auto">
           <div className='flex flex-col items-start justify-start gap-3 w-full col-span-2 md:col-span-1'>
             <h6 data-aos="fade-up" data-aos-delay="100" className='text-white font-bold'>V-LEARNING</h6>
             <p data-aos="fade-up" data-aos-delay="200" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
@@ -48,10 +79,10 @@ export default function Footer() {
           </div>
           <div className='flex flex-col items-start justify-start gap-3 w-full col-span-4 md:col-span-1'>
             <h6 data-aos="fade-up" data-aos-delay="100" className='text-white font-bold uppercase'>Đăng kí tư vấn</h6>
-            <input data-aos="fade-up" data-aos-delay="200" type="text" className="w-full bg-transparent text-gray-400 border-b border-gray-500 focus:outline-none py-1 text-base" placeholder="Họ và tên" />
-            <input data-aos="fade-up" data-aos-delay="300" type="text" className="w-full bg-transparent text-gray-400 border-b border-gray-500 focus:outline-none py-1 text-base" placeholder="Email" />
-            <input data-aos="fade-up" data-aos-delay="400" type="number" className="w-full bg-transparent text-gray-400 border-b border-gray-500 focus:outline-none py-1 text-base" placeholder="Số điện thoại" />
-            <button data-aos="fade-up" data-aos-delay="500" className='btnLVT'>Đăng kí</button>
+            <input name="name" value={formData.name} onChange={handleChange} data-aos="fade-up" data-aos-delay="200" type="text" className="w-full bg-transparent text-gray-400 border-b border-gray-500 focus:outline-none py-1 text-base" placeholder="Họ và tên" />
+            <input name="email" value={formData.email} onChange={handleChange} data-aos="fade-up" data-aos-delay="300" type="text" className="w-full bg-transparent text-gray-400 border-b border-gray-500 focus:outline-none py-1 text-base" placeholder="Email" />
+            <input name="phone" value={formData.phone} onChange={handleChange} data-aos="fade-up" data-aos-delay="400" type="number" className="w-full bg-transparent text-gray-400 border-b border-gray-500 focus:outline-none py-1 text-base" placeholder="Số điện thoại" />
+            <button onClick={handleSubmit} data-aos="fade-up" data-aos-delay="500" className='btnLVT'>Đăng kí</button>
           </div>
         </div>
       </div>

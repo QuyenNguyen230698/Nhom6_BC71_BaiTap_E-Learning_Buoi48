@@ -34,11 +34,11 @@ export default function Header() {
       const isAccountPage = location.pathname === '/account' 
       || location.pathname === '/accountAdmin' 
       || location.pathname === '/login' 
-      || location.pathname === '/signup';
-      setIsScrolled(isAccountPage || window.scrollY > 0);
-    };
+      || location.pathname === '/signup'
+      setIsScrolled(isAccountPage || window.scrollY > 0)
+    }
 
-    handleScroll();
+    handleScroll()
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
