@@ -8,18 +8,24 @@ import App from './App';
 import './index.css';
 
 // Create the Redux store
-export let store = configureStore({
+export const store = configureStore({
   reducer: {
     userSlice: userSlice,
     loadingSlice: loadingSlice,
   }
 });
 
-// Render the application
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
-);
+// Check if root has already been created
+const container = document.getElementById('root');
+if (!container._reactRootContainer) { // Check to prevent multiple createRoot calls
+  const root = ReactDOM.createRoot(container);
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>
+  );
+} else {
+  console.warn('ReactDOM.createRoot() has already been called on this container.');
+}
