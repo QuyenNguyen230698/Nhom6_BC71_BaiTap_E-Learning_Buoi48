@@ -26,10 +26,10 @@ export default function Login() {
       localStorage.setItem("DATA_USER", dataUser);
       if (res.data.maLoaiNguoiDung == "GV") {
         message.success("Đăng nhập thành công")
-        navigate("/accountAdmin");
+        window.location.href = "/accountAdmin"
       } else {
         message.success("Đăng nhập thành công")
-        navigate("/account");
+        window.location.href = "/account"
       }
     } catch (error) {
       message.error(error.response?.data || "Đăng nhập thất bại. Vui lòng thử lại!");

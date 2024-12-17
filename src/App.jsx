@@ -1,3 +1,4 @@
+
 import './App.css'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import 'daisyui/dist/full.css'
@@ -20,24 +21,24 @@ import Payment from './pages/payment/Payment'
 function App() {
   return (
     <div>
-      <Loading/>
-    <BrowserRouter>
+      <BrowserRouter basename="/">
+      <Loading />
       <Routes>
         <Route path="/" element={<Layout main={<Home />} />} />
         <Route path="/login" element={<Layout main={<Login />} />} />
-        <Route path="/infoPage" element={<Layout main={<InfoPage />} />} />
         <Route path="/signup" element={<Layout main={<Signup />} />} />
+        <Route path="/infoPage" element={<Layout main={<InfoPage />} />} />
         <Route path="/account" element={<Layout main={<Account />} />} />
         <Route path="/accountAdmin" element={<Layout main={<AccountAdmin />} />} />
         <Route path="/event" element={<Layout main={<EventPage />} />} />
         <Route path="/searchCourse/:maDanhMuc" element={<Layout main={<SearchCourse />} />} />
         <Route path="/classDetail/:maKhoaHoc" element={<Layout main={<ClassDetail />} />} />
         <Route path="/500" element={<ServerError />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/return" element={<Return />} />
+        <Route path="/return" element={<Layout main={<Return />} />} />
         <Route path="/payment" element={<Payment />} />
-        </Routes>
-      </BrowserRouter>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
     </div>
   )
 }

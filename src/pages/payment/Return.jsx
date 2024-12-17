@@ -51,7 +51,7 @@ export default function Return() {
   let dataUser = JSON.parse(localStorage.getItem("DATA_USER"))
 
 
-  return <div className='bg-white text-black-gray h-full w-full flex items-center justify-center'>
+  return <div className='bg-white text-black-gray h-full w-full flex items-center justify-center py-20'>
     <div className="w-full max-w-lg h-auto flex flex-col container mx-auto gap-2 lg:gap-4 items-center justify-center rounded-lg overflow-hidden shadow-xl">
         <div className="bg-orange-500 items-center justify-center text-3xl font-bold py-3 text-white flex min-w-full">V-LEARNING</div>
         <div className="text-center text-2xl p-0 text-black-gray">Hóa Đơn Thanh Toán</div>

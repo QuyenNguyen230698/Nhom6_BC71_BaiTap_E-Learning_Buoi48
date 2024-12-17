@@ -251,7 +251,7 @@ export default function AccountAdmin() {
       message.warning(
         "Tài khoản của bạn không có quyền truy cập chức năng này"
       );
-      navigate("/");
+      window.location.href = "/"
     }
     reloadCourseList();
     reloadUserList();

@@ -6,6 +6,10 @@ import autoprefixer from 'autoprefixer'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/', // Base path cho router
+  server: {
+    historyApiFallback: true, // Hỗ trợ route fallback
+  },
   css: {
     postcss: {
       plugins: [
@@ -13,5 +17,8 @@ export default defineConfig({
         autoprefixer
       ],
     },
+  },
+  build: {
+    outDir: 'dist',
   }
 })

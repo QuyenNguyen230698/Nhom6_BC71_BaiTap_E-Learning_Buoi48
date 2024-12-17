@@ -35,6 +35,7 @@ export default function Header() {
       || location.pathname === '/accountAdmin' 
       || location.pathname === '/login' 
       || location.pathname === '/signup'
+      || location.pathname === '/return'
       setIsScrolled(isAccountPage || window.scrollY > 0)
     }
 
@@ -62,7 +63,7 @@ export default function Header() {
   const handleLogout = () => {
     localStorage.removeItem("DATA_USER")
     message.success("Đăng xuất thành công")
-    navigate("/login")
+    window.location.href = "/login"
   }
 
   return (

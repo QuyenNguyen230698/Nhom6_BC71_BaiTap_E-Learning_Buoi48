@@ -24,7 +24,7 @@ export default function ClassDetail() {
         let dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
         if (!dataUser) {
             message.warning("Vui lòng đăng nhập để sử dụng chức năng này");
-            navigate("/login");
+            window.location.href = "/login"
           }
         const formData = JSON.stringify({
             maKhoaHoc: maKhoaHoc,

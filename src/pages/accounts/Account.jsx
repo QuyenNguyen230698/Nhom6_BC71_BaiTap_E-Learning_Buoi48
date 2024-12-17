@@ -80,7 +80,7 @@ export default function Account() {
     setUsers(dataUser);
     if (!dataUser) {
       message.warning("Vui lòng đăng nhập để sử dụng chức năng này");
-      navigate("/login");
+      window.location.href = "/login"
     } else {
       setFormData({
         taiKhoan: dataUser.taiKhoan || '',
