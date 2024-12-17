@@ -2,7 +2,7 @@ import React from "react";
 import CardBanner from "../../components/card/CardBanner";
 
 const ImageCard = ({ src, alt, title }) => (
-  <div className="flex flex-col w-full h-full col-span-2 lg:col-span-1 gap-1">
+  <div className="flex flex-col w-full h-full justify-stretch col-span-4 lg:col-span-1 gap-1">
     <div className="w-full h-full rounded-xl overflow-hidden">
       <img className="w-full h-full object-cover" src={src} alt={alt} />
     </div>

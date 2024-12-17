@@ -12,6 +12,10 @@ import EventPage from './pages/event/EventPage'
 import SearchCourse from './pages/home/SearchCourse'
 import ClassDetail from './pages/home/ClassDetail'
 import AccountAdmin from './pages/accounts/AccountAdmin'
+import ServerError from './pages/ServerError'
+import NotFound from './pages/NotFound'
+import Return from './pages/payment/Return'
+import Payment from './pages/payment/Payment'
 
 function App() {
   return (
@@ -28,6 +32,10 @@ function App() {
         <Route path="/event" element={<Layout main={<EventPage />} />} />
         <Route path="/searchCourse/:maDanhMuc" element={<Layout main={<SearchCourse />} />} />
         <Route path="/classDetail/:maKhoaHoc" element={<Layout main={<ClassDetail />} />} />
+        <Route path="/500" element={<ServerError />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/return" element={<Return />} />
+        <Route path="/payment" element={<Payment />} />
         </Routes>
       </BrowserRouter>
     </div>

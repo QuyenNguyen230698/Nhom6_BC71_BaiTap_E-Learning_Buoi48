@@ -25,9 +25,9 @@ export default function CardCourse() {
         <div data-aos="fade-up" data-aos-delay="100" className='w-full flex justify-center items-center py-4'>
             <h2 className='text-2xl lg:text-4xl font-light text-black-gray uppercase pb-5 lg:pb-10'>Khóa học phổ biến</h2>
         </div>
-      <div className='w-full max-w-6xl h-full items-stretch justify-stretch container mx-auto grid grid-cols-6 gap-5'>
+      <div className='w-full lg:max-w-6xl h-full items-stretch justify-stretch container mx-auto grid grid-cols-6 gap-5'>
         {listCourseCatalog?.map((course, idx) => (
-          <div key={idx} data-aos="fade-up" data-aos-delay="100" className='w-full h-full leading-none flex flex-col justify-stretch col-span-3 lg:col-span-2 shadow-lg rounded-lg overflow-hidden'>
+          <div key={idx} data-aos="fade-up" data-aos-delay="100" className='w-full h-full leading-none flex flex-col justify-stretch col-span-6 md:col-span-3 lg:col-span-2 shadow-lg rounded-lg overflow-hidden'>
             <div className='w-full h-full'>
                 <img src={arrImg[idx].src} alt={arrImg[idx].alt} className='w-full h-32 md:h-48 lg:h-60 object-cover'/>
             </div>
@@ -48,7 +48,7 @@ export default function CardCourse() {
                         </svg>
                         </span> Tất cả</p>
                 </div>
-                <div className='flex flex-col md:flex-row w-full h-auto items-center justify-between  md:gap-2 leading-none'>
+                <div className='flex flex-row w-full h-auto items-center justify-between  md:gap-2 leading-none'>
                     <p className='text-base font-bold text-green-500 underline'>{arrImg[idx].price} <sup className='underline'>đ</sup></p>
                     <button className='btnLVT' onClick={() => navigate(`/searchCourse/${course.maDanhMuc}`)}>Xem chi tiết</button>
                 </div>

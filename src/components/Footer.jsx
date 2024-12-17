@@ -17,7 +17,7 @@ export default function Footer() {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/test', {
+      const response = await axios.post('http://14.225.192.165:8000/test', {
         email: formData.email,
         name: formData.name,
         phone: formData.phone
