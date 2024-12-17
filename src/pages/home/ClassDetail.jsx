@@ -41,7 +41,7 @@ export default function ClassDetail() {
 
           //payment
           const paymentFetch = async () => {
-            const data =  await fetch(`http://14.225.192.165:8000/payment/process`,{
+            const data =  await fetch(`https://api.jobspeeds.com/payment/process`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
