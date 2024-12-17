@@ -45,14 +45,14 @@ const dataBanner = {
             </div>
         <div className='w-full max-w-7xl h-full container mx-auto grid grid-cols-8 items-center justify-stretch gap-5'>
             {listCourse?.map((course, idx) => (
-            <div key={idx} data-aos="fade-up" data-aos-delay="100" className='w-full h-full leading-none flex flex-col justify-stretch col-span-4 lg:col-span-2 shadow-lg rounded-lg overflow-hidden'>
+            <div key={idx} data-aos="fade-up" data-aos-delay="100" className='w-full h-full leading-none flex flex-col justify-stretch col-span-8 md:col-span-4 lg:col-span-2 shadow-lg rounded-lg overflow-hidden'>
                 <div className='w-full h-full'>
                     <img src={arrImg[idx % arrImg.length].src} alt={arrImg[idx % arrImg.length].alt} className='w-full h-full object-cover'/>
                 </div>
                 <div className='w-full h-fit flex flex-col justify-center text-black-gray p-3 lg:gap-3'>
                     <h3 className='text-2xl lg:text-3xl font-light text-black-gray truncate'>{course.tenKhoaHoc}</h3>
-                    <p className='text-sm lg:text-base text-justify text-black-gray'>Lập trình hiện đang là xu hướng trên toàn thế giới...</p>
-                    <div className='hidden lg:flex flex-wrap w-full justify-start items-start gap-3 border-b border-gray-300 pb-2'>
+                    <p className='text-sm lg:text-base text-justify text-black-gray py-1'>Lập trình hiện đang là xu hướng trên toàn thế giới...</p>
+                    <div className='flex flex-wrap w-full justify-start items-start gap-3 border-b border-gray-300 py-2'>
                         <p className='flex flex-row items-center gap-1 '><span className='text-yellow-500'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
@@ -66,7 +66,7 @@ const dataBanner = {
                             </svg>
                             </span> Tất cả</p>
                     </div>
-                    <div className='flex flex-col lg:flex-row w-full h-auto items-center justify-between gap-2'>
+                    <div className='flex flex-row w-full h-auto items-center justify-between gap-2 py-2'>
                         <p className='text-base font-bold text-green-500 underline'>2,000,000 <sup className='underline'>đ</sup></p>
                         <button className='btnLVT' onClick={() => navigate(`/classDetail/${course.maKhoaHoc}`)}>Xem chi tiết</button>
                     </div>
