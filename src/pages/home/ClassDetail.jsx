@@ -384,8 +384,8 @@ export default function ClassDetail() {
                 </div>
             </div>
             {/* right */}
-            <div data-aos="fade-up" data-aos-delay="100" className='col-span-12 md:col-span-6 lg:col-span-4 w-full'>
-                <div className='md:ml-6 flex flex-col h-fit w-full p-2 shadow-xl gap-2'>
+            <div data-aos="fade-up" data-aos-delay="100" className='col-span-12 md:col-span-6 lg:col-span-4 w-full h-full min-h-screen '>
+                <div className='md:ml-6 flex flex-col h-auto w-full p-2 shadow-xl gap-2 sticky top-20'>
                     <img src={course.hinhAnh} alt="" className='w-full h-full object-cover'/>
                     <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-4'>
                         <p className='text-black-gray text-lg'>Ghi danh: <span className='font-bold text-black-gray text-lg'>10 học viên</span></p>

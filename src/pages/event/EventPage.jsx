@@ -4,7 +4,7 @@ import CardBanner from "../../components/card/CardBanner";
 const ImageCard = ({ src, alt, title }) => (
   <div className="flex flex-col w-full h-full justify-stretch col-span-4 lg:col-span-1 gap-1">
     <div className="w-full h-full rounded-xl overflow-hidden">
-      <img className="w-full h-full object-cover" src={src} alt={alt} />
+      <img className="w-full h-96 lg:h-full object-cover" src={src} alt={alt} />
     </div>
     <h3 className="text-center text-base leading-normal lg:text-2xl uppercase font-bold">
       {title}
@@ -14,7 +14,7 @@ const ImageCard = ({ src, alt, title }) => (
 
 const SpeakerCard = ({ imgSrc, name, title }) => (
   <div className="lg:w-1/4 flex flex-col items-start w-full p-4">
-    <img src={imgSrc} alt={name} />
+    <img src={imgSrc} alt={name} className="w-full h-full bg-cover"/>
     <h2 className="uppercase text-white font-bold">{name}</h2>
     <p className="uppercase text-white">{title}</p>
   </div>
