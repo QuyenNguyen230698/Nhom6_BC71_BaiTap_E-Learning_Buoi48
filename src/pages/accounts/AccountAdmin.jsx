@@ -432,7 +432,6 @@ export default function AccountAdmin() {
                 tài khoản
               </label>
               <input
-                disabled
                 type="text"
                 name="taiKhoan"
                 value={formData.taiKhoan}
