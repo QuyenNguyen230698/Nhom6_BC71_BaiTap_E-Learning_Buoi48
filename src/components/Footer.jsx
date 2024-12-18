@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { message } from 'antd';
 
 export default function Footer() {
   const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ export default function Footer() {
           'Content-Type': 'application/json',
         }
       });
-      console.log('Response:', response.data);
+      message.success("Chúng tôi đã nhận được yêu cầu của bạn, hãy kiểm tra mail nhé!")
     } catch (error) {
       console.error('Error:', error);
     }
