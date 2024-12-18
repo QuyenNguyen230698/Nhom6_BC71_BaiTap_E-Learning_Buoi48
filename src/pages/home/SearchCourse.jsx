@@ -4,6 +4,7 @@ import { VlearningService } from '../../../services/Vlearning';
 import { useDispatch } from 'react-redux';
 import { turnOffLoading } from '../../redux/loadingSlice';
 import CardBanner from '../../components/card/CardBanner';
+import CardCourse from '../../components/card/CardCourse';
 
 export default function SearchCourse() {
   const { maDanhMuc } = useParams();
@@ -75,6 +76,7 @@ const dataBanner = {
             ))}
         </div>
         </div>
+        <CardCourse/>
     </div>
   )
 }
