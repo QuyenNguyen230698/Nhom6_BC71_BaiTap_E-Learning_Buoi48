@@ -13,7 +13,6 @@ export default function Footer() {
   });
 
   const handleChange = (e) => {
-    dispatch(turnOnLoading())
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -31,7 +30,6 @@ export default function Footer() {
           'Content-Type': 'application/json',
         }
       });
-      dispatch(turnOffLoading())
       message.success("Chúng tôi đã nhận được yêu cầu của bạn, hãy kiểm tra mail nhé!")
     } catch (error) {
       dispatch(turnOffLoading())
