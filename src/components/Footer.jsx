@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { message } from 'antd';
+import { useDispatch } from 'react-redux';
+import { turnOffLoading, turnOnLoading } from '../redux/loadingSlice';
 
 export default function Footer() {
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,6 +13,7 @@ export default function Footer() {
   });
 
   const handleChange = (e) => {
+    dispatch(turnOnLoading())
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -27,8 +31,10 @@ export default function Footer() {
           'Content-Type': 'application/json',
         }
       });
+      dispatch(turnOffLoading())
       message.success("Chúng tôi đã nhận được yêu cầu của bạn, hãy kiểm tra mail nhé!")
     } catch (error) {
+      dispatch(turnOffLoading())
       console.error('Error:', error);
     }
   };
