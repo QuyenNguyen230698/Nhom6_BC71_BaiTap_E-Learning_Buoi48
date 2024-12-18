@@ -55,7 +55,7 @@ export default function Login() {
             />
           </div>
           <div className="mb-6 flex flex-col gap-1">
-            <label className="block mb-2 text-sm font-semibold text-black-gray">Mật Khẩu ( asdasdasd )</label>
+            <label className="block mb-2 text-sm font-semibold text-black-gray">Mật Khẩu</label>
             <input
               type="password"
               value={password}
