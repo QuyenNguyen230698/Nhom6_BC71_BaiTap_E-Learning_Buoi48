@@ -286,7 +286,7 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser 
                     <div className=" w-full">
                     <form method="dialog w-full" onSubmit={(e) => {
                         e.preventDefault();
-                        handleUpdateCourse(); // Call the existing function
+                        handleUpdateCourse();
                     }}>
                         <button type="submit" className="btnLVT w-full font-thin">Thêm Khoá Học</button>
                     </form>
