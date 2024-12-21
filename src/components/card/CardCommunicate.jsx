@@ -19,7 +19,7 @@ export default function CardCommunicate() {
 
   return (
     <div>
-      <div className="relative w-full h-full overflow-hidden bg-cover bg-center py-10 " style={{ backgroundImage: 'url(https://res.cloudinary.com/dbcr9t1rd/image/upload/v1732874597/Contact_uoiab3.jpg)' }}>
+      <div className="relative w-full h-full overflow-hidden bg-cover bg-center py-10 " style={{ backgroundImage: 'url(https://res.cloudinary.com/dgkceewlq/image/upload/v1734751559/Contact_uoiab3_ha8ibu.jpg)' }}>
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative w-full h-auto container mx-auto px-4">
           <div className="grid grid-cols-4 w-full h-full justify-center items-center gap-4 lg:gap-8">
