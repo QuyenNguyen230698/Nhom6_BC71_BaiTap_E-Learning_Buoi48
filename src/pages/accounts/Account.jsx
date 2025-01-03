@@ -91,11 +91,18 @@ export default function Account() {
         dispatch(turnOffLoading())
         setFormData({});
       })
+      .then(() => {
+        closeModal();
+      })
       .catch(error => {
         dispatch(turnOffLoading())
         message.error("Có lỗi xảy ra khi cập nhật thông tin");
         console.error(error);
       });
+  };
+
+  const closeModal = () => {
+    document.getElementById('my_modal_1').close();
   };
 
   useEffect(() => {
@@ -149,7 +156,7 @@ export default function Account() {
         </button>
       </div>
       {showPersonalInfo ? (
-        <div className='w-full container mx-auto max-w-4xl h-full py-10 flex flex-col'>
+        <div className='w-full container mx-auto max-w-4xl h-full py-10 px-4 flex flex-col'>
           <div className='flex flex-col lg:flex-row w-full lg:justify-between lg:items-center py-2 border-b border-black'>
           <p className='text-black-gray text-lg font-bold'>Email: {users.email}</p>
           <p className='text-black-gray text-lg font-bold'>Họ Tên: {users.hoTen}</p>
@@ -167,7 +174,7 @@ export default function Account() {
           </div>
         </div>
       ) : (
-        <div className='w-full container mx-auto max-w-6xl py-10'>
+        <div className='w-full container mx-auto max-w-6xl py-10 px-3'>
           {courseSignup.length > 0 ? (
             courseSignup.map((course, index) => (
               <div key={index} className='course-item flex flex-row justify-between items-center py-2 border-b border-black'>
@@ -192,11 +199,12 @@ export default function Account() {
             <div className="mb-6 flex flex-col gap-1">
                 <label className="block mb-2 text-sm font-semibold text-black-gray">Họ tên</label>
                 <input
+                  disabled
                   type="text"
                   name="hoTen"
                   value={formData.hoTen}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
+                  className="w-full px-4 py-3 border rounded focus:outline-none bg-stone-100"
                   placeholder="Nhập họ tên"
                   required
                 />
@@ -243,12 +251,12 @@ export default function Account() {
             </div>
             <div className=" w-full">
               <form method="dialog w-full">
-                <button onClick={handleUpdateUser} className="btnLVT w-full font-thin">Cập Nhật</button>
+                <button type="button" onClick={handleUpdateUser} className="btnLVT w-full font-thin">Cập Nhật</button>
               </form>
             </div>
           </div>
           <form method="dialog" className="modal-backdrop w-full h-full absolute inset-1 cursor-pointer">
-            <button>close</button>
+            <button type="button" onClick={closeModal}>close</button>
           </form> 
         </dialog>
 

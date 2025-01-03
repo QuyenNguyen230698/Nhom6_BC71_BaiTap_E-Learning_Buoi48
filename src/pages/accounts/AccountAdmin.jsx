@@ -545,7 +545,7 @@ export default function AccountAdmin() {
           method="dialog"
           className="modal-backdrop w-full h-full absolute inset-1 cursor-pointer"
         >
-          <button>close</button>
+          <button type="button">close</button>
         </form>
       </dialog>
       {/* modal Course */}
@@ -728,7 +728,7 @@ export default function AccountAdmin() {
           method="dialog"
           className="modal-backdrop w-full h-full absolute inset-1 cursor-pointer"
         >
-          <button>close</button>
+          <button type="button">close</button>
         </form>
       </dialog>
     </div>

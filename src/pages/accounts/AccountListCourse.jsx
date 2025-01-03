@@ -293,7 +293,7 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser 
                     </div>
                 </div>
                 <form method="dialog" className="modal-backdrop w-full h-full absolute inset-1 cursor-pointer">
-                    <button>close</button>
+                    <button type="button">close</button>
                 </form> 
                 </dialog>
         </div>
