@@ -5,17 +5,19 @@ import { message } from 'antd';
 import { turnOffLoading } from '../../redux/loadingSlice';
 import { useFormik } from 'formik';
 
-export default function AccountListCourse({ listCourse,onButtonClick,searchuser }) {
+export default function AccountListCourse({ listCourse,onButtonClick,searchuser,reloadCourseList }) {
     const dispatch = useDispatch()
     const [previewImage,setPreviewImage] = useState(null)
     const handleDeleteCourse = (maKhoaHoc) => {
         VlearningService.deleteCourse(maKhoaHoc).then((result) => {
             message.success("Xoá Khoá Học Thành Công")
             onButtonClick()
+            reloadCourseList()
             dispatch(turnOffLoading())
         }).catch((err) => {
-            message.error("Khóa học đã ghi danh học viên không thể xóa!")
             dispatch(turnOffLoading())
+            reloadCourseList()
+            message.error("Khóa học đã ghi danh học viên không thể xóa!")
         });
     }
     let dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
@@ -63,11 +65,15 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser 
         }
          VlearningService.updateCourse(formData).then((result) => {
              dispatch(turnOffLoading())
-             message.success("Success")
-         }).catch((err) => {
-             message.error("Thông tin khoá học không hợp lệ")
-             console.log(err)
+             closeModal3()
+             message.success("Cập nhật khóa hoc thành công")
+         }).then(() => {
+            closeModal3()
+         })
+         .catch((err) => {
              dispatch(turnOffLoading())
+             closeModal3()
+             message.error("Thông tin khoá học không hợp lệ")
          });
        }
        })
@@ -102,8 +108,12 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser 
        };
        const handleUpdateCourse = () => {
         formik.handleSubmit()
+        closeModal3()
        }
-
+       
+       const closeModal3 = () => {
+        document.getElementById("my_modal_3").close();
+      };
 
     return (
         <div data-aos="fade-up" data-aos-delay="100" className="overflow-x-auto w-full px-6 mx-auto">
@@ -148,10 +158,10 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser 
             </table>
             <dialog id="my_modal_3" className="modal w-full h-auto flex justify-center items-center backdrop-blur-xl ">
                 <div className="h-full min-h-screen lg:h-auto overflow-y-auto pt-6 pb-24 px-10 w-full max-w-2xl bg-white rounded-md z-50">
-                    <div className="grid grid-cols-2 gap-2 items-start leading-none h-auto w-11/12">
+                    <div className="grid grid-cols-2 gap-2 items-start leading-none h-auto w-full">
                     <div className='flex w-full col-span-2 justify-end'>
                         <form method="dialog">
-                            <button className='btnLVT'>x</button>
+                            <button type='button' onClick={closeModal3}>x</button>
                         </form> 
                     </div>
 
@@ -293,7 +303,7 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser 
                     </div>
                 </div>
                 <form method="dialog" className="modal-backdrop w-full h-full absolute inset-1 cursor-pointer">
-                    <button type="button">close</button>
+                    <button type="button" onClick={closeModal3}>close</button>
                 </form> 
                 </dialog>
         </div>

@@ -43,12 +43,13 @@ export default function CardListCourse({dataImg}) {
         setSearchUser(await searchFilter(event.target.value));
       };
 
+    const currentData = searchUser.length > 0 ? searchUser : listCourse;
     const indexOfLastCourse = currentPage * coursesPerPage;
     const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
-    const currentCourses = listCourse.slice(indexOfFirstCourse, indexOfLastCourse);
+    const currentCourses = currentData.slice(indexOfFirstCourse, indexOfLastCourse);
 
     const handleNextPage = () => {
-        if (currentPage < Math.ceil(listCourse.length / coursesPerPage)) {
+        if (currentPage < Math.ceil(currentData.length / coursesPerPage)) {
             setCurrentPage(currentPage + 1);
         }
     };
@@ -86,37 +87,7 @@ export default function CardListCourse({dataImg}) {
                 
                 <div className='flex flex-col w-full h-full gap-4 overflow-hidden'>
                 {/* render danh sách khóa học */}
-                {searchUser.length > 0 ? searchUser.map((item, index) => {
-                    return (<div key={index} data-aos="fade-up" data-aos-delay="100" className='flex flex-col lg:flex-row items-start lg:items-center justify-between w-full border-b border-gray py-4'>
-                    <div className="w-full flex flex-row items-center justify-start gap-4">
-                        <div className='w-40 h-20 hidden lg:block'>
-                        <img src={dataImg[index % dataImg.length].src} alt="img" className='w-full h-full object-cover'/>
-                        </div>
-                        <div className='flex flex-col items-start justify-center w-fit h-full text-black-gray gap-1'>
-                        <h2 className='text-2xl lg:text-4xl text-black-gray'>{item.tenKhoaHoc}</h2>
-                        <div className='flex flex-row w-full items-center justify-center'>
-                            <div className="flex flex-col lg:flex-row gap-1 w-full items-center">
-                            <div className="flex flex-wrap w-full lg:w-auto gap-1">
-                                <p className="text-sm">Posted:</p>
-                                <p className="text-sm">{item.ngayTao}</p>
-                            </div>
-                                <div className="flex flex-wrap w-full justify-start items-center lg:w-auto gap-1">
-                                <p className='hidden lg:block'>|</p>
-                                <p className="text-sm uppercase">V-LEARNING</p>
-                                <p>|</p>
-                                <p className="text-sm">Online/Offline</p>
-                                <p>|</p>
-                                <p className="text-sm">{item.danhMucKhoaHoc.tenDanhMucKhoaHoc}</p>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="w-auto flex flex-row items-center justify-center gap-4">
-                        <button className='btnLVT-sm' onClick={() => navigate(`/classDetail/${item.maKhoaHoc}`)}>Đăng Ký Ngay</button>
-                    </div>
-                    </div>)
-                }) : currentCourses.map((item, index) => {
+                {currentCourses.map((item, index) => {
                     return (<div key={index} data-aos="fade-up" data-aos-delay="100" className='flex flex-col lg:flex-row items-start lg:items-center justify-between w-full border-b border-gray py-4'>
                     <div className="w-full flex flex-row items-center justify-start gap-4">
                         <div className='w-40 h-20 hidden lg:block'>

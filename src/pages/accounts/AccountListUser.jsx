@@ -29,13 +29,13 @@ export default function AccountListUser({currentItems,indexOfFirstItem,handleEdi
                         <td>{user.maLoaiNguoiDung}</td>
                         <td>
                             <div className="flex gap-2">
-                                <button 
+                                <button type='button'
                                     onClick={() => handleEditUserClick(user.taiKhoan)} 
                                     className="btn btn-warning btn-xs"
                                 >
                                     Sửa
                                 </button>
-                                <button onClick={()=>handleDeleteUsers(user.taiKhoan)}  className="btn btn-error btn-xs">Xóa</button>
+                                <button type='button' onClick={()=>handleDeleteUsers(user.taiKhoan)}  className="btn btn-error btn-xs">Xóa</button>
                             </div>
                         </td>
                     </tr>

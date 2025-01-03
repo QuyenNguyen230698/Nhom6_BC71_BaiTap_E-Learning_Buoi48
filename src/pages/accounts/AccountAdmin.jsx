@@ -122,9 +122,13 @@ export default function AccountAdmin() {
         reloadUserList();
         dispatch(turnOffLoading());
       })
+      .then(() => {
+        closeModal1()
+      })
       .catch((err) => {
-        message.error("Thêm thất bại, vui lòng thử lại");
         dispatch(turnOffLoading());
+        closeModal1()
+        message.error("Thêm thất bại, vui lòng thử lại");
       });
   };
   //#endregion
@@ -199,15 +203,20 @@ export default function AccountAdmin() {
                 : user
             )
           );
-          message.success("Cập nhật thông tin thành công");
           reloadUserList();
           dispatch(turnOffLoading());
+          closeModal1()
+          message.success("Cập nhật thông tin thành công");
         } else {
-          message.success("Cập nhật thông tin thành công");
           reloadUserList();
           dispatch(turnOffLoading());
+          closeModal1()
+          message.success("Cập nhật thông tin thành công");
         }
         dispatch(turnOffLoading());
+      })
+      then(() => {
+        closeModal1()
       })
       .catch((error) => {
         dispatch(turnOffLoading());
@@ -270,6 +279,7 @@ export default function AccountAdmin() {
 
   const handleAddCourse = () => {
     formik.handleSubmit();
+    closeModal2()
   };
   const [searchuser, setSearchUser] = useState([]);
   //Search Users
@@ -314,6 +324,13 @@ export default function AccountAdmin() {
       return responsive.json();
     };
     setSearchUser(await searchFilter(event.target.value));
+  };
+
+  const closeModal1 = () => {
+    document.getElementById("my_modal_1").close();
+  };
+  const closeModal2 = () => {
+    document.getElementById("my_modal_2").close();
   };
 
   return (
@@ -394,6 +411,7 @@ export default function AccountAdmin() {
           onButtonClick={reloadCourseList}
           listCourse={listCourse}
           previewImage={previewImage}
+          reloadCourseList={reloadCourseList}
         />
       )}
       <div className="join w-full bg-white rounded-none text-black-gray container mx-auto flex flex-wrap items-center justify-center lg:justify-end">
@@ -423,7 +441,9 @@ export default function AccountAdmin() {
           <div className="grid grid-cols-2 gap-2 items-start leading-none h-auto w-full">
             <div className="flex w-full col-span-2 justify-end">
               <form method="dialog">
-                <button className="uppercase">x</button>
+                <button type="button" className="uppercase" onClick={closeModal1}>
+                  x
+                </button>
               </form>
             </div>
 
@@ -521,7 +541,7 @@ export default function AccountAdmin() {
           <div className=" w-full">
             {activeButton === "update" && (
               <form method="dialog w-full">
-                <button
+                <button type="button"
                   onClick={handleUpdateUser}
                   className="btnLVT w-full font-thin"
                 >
@@ -531,7 +551,7 @@ export default function AccountAdmin() {
             )}
             {activeButton === "add" && (
               <form method="dialog w-full">
-                <button
+                <button type="button"
                   onClick={addUsersAdmin}
                   className="btnLVT w-full font-thin"
                 >
@@ -545,7 +565,7 @@ export default function AccountAdmin() {
           method="dialog"
           className="modal-backdrop w-full h-full absolute inset-1 cursor-pointer"
         >
-          <button type="button">close</button>
+          <button type="button" onClick={closeModal1}>close</button>
         </form>
       </dialog>
       {/* modal Course */}
@@ -557,7 +577,7 @@ export default function AccountAdmin() {
           <div className="grid grid-cols-2 gap-2 items-start leading-none h-auto w-full">
             <div className="flex w-full col-span-2 justify-end">
               <form method="dialog">
-                <button className="uppercase">x</button>
+                <button type="button" onClick={closeModal2} className="uppercase">x</button>
               </form>
             </div>
 
@@ -728,7 +748,7 @@ export default function AccountAdmin() {
           method="dialog"
           className="modal-backdrop w-full h-full absolute inset-1 cursor-pointer"
         >
-          <button type="button">close</button>
+          <button type="button" onClick={closeModal2}>close</button>
         </form>
       </dialog>
     </div>
