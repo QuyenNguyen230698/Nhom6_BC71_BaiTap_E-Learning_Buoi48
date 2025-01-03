@@ -20,7 +20,7 @@ export default function Account() {
     adminService.deleteSignupCourse(formData)
       .then(response => {
         dispatch(turnOffLoading())
-        message.success("Đã hủy đăng ký khóa học thành công");
+        message.success("Hủy đăng ký khóa học thành công");
         adminService.getUserDetail(users.taiKhoan).then((result) => {
           setCourseSignup(result.data.chiTietKhoaHocGhiDanh);
         });
@@ -41,13 +41,35 @@ export default function Account() {
     email: '',
     maLoaiNguoiDung:''
   });
+
+  const validateInput = (name, value) => {
+    switch (name) {
+      case 'taiKhoan':
+      case 'matKhau':
+      case 'hoTen':
+      case 'soDT':
+      case 'email':
+      case 'maLoaiNguoiDung':
+        return value.trim() !== '';
+      case 'maNhom':
+        return value.trim() !== '' || value === 'GP01';
+      default:
+        return true;
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+    if (validateInput(name, value)) {
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    } else {
+      message.error(`${name} không được để trống`);
+    }
   };
+
   const handleUpdateUser = (event) => {
     event.preventDefault();
     const dataUpdate = {
@@ -67,6 +89,7 @@ export default function Account() {
         }));
         message.success("Cập nhật thông tin thành công");
         dispatch(turnOffLoading())
+        setFormData({});
       })
       .catch(error => {
         dispatch(turnOffLoading())
