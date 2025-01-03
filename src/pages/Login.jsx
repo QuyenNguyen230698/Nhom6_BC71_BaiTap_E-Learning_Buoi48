@@ -32,7 +32,7 @@ export default function Login() {
         window.location.href = "/account"
       }
     } catch (error) {
-      message.error(error.response?.data || "Đăng nhập thất bại. Vui lòng thử lại!");
+      message.error(error.response?.data || "Tài khoản hoặc mật khẩu không đúng!");
       dispatch(turnOffLoading())
     } finally {
       setIsActiveClick(false);

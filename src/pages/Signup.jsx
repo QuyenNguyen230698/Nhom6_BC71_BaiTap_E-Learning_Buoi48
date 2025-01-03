@@ -26,6 +26,38 @@ export default function Signup() {
   };
 
   const handleSignup = async (e) => {
+    if (!formData.taiKhoan) {
+      message.error("Tài khoản không được để trống!")
+      return
+    }
+    if (!formData.matKhau) {
+      message.error("Mật khẩu không được để trống!")
+      return
+    }
+    if (!formData.hoTen) {
+      message.error("Vui lòng nhập họ tên!")
+      return
+    }
+    if (!formData.soDT) {
+      message.error("Vui lòng nhập số điện thoại!")
+      return
+    }
+    if (!formData.email) {
+      message.error("Vui lòng nhập email!")
+      return
+    }
+    if (formData.matKhau.length < 8 || !/[A-Z]/.test(formData.matKhau)) {
+      message.error("Mật khẩu không đủ mạnh!")
+      return
+    }
+    if (formData.soDT.length !== 10) {
+      message.error("Số điện thoại không đúng!")
+      return
+    }
+    if (!formData.email.includes('@')) {
+      message.error("Email không hợp lệ!")
+      return
+    }
     e.preventDefault();
     setIsActiveClick(true);
     // Xử lý logic đăng ký ở đây
@@ -38,10 +70,10 @@ export default function Signup() {
       maNhom: "GP01"
     }
     adminService.registerUser(data).then((result) => {
-      message.success("Đăng ký thành công, vui lòng đăng nhập để sử dụng tài khoản")
+      message.success("Đăng ký thành công, đăng nhập để sử dụng tài khoản.")
       dispatch(turnOffLoading())
     }).catch((err) => {
-      message.error("Đăng ký thất bại, vui lòng thử lại")
+      message.error("Tài khoản đã tồn tại!")
       dispatch(turnOffLoading())
     });
   };

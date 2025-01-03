@@ -420,10 +420,10 @@ export default function AccountAdmin() {
         className="modal w-full h-auto flex justify-center items-center backdrop-blur-xl "
       >
         <div className="h-auto pt-6 pb-24 px-10 w-full max-w-2xl bg-white rounded-md z-50">
-          <div className="grid grid-cols-2 gap-2 items-start leading-none h-auto w-11/12">
+          <div className="grid grid-cols-2 gap-2 items-start leading-none h-auto w-full">
             <div className="flex w-full col-span-2 justify-end">
               <form method="dialog">
-                <button className="btnLVT">x</button>
+                <button className="uppercase">x</button>
               </form>
             </div>
 
@@ -554,10 +554,10 @@ export default function AccountAdmin() {
         className="modal w-full h-auto flex justify-center items-center backdrop-blur-xl "
       >
         <div className="h-full min-h-screen lg:h-auto overflow-y-auto pt-6 pb-24 px-10 w-full max-w-2xl bg-white rounded-md z-50">
-          <div className="grid grid-cols-2 gap-2 items-start leading-none h-auto w-11/12">
+          <div className="grid grid-cols-2 gap-2 items-start leading-none h-auto w-full">
             <div className="flex w-full col-span-2 justify-end">
               <form method="dialog">
-                <button className="btnLVT">x</button>
+                <button className="uppercase">x</button>
               </form>
             </div>
 
