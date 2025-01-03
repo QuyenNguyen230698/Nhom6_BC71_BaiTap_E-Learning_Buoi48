@@ -12,6 +12,12 @@ export default function Return() {
     return formattedAmount;
   };
 
+  useEffect(() => {
+    if (dataCart && Object.keys(dataCart).length > 0) {
+      message.success("Đăng ký khóa học thành công");
+    }
+  }, [dataCart]);
+
   const checkPaymentStatusFromUrl = async () => {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
@@ -43,7 +49,6 @@ export default function Return() {
     } catch (err) {
     } finally {
     }
-    message.success("Đăng ký khóa học thành công");
   };
   checkPaymentStatusFromUrl();
 
