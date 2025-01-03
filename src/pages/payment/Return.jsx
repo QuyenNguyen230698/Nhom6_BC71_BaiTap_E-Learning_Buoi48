@@ -38,6 +38,7 @@ export default function Return() {
 
       if (data.result) {
         setDataCart(data.data);
+        console.log(dataCart)
         if (dataCart.length > 0) {
           message.success("Đăng ký khóa học thành công");
         } else {
