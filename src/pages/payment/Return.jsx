@@ -38,7 +38,7 @@ export default function Return() {
 
       if (data.result) {
         setDataCart(data.data);
-        if (dataCart.vpc_Message === "Approved") {
+        if (dataCart.length > 0) {
           message.success("Đăng ký khóa học thành công");
         } else {
           message.error("Bạn đã huỷ thanh toán khóa học");
