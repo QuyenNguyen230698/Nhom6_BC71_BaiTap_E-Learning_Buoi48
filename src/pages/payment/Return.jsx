@@ -38,9 +38,12 @@ export default function Return() {
 
       if (data.result) {
         setDataCart(data.data);
-        message.success("Đăng ký khóa học thành công");
+        if (dataCart.vpc_CardNum) {
+          message.success("Đăng ký khóa học thành công");
+        } else {
+          message.error("Bạn đã huỷ thanh toán khóa học");
+        }
       } else {
-        message.error("Đăng ký khóa học thất bại");
       }
     } catch (err) {
     } finally {
