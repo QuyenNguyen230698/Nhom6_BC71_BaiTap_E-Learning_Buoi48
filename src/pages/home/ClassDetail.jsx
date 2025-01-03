@@ -26,18 +26,6 @@ export default function ClassDetail() {
             message.warning("Vui lòng đăng nhập để sử dụng chức năng này");
             window.location.href = "/login"
           }
-        const formData = JSON.stringify({
-            maKhoaHoc: maKhoaHoc,
-            taiKhoan: dataUser.taiKhoan
-          });
-          adminService.registerCourse(formData).then((result) => {
-            message.success("Đăng ký khóa học thành công")
-            dispatch(turnOffLoading())
-          }).catch((err) => {
-            console.log(err)
-            dispatch(turnOffLoading())
-            message.error("Bạn đã đăng ký khóa học này rồi")
-          });
 
           //payment
           const paymentFetch = async () => {
@@ -60,13 +48,25 @@ export default function ClassDetail() {
                 if(responsive.result){
                     return responsive.paymentUrl
                 }else{
-                    console.error('Payment failed')
+                    message.error('Payment failed')
                 }
                
           }
 
          const url = await paymentFetch()
          window.location.href = url
+
+         const formData = JSON.stringify({
+            maKhoaHoc: maKhoaHoc,
+            taiKhoan: dataUser.taiKhoan
+          });
+          adminService.registerCourse(formData).then((result) => {
+            dispatch(turnOffLoading())
+          }).catch((err) => {
+            console.log(err)
+            dispatch(turnOffLoading())
+            message.error("Bạn đã đăng ký khóa học này rồi")
+          });
     }
 
     useEffect(() => {
@@ -386,8 +386,10 @@ export default function ClassDetail() {
             {/* right */}
             <div data-aos="fade-up" data-aos-delay="100" className='col-span-12 md:col-span-6 lg:col-span-4 w-full h-full min-h-screen '>
                 <div className='md:ml-6 flex flex-col h-auto w-full p-2 shadow-xl gap-2 sticky top-20'>
+                    <div className='h-60'>
                     <img src={course.hinhAnh} alt="" className='w-full h-full object-cover'/>
-                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-4'>
+                    </div>
+                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-3'>
                         <p className='text-black-gray text-lg'>Ghi danh: <span className='font-bold text-black-gray text-lg'>10 học viên</span></p>
                         <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" className="size-6">
@@ -395,7 +397,7 @@ export default function ClassDetail() {
                         </svg>
                         </span>
                     </div>
-                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-4'>
+                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-3'>
                         <p className='text-black-gray text-lg'>Thời gian:  <span className='font-bold text-black-gray text-lg'>18 giờ</span></p>
                         <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="size-6">
@@ -403,7 +405,7 @@ export default function ClassDetail() {
                         </svg>
                         </span>
                     </div>
-                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-4'>
+                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-3'>
                         <p className='text-black-gray text-lg'>Bài học: <span className='font-bold text-black-gray text-lg'>10</span></p>
                         <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="size-6">
@@ -411,13 +413,13 @@ export default function ClassDetail() {
                         </svg>
                         </span>
                     </div>
-                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-4'>
+                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-3'>
                         <p className='text-black-gray text-lg'>Video: <span className='font-bold text-black-gray text-lg'>14</span></p>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-3.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-1.5A1.125 1.125 0 0 1 18 18.375M20.625 4.5H3.375m17.25 0c.621 0 1.125.504 1.125 1.125M20.625 4.5h-1.5C18.504 4.5 18 5.004 18 5.625m3.75 0v1.5c0 .621-.504 1.125-1.125 1.125M3.375 4.5c-.621 0-1.125.504-1.125 1.125M3.375 4.5h1.5C5.496 4.5 6 5.004 6 5.625m-3.75 0v1.5c0 .621.504 1.125 1.125 1.125m0 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m1.5-3.75C5.496 8.25 6 7.746 6 7.125v-1.5M4.875 8.25C5.496 8.25 6 8.754 6 9.375v1.5m0-5.25v5.25m0-5.25C6 5.004 6.504 4.5 7.125 4.5h9.75c.621 0 1.125.504 1.125 1.125m1.125 2.625h1.5m-1.5 0A1.125 1.125 0 0 1 18 7.125v-1.5m1.125 2.625c-.621 0-1.125.504-1.125 1.125v1.5m2.625-2.625c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125M18 5.625v5.25M7.125 12h9.75m-9.75 0A1.125 1.125 0 0 1 6 10.875M7.125 12C6.504 12 6 12.504 6 13.125m0-2.25C6 11.496 5.496 12 4.875 12M18 10.875c0 .621-.504 1.125-1.125 1.125M18 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m-12 5.25v-5.25m0 5.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125m-12 0v-1.5c0-.621-.504-1.125-1.125-1.125M18 18.375v-5.25m0 5.25v-1.5c0-.621.504-1.125 1.125-1.125M18 13.125v1.5c0 .621.504 1.125 1.125 1.125M18 13.125c0-.621.504-1.125 1.125-1.125M6 13.125v1.5c0 .621-.504 1.125-1.125 1.125M6 13.125C6 12.504 5.496 12 4.875 12m-1.5 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M19.125 12h1.5m0 0c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h1.5m14.25 0h1.5" />
                         </svg>
                     </div>
-                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-4'>
+                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-3'>
                         <p className='text-black-gray text-lg'>Trình độ: <span className='font-bold text-black-gray text-lg'>Người mới bắt đầu</span></p>
                         <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="size-6">
@@ -425,7 +427,7 @@ export default function ClassDetail() {
                         </svg>
                         </span>
                     </div>
-                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-4'>
+                    <div className='flex flex-row w-full items-center justify-between border-b border-gray-400 py-3'>
                         <p className='text-black-gray text-lg'>Giá trị: <span className='font-bold text-yellow-600 text-lg'>2,000,000 VNĐ</span></p>
                         <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" className="size-6">
