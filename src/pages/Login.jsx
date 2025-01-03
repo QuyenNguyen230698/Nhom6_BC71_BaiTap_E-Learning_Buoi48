@@ -13,6 +13,10 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
+    if (!account || !password) {
+      message.error("Vui lòng nhập tài khoản và mật khẩu!")
+      return
+    }
     e.preventDefault();
     setIsActiveClick(true);
     try {
