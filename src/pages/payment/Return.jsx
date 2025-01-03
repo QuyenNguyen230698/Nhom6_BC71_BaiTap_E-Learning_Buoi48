@@ -38,17 +38,12 @@ export default function Return() {
 
       if (data.result) {
         setDataCart(data.data);
-        console.log(dataCart)
-        if (dataCart.length > 0) {
-          message.success("Đăng ký khóa học thành công");
-        } else {
-          message.error("Bạn đã huỷ thanh toán khóa học");
-        }
       } else {
       }
     } catch (err) {
     } finally {
     }
+    console.log(data.data)
   };
   useEffect(() => {
     checkPaymentStatusFromUrl();
