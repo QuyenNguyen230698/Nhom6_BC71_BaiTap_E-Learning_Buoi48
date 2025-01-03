@@ -43,7 +43,6 @@ export default function Return() {
     } catch (err) {
     } finally {
     }
-    console.log(data.data)
   };
   useEffect(() => {
     checkPaymentStatusFromUrl();
@@ -98,6 +97,17 @@ export default function Return() {
             <h2 className="font-bold text-xl">Trạng thái:</h2>
             <p className="text-black-gray">{dataCart.vpc_Message}</p>
           </div>
+          {dataCart.vpc_Message === "Approved" ? (
+            <div className="flex flex-row justify-between items-center w-full mx-3 border-b container mx-auto">
+              <h2 className="font-bold text-xl">Đăng ký:</h2>
+              <p className="text-black-gray">Thành Công</p>
+            </div>
+          ) : (
+            <div className="flex flex-row justify-between items-center w-full mx-3 border-b container mx-auto">
+              <h2 className="font-bold text-xl">Đăng ký:</h2>
+              <p className="text-black-gray">Thất Bại</p>
+            </div>
+          )}
         </div>
         <div className="w-full items-center justify-center flex min-w-full py-2">
           <a href="/" className="btn btn-warning">
