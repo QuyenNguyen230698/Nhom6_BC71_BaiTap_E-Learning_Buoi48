@@ -6,7 +6,7 @@ export default function Spring2025() {
     title: 'Chúc mừng năm mới',
     subTitle: 'Học Tập Đúng Xu Hướng - Bứt Phá Mọi Giới Hạn',
     description: '',
-    img: 'https://res.cloudinary.com/dmd3qqgum/image/upload/v1735920412/att.HcI9_T2BwlfBrO-WUxgEBY_tjjzBwC2bZFNJZk4E3bg_bgknum.jpg'
+    img: '/img/springBanner2025.webp'
   };
 
   const sections = [

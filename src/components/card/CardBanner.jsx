@@ -12,7 +12,7 @@ export default function CardBanner({dataBanner}) {
                 <h1 data-aos="fade-up" data-aos-delay="200" className='textTitle uppercase text-center tracking-wide text-yellow-500'>{subTitle}</h1>
                 <p data-aos="fade-up" data-aos-delay="300" className='textTitle uppercase text-center tracking-wide italic text-green-600'>Art: Hà DEV</p>
             </div>
-            <div className='absolute inset-0 h-1/10 bg-gradient-to-b from-black/50 to-transparent pointer-events-none z-0'></div>
+            <div className='absolute inset-0 bg-gradient-to-b from-black/70 to-transparent pointer-events-none z-0'></div>
         </div>
       </section>
     </div>
