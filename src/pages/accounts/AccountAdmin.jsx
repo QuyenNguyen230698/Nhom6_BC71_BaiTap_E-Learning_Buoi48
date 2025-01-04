@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 import AccountListCourse from "./AccountListCourse";
 import AccountListUser from "./AccountListUser";
-import { useFormik } from "formik";
 
 export default function AccountAdmin() {
   const [listAccount, setListAccount] = useState([]);
@@ -17,15 +16,15 @@ export default function AccountAdmin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const itemsPerPage = 30;
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     taiKhoan: "",
     matKhau: "",
     hoTen: "",
     soDT: "",
-    maNhom: "GP01", // Giá trị mặc định
     email: "",
     maLoaiNguoiDung: "",
-  });
+  };
+  const [formData, setFormData] = useState(initialFormData);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -33,43 +32,55 @@ export default function AccountAdmin() {
       [name]: value,
     }));
   };
-  //#region add Course
-  const formik = useFormik({
-    initialValues: {
-      maKhoaHoc: "",
-      biDanh: "",
-      tenKhoaHoc: "",
-      moTa: "",
-      luotXem: 0,
-      danhGia: 0,
-      maNhom: "",
-      ngayTao: "",
-      maDanhMucKhoaHoc: "",
-      taiKhoanNguoiTao: "",
-      hinhAnh: "",
-    },
-    onSubmit: (values) => {
-      let dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
-      values.taiKhoanNguoiTao = dataUser.taiKhoan;
 
-      let formData = new FormData();
-      for (let key in values) {
-        formData.append(key, values[key]);
-      }
-      VlearningService.addCourse(formData)
-        .then((result) => {
-          dispatch(turnOffLoading());
-          message.success("Success");
-          reloadCourseList();
-        })
-        .catch((err) => {
-          console.log(formData);
-          message.error("Thông tin khoá học không hợp lệ");
-          console.log(err);
-          dispatch(turnOffLoading());
-        });
-    },
-  });
+  const initialCourseData = {
+    maKhoaHoc: "",
+    biDanh: "",
+    tenKhoaHoc: "",
+    moTa: "",
+    luotXem: 0,
+    danhGia: 0,
+    maNhom: "",
+    ngayTao: "",
+    maDanhMucKhoaHoc: "",
+    taiKhoanNguoiTao: "",
+    hinhAnh: "",
+  };
+  const [courseData, setCourseData] = useState(initialCourseData);
+
+  const handleCourseChange = (e) => {
+    const { name, value } = e.target;
+    setCourseData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleAddCourse = (event) => {
+    event.preventDefault();
+    let dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
+    courseData.taiKhoanNguoiTao = dataUser.taiKhoan;
+
+    let formData = new FormData();
+    for (let key in courseData) {
+      formData.append(key, courseData[key]);
+    }
+    VlearningService.addCourse(formData)
+      .then((result) => {
+        dispatch(turnOffLoading());
+        message.success("Thêm Khoá Học Thành Công");
+        reloadCourseList();
+        closeModal2();
+        setCourseData(initialCourseData);
+      })
+      .catch((err) => {
+        message.error("Thông tin khoá học không hợp lệ");
+        dispatch(turnOffLoading());
+        closeModal2();
+        setCourseData(initialCourseData);
+      });
+  };
+
   let handleFileChange = (e) => {
     let file = e.target.files[0];
 
@@ -88,7 +99,10 @@ export default function AccountAdmin() {
           const fileExtension = file.type.split("/")[1];
           const blobUrlWithExtension = `${blobUrl}.${fileExtension}`;
           setPreviewImage(blobUrlWithExtension);
-          formik.setFieldValue("hinhAnh", blobUrlWithExtension);
+          setCourseData((prevState) => ({
+            ...prevState,
+            hinhAnh: blobUrlWithExtension,
+          }));
         };
       } else {
         message.error("Image size must be less than 1 MB");
@@ -101,9 +115,8 @@ export default function AccountAdmin() {
       e.target.value = null;
     }
   };
-  //#endregion
 
-  //#region add users
+  //#endregion add users
   const addUsersAdmin = (event) => {
     event.preventDefault();
     const dataUpdate = {
@@ -121,6 +134,7 @@ export default function AccountAdmin() {
         message.success("Thêm Người Dùng Thành Công");
         reloadUserList();
         dispatch(turnOffLoading());
+        setFormData(initialFormData);
       })
       .then(() => {
         closeModal1()
@@ -129,6 +143,7 @@ export default function AccountAdmin() {
         dispatch(turnOffLoading());
         closeModal1()
         message.error("Thêm thất bại, vui lòng thử lại");
+        setFormData(initialFormData);
       });
   };
   //#endregion
@@ -277,10 +292,13 @@ export default function AccountAdmin() {
     document.getElementById("my_modal_1").showModal();
   };
 
-  const handleAddCourse = () => {
-    formik.handleSubmit();
-    closeModal2()
+  const closeModal1 = () => {
+    document.getElementById("my_modal_1").close();
   };
+  const closeModal2 = () => {
+    document.getElementById("my_modal_2").close();
+  };
+
   const [searchuser, setSearchUser] = useState([]);
   //Search Users
   const autoSearchUser = async(event) => {
@@ -326,16 +344,9 @@ export default function AccountAdmin() {
     setSearchUser(await searchFilter(event.target.value));
   };
 
-  const closeModal1 = () => {
-    document.getElementById("my_modal_1").close();
-  };
-  const closeModal2 = () => {
-    document.getElementById("my_modal_2").close();
-  };
-
   return (
     <div className="py-20 flex flex-col gap-6 w-full h-full bg-home">
-      <div className="w-full flex flex-wrap items-center container mx-auto gap-2">
+      <div className="w-full flex overflow-x-auto items-center container mx-auto gap-2 px-3">
         <button onClick={handleAddUserClick} className="btn btn-success">
           Thêm Người Dùng
         </button>
@@ -588,8 +599,8 @@ export default function AccountAdmin() {
               <input
                 type="text"
                 name="maKhoaHoc"
-                value={formik.maKhoaHoc}
-                onChange={formik.handleChange}
+                value={courseData.maKhoaHoc}
+                onChange={handleCourseChange}
                 className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                 placeholder="Nhập mã khoá học"
                 required
@@ -601,8 +612,8 @@ export default function AccountAdmin() {
               </label>
               <select
                 name="maDanhMucKhoaHoc"
-                value={formik.maDanhMucKhoaHoc}
-                onChange={formik.handleChange}
+                value={courseData.maDanhMucKhoaHoc}
+                onChange={handleCourseChange}
                 className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                 required
               >
@@ -622,8 +633,8 @@ export default function AccountAdmin() {
               <input
                 type="text"
                 name="tenKhoaHoc"
-                value={formik.tenKhoaHoc}
-                onChange={formik.handleChange}
+                value={courseData.tenKhoaHoc}
+                onChange={handleCourseChange}
                 className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                 placeholder="Nhập tên khoá học"
                 required
@@ -637,8 +648,8 @@ export default function AccountAdmin() {
                 type="text"
                 name="ngayTao"
                 format={"DD/MM/YYYY"}
-                value={formik.ngayTao}
-                onChange={formik.handleChange}
+                value={courseData.ngayTao}
+                onChange={handleCourseChange}
                 className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                 placeholder="Nhập ngày tạo DD/MM/YYYY"
                 required
@@ -651,8 +662,8 @@ export default function AccountAdmin() {
               <input
                 type="number"
                 name="danhGia"
-                value={formik.danhGia}
-                onChange={formik.handleChange}
+                value={courseData.danhGia}
+                onChange={handleCourseChange}
                 className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                 placeholder="Nhập Số Đánh Giá"
                 required
@@ -665,8 +676,8 @@ export default function AccountAdmin() {
               <input
                 type="number"
                 name="luotXem"
-                value={formik.luotXem}
-                onChange={formik.handleChange}
+                value={courseData.luotXem}
+                onChange={handleCourseChange}
                 className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                 placeholder="Nhập Số Lượt xem"
                 required
@@ -679,8 +690,8 @@ export default function AccountAdmin() {
               <input
                 type="text"
                 name="biDanh"
-                value={formik.biDanh}
-                onChange={formik.handleChange}
+                value={courseData.biDanh}
+                onChange={handleCourseChange}
                 className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                 placeholder="Nhập bí danh"
                 required
@@ -692,8 +703,8 @@ export default function AccountAdmin() {
               </label>
               <select
                 name="maNhom"
-                value={formik.maNhom}
-                onChange={formik.handleChange}
+                value={courseData.maNhom}
+                onChange={handleCourseChange}
                 className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                 required
               >
@@ -708,8 +719,8 @@ export default function AccountAdmin() {
               <input
                 type="text"
                 name="moTa"
-                value={formik.moTa}
-                onChange={formik.handleChange}
+                value={courseData.moTa}
+                onChange={handleCourseChange}
                 className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                 placeholder="Nhập mô tả"
                 required
@@ -733,12 +744,12 @@ export default function AccountAdmin() {
           <div className=" w-full">
             <form
               method="dialog w-full"
-              onSubmit={(e) => {
-                e.preventDefault(); // Prevent default form submission
-                handleAddCourse(); // Call the existing function
-              }}
+              // onSubmit={(e) => {
+              //   e.preventDefault(); 
+              //   handleAddCourse(); 
+              // }}
             >
-              <button type="submit" className="btnLVT w-full font-thin">
+              <button type="submit" onClick={handleAddCourse} className="btnLVT w-full font-thin">
                 Thêm Khoá Học
               </button>
             </form>
