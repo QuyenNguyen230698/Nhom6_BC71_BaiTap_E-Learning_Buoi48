@@ -70,12 +70,26 @@ export default function Signup() {
       maNhom: "GP01"
     }
     adminService.registerUser(data).then((result) => {
+      clearForm()
+      dispatch(turnOffLoading())
       message.success("Đăng ký thành công, đăng nhập để sử dụng tài khoản.")
-      dispatch(turnOffLoading())
     }).catch((err) => {
-      message.error("Tài khoản đã tồn tại!")
+      clearForm()
       dispatch(turnOffLoading())
+      message.error("Tài khoản đã tồn tại!")
     });
+  };
+
+  const clearForm = () => {
+    setFormData({
+      taiKhoan: '',
+      matKhau: '',
+      hoTen: '',
+      soDT: '',
+      maNhom: 'GP01', // Giá trị mặc định
+      email: ''
+    });
+    setIsActiveClick(false);
   };
 
   return (

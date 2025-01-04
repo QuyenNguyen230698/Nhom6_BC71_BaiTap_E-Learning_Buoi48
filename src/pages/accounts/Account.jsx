@@ -97,7 +97,6 @@ export default function Account() {
       .catch(error => {
         dispatch(turnOffLoading())
         message.error("Có lỗi xảy ra khi cập nhật thông tin");
-        console.error(error);
       });
   };
 
