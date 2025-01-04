@@ -56,10 +56,40 @@ export default function AccountAdmin() {
     }));
   };
 
+  const isValidDate = () => {
+    const datePattern = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+    const match = courseData.ngayTao.match(datePattern);
+    if (!match) return false;
+
+    const day = parseInt(match[1], 10);
+    const month = parseInt(match[2], 10);
+    const year = parseInt(match[3], 10);
+
+    // Check if the date is valid
+    if (month < 1 || month > 12) return false;
+    const daysInMonth = new Date(year, month, 0).getDate();
+    if (day < 1 || day > daysInMonth) return false;
+
+    return true;
+  }
+
   const handleAddCourse = (event) => {
     event.preventDefault();
     let dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
     courseData.taiKhoanNguoiTao = dataUser.taiKhoan;
+
+    // Validate courseData fields
+    if (!courseData.maKhoaHoc || !courseData.biDanh || !courseData.tenKhoaHoc || !courseData.moTa || !courseData.luotXem || !courseData.danhGia || !courseData.maNhom || !courseData.ngayTao || !courseData.maDanhMucKhoaHoc || !courseData.hinhAnh) {
+      closeModal2();
+      message.error("Các trường thông tin không được bỏ trống!");
+      return;
+    }
+
+    if (!isValidDate()) {
+      closeModal2();
+      message.error("Ngày tạo không đúng định dạng DD/MM/YYYY hoặc không hợp lệ!");
+      return;
+    }
 
     let formData = new FormData();
     for (let key in courseData) {
@@ -105,20 +135,59 @@ export default function AccountAdmin() {
           }));
         };
       } else {
-        message.error("Image size must be less than 1 MB");
+        closeModal2();
+        message.error("Hình ảnh khóa học không được quá 1 MB");
         e.target.value = null;
       }
     } else {
       message.error(
-        "Please upload a valid image file (PNG, JPEG, GIF, or JPG)"
+        "Hình ảnh khóa học phải là dạng hình ảnh (PNG, JPEG, GIF, or JPG)"
       );
       e.target.value = null;
     }
   };
 
-  //#endregion add users
+  //#region add users
+  const isValidPassword = (password) => {
+    const hasNoSpaces = !/\s/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    return hasNoSpaces && hasUppercase;
+  };
+  const isValidsoDT = (soDT) => {
+    const isTenDigits = /^\d{10}$/.test(soDT);
+    return isTenDigits;
+  };
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const addUsersAdmin = (event) => {
     event.preventDefault();
+    if (!formData.taiKhoan || !formData.matKhau || !formData.hoTen || !formData.soDT || !formData.email || !formData.maLoaiNguoiDung) {
+      closeModal1()
+      message.error("Các trường thông tin không được bỏ trống!");
+      return;
+    }
+
+    if (!isValidPassword(formData.matKhau)) {
+      closeModal1();
+      message.error("Mật khẩu không được chứa khoảng trắng và phải có ít nhất một ký tự viết hoa!");
+      return;
+    }
+
+    if (!isValidsoDT(formData.soDT)) {
+      closeModal1();
+      message.error("Số điện thoại phải là 10 chữ số!");
+      return;
+    }
+
+    if (!isValidEmail(formData.email)) {
+      closeModal1();
+      message.error("Email phải đúng định dạng!");
+      return;
+    }
+
     const dataUpdate = {
       taiKhoan: formData.taiKhoan,
       matKhau: formData.matKhau,
@@ -197,6 +266,30 @@ export default function AccountAdmin() {
 
   const handleUpdateUser = (event) => {
     event.preventDefault();
+    if (!formData.taiKhoan || !formData.matKhau || !formData.hoTen || !formData.soDT || !formData.email || !formData.maLoaiNguoiDung) {
+      closeModal1()
+      message.error("Các trường thông tin không được bỏ trống!");
+      return;
+    }
+
+    if (!isValidPassword(formData.matKhau)) {
+      closeModal1();
+      message.error("Mật khẩu không được chứa khoảng trắng và phải có ít nhất một ký tự viết hoa!");
+      return;
+    }
+
+    if (!isValidsoDT(formData.soDT)) {
+      closeModal1();
+      message.error("Số điện thoại phải là 10 chữ số!");
+      return;
+    }
+
+    if (!isValidEmail(formData.email)) {
+      closeModal1();
+      message.error("Email phải đúng định dạng!");
+      return;
+    }
+
     const dataUpdate = {
       taiKhoan: formData.taiKhoan,
       matKhau: formData.matKhau,
@@ -742,13 +835,7 @@ export default function AccountAdmin() {
             />
           </div>
           <div className=" w-full">
-            <form
-              method="dialog w-full"
-              // onSubmit={(e) => {
-              //   e.preventDefault(); 
-              //   handleAddCourse(); 
-              // }}
-            >
+            <form method="dialog w-full">
               <button type="submit" onClick={handleAddCourse} className="btnLVT w-full font-thin">
                 Thêm Khoá Học
               </button>

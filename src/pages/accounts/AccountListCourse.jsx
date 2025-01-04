@@ -3,11 +3,32 @@ import { VlearningService } from '../../../services/Vlearning'
 import { useDispatch } from 'react-redux';
 import { message } from 'antd';
 import { turnOffLoading } from '../../redux/loadingSlice';
-import { useFormik } from 'formik';
 
 export default function AccountListCourse({ listCourse,onButtonClick,searchuser,reloadCourseList }) {
     const dispatch = useDispatch()
     const [previewImage,setPreviewImage] = useState(null)
+    const [formData, setFormData] = useState({
+        maKhoaHoc: "",
+        biDanh: "",
+        tenKhoaHoc: "",
+        moTa: "",
+        luotXem: 0,
+        danhGia: 0,
+        maNhom: "",
+        ngayTao: "",
+        maDanhMucKhoaHoc: "",
+        taiKhoanNguoiTao: "",
+        hinhAnh: ""
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
     const handleDeleteCourse = (maKhoaHoc) => {
         VlearningService.deleteCourse(maKhoaHoc).then((result) => {
             message.success("Xoá Khoá Học Thành Công")
@@ -23,9 +44,8 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
     let dataUser = JSON.parse(localStorage.getItem("DATA_USER"));
     const showIndex = (maKhoaHoc) => {
         const course = listCourse.find(item => item.maKhoaHoc === maKhoaHoc);
-        console.log(course)
         if (course) {
-            formik.setValues({
+            setFormData({
                 maKhoaHoc: course.maKhoaHoc,
                 biDanh: course.biDanh,
                 tenKhoaHoc: course.tenKhoaHoc,
@@ -42,44 +62,61 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
         document.getElementById('my_modal_3').showModal();
     };
 
-    const formik = useFormik({
-        initialValues:{
-     maKhoaHoc: "",
-     biDanh: "",
-     tenKhoaHoc: "",
-     moTa: "",
-     luotXem: 0,
-     danhGia: 0,
-     maNhom: "",
-     ngayTao: "",
-     maDanhMucKhoaHoc: "",
-     taiKhoanNguoiTao:"",
-     hinhAnh: ""
-    },
-        onSubmit: (values) => {
-         values.taiKhoanNguoiTao = dataUser.taiKhoan
- 
-         let formData = new FormData();
-         for (let key in values) {
-            formData.append(key, values[key]);
+    const isValidDate = () => {
+        const datePattern = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+        const match = formData.ngayTao.match(datePattern);
+        if (!match) return false;
+    
+        const day = parseInt(match[1], 10);
+        const month = parseInt(match[2], 10);
+        const year = parseInt(match[3], 10);
+    
+        // Check if the date is valid
+        if (month < 1 || month > 12) return false;
+        const daysInMonth = new Date(year, month, 0).getDate();
+        if (day < 1 || day > daysInMonth) return false;
+    
+        return true;
+      }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        console.log(formData)
+        if (!formData.maKhoaHoc || !formData.biDanh || !formData.tenKhoaHoc || !formData.moTa || !formData.luotXem || !formData.danhGia || !formData.maNhom || !formData.ngayTao || !formData.maDanhMucKhoaHoc) {
+            closeModal3();
+            message.error("Các trường thông tin không được bỏ trống!");
+            return;
         }
-         VlearningService.updateCourse(formData).then((result) => {
-             dispatch(turnOffLoading())
-             closeModal3()
-             message.success("Cập nhật khóa hoc thành công")
-         }).then(() => {
+        if (!isValidDate()) {
+            closeModal3();
+            message.error("Ngày tạo không đúng định dạng DD/MM/YYYY hoặc không hợp lệ!");
+            return;
+          }
+
+        formData.taiKhoanNguoiTao = dataUser.taiKhoan;
+
+        let formDataObj = new FormData();
+        for (let key in formData) {
+            formDataObj.append(key, formData[key]);
+        }
+        VlearningService.updateCourse(formDataObj).then((result) => {
+            dispatch(turnOffLoading())
             closeModal3()
-         })
-         .catch((err) => {
-             dispatch(turnOffLoading())
-             closeModal3()
-             message.error("Thông tin khoá học không hợp lệ")
-         });
-       }
-       })
-       let handleFileChange = (e) => {
+            message.success("Cập nhật khóa hoc thành công")
+        }).then(() => {
+            closeModal3()
+        })
+        .catch((err) => {
+            dispatch(turnOffLoading())
+            closeModal3()
+            message.error("Thông tin khoá học không hợp lệ")
+        });
+    };
+
+    let handleFileChange = (e) => {
         let file = e.target.files[0];
- 
+
         if (
           file.type === "image/png" ||
           file.type === "image/jpeg" ||
@@ -95,25 +132,26 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
               const fileExtension = file.type.split('/')[1];
               const blobUrlWithExtension = `${blobUrl}.${fileExtension}`;
               setPreviewImage(blobUrlWithExtension);
-              formik.setFieldValue("hinhAnh", blobUrlWithExtension);
+              setFormData((prevState) => ({
+                ...prevState,
+                hinhAnh: blobUrlWithExtension,
+              }));
             };
           } else {
-            message.error("Image size must be less than 1 MB");
+            closeModal3()
+            message.error("Hình ảnh khóa học không được quá 1 MB");
             e.target.value = null;
           }
         } else {
-          message.error("Please upload a valid image file (PNG, JPEG, GIF, or JPG)");
+            closeModal3()
+          message.error("Hình ảnh khóa học phải là dạng hình ảnh (PNG, JPEG, GIF, or JPG)");
           e.target.value = null;
         }
-       };
-       const handleUpdateCourse = () => {
-        formik.handleSubmit()
-        closeModal3()
-       }
-       
-       const closeModal3 = () => {
+    };
+
+    const closeModal3 = () => {
         document.getElementById("my_modal_3").close();
-      };
+    };
 
     return (
         <div data-aos="fade-up" data-aos-delay="100" className="overflow-x-auto w-full px-6 mx-auto">
@@ -171,8 +209,8 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
                         disabled
                         type="text"
                         name="maKhoaHoc"
-                        value={formik.values.maKhoaHoc}
-                        onChange={formik.handleChange}
+                        value={formData.maKhoaHoc}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                         placeholder="Nhập mã khoá học"
                         required
@@ -182,8 +220,8 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Danh Mục Khoá Học</label>
                         <select
                         name="maDanhMucKhoaHoc"
-                        value={formik.values.maDanhMucKhoaHoc}
-                        onChange={formik.handleChange}
+                        value={formData.maDanhMucKhoaHoc}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                         required
                         >
@@ -201,8 +239,8 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
                         <input
                         type="text"
                         name="tenKhoaHoc"
-                        value={formik.values.tenKhoaHoc}
-                        onChange={formik.handleChange}
+                        value={formData.tenKhoaHoc}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                         placeholder="Nhập tên khoá học"
                         required
@@ -214,8 +252,8 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
                         type="text"
                         name="ngayTao"
                         format={"DD/MM/YYYY"}
-                        value={formik.values.ngayTao}
-                        onChange={formik.handleChange}
+                        value={formData.ngayTao}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                         placeholder="Nhập ngày tạo DD/MM/YYYY"
                         required
@@ -226,8 +264,8 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
                         <input
                         type="number"
                         name="danhGia"
-                        value={formik.values.danhGia}
-                        onChange={formik.handleChange}
+                        value={formData.danhGia}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                         placeholder="Nhập Số Đánh Giá"
                         required
@@ -238,8 +276,8 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
                         <input
                         type="number"
                         name="luotXem"
-                        value={formik.values.luotXem}
-                        onChange={formik.handleChange}
+                        value={formData.luotXem}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                         placeholder="Nhập Số Lượt xem"
                         required
@@ -250,8 +288,8 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
                         <input
                         type="text"
                         name="biDanh"
-                        value={formik.values.biDanh}
-                        onChange={formik.handleChange}
+                        value={formData.biDanh}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                         placeholder="Nhập bí danh"
                         required
@@ -261,8 +299,8 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
                         <label className="block mb-2 text-sm font-semibold text-black-gray">Mã Nhóm</label>
                         <select
                         name="maNhom"
-                        value={formik.values.maNhom}
-                        onChange={formik.handleChange}
+                        value={formData.maNhom}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                         required
                         >
@@ -275,8 +313,8 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
                         <input
                         type="text"
                         name="moTa"
-                        value={formik.values.moTa}
-                        onChange={formik.handleChange}
+                        value={formData.moTa}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 border rounded focus:outline-none bg-white"
                         placeholder="Nhập mô tả"
                         required
@@ -294,10 +332,7 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
                         />
                       </div>
                     <div className=" w-full">
-                    <form method="dialog w-full" onSubmit={(e) => {
-                        e.preventDefault();
-                        handleUpdateCourse();
-                    }}>
+                    <form method="dialog w-full" onSubmit={handleSubmit}>
                         <button type="submit" className="btnLVT w-full font-thin">Thêm Khoá Học</button>
                     </form>
                     </div>
