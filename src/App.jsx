@@ -17,6 +17,7 @@ import ServerError from './pages/ServerError'
 import NotFound from './pages/NotFound'
 import Return from './pages/payment/Return'
 import Payment from './pages/payment/Payment'
+import Spring2025 from './pages/spring2025/Spring2025'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<Layout main={<Login />} />} />
         <Route path="/signup" element={<Layout main={<Signup />} />} />
         <Route path="/infoPage" element={<Layout main={<InfoPage />} />} />
+        <Route path="/spring2025" element={<Layout main={<Spring2025 />} />} />
         <Route path="/account" element={<Layout main={<Account />} />} />
         <Route path="/accountAdmin" element={<Layout main={<AccountAdmin />} />} />
         <Route path="/event" element={<Layout main={<EventPage />} />} />

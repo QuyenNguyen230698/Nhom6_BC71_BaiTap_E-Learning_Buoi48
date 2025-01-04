@@ -50,6 +50,7 @@ export default function Header() {
       <li className='pt-3'><NavLink onClick={toggleDropdown} to="/">Trang Chủ</NavLink></li>
       <li><NavLink onClick={toggleDropdown} to="/infoPage">Về Chúng Tôi</NavLink></li>
       <li><NavLink onClick={toggleDropdown} to="/event">Sự Kiện</NavLink></li>
+      <li><NavLink onClick={toggleDropdown} to="/spring2025">Báo Xuân 2025</NavLink></li>
       <li className='font-bold text-yellow-500 p-1' onClick={toggleDropdown}>Danh Mục</li>
       {listCourseCatalog?.map((item, index) => (
         <li key={index}><NavLink onClick={toggleDropdown} to={`/searchCourse/${item.maDanhMuc}`}>{item.tenDanhMuc}</NavLink></li>
