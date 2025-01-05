@@ -46,7 +46,7 @@ export default function Signup() {
       message.error("Vui lòng nhập email!")
       return
     }
-    if (formData.matKhau.length < 8 || !/[A-Z]/.test(formData.matKhau)) {
+    if (!formData.matKhau.length < 8 || !/[A-Z]/.test(formData.matKhau)) {
       message.error("Mật khẩu không đủ mạnh!")
       return
     }
