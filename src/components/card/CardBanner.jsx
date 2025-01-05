@@ -3,7 +3,7 @@ import React from 'react'
 export default function CardBanner({dataBanner}) {
   const {title, subTitle, img} = dataBanner;
   return (
-    <div data-aos="fade-up" data-aos-delay="100" className='bg-white w-full h-full'>
+    <div data-aos="fade-up" data-aos-delay="100" className='bg-white w-full h-full overflow-hidden'>
       <section className='flex flex-col overflow-hidden items-center justify-center w-full h-auto '>
         <div className='h-96 md:h-4/6 w-full overflow-hidden relative '>
             <img src={img} alt="banner" className='w-full h-35r object-cover' style={{ borderRadius: '0px' }} />

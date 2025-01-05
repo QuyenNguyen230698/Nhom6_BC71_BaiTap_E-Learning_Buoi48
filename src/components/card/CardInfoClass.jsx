@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CardInfoClass() {
   return (
-    <div className="py-10 grid grid-cols-3 w-full h-full gap-3 container mx-auto bg-home border-b border-black">
+    <div className="py-10 grid grid-cols-3 w-full h-full gap-3 container mx-auto bg-home">
       <div data-aos="fade-up" data-aos-delay="100" className="col-span-3 lg:col-span-1 w-full bg-teal-400 text-white h-full p-3 rounded-md">
         <h3 className="font-bold text-2xl uppercase ">Khóa học</h3>
         <p>
@@ -83,6 +83,7 @@ export default function CardInfoClass() {
           </p>
         </div>
       </div>
+      <div data-aos="fade-up" data-aos-delay="100" className="col-span-4 w-full bg-black-gray mt-4" style={{ height: "1px" }}></div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import CardCourse from "../../components/card/CardCourse";
 import CardUser from "../../components/card/CardUser";
 import CardCountingUp from "../../components/card/CardCountingUp";
 import CardInfoClass from "../../components/card/CardInfoClass";
+import CardADS from "../../components/card/CardADS";
 
 export default function Home() {
   const dataBanner = {
@@ -50,8 +51,9 @@ export default function Home() {
   ];
 
   return (
-    <div className="w-full h-full flex flex-col bg-white">
+    <div className="w-full h-full flex flex-col bg-white overflow-hidden">
       <CardBanner dataBanner={dataBanner} />
+      <CardADS/>
       <CardCountingUp />
       <CardInfoClass />
       <CardCourse />

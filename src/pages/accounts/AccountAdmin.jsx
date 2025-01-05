@@ -518,7 +518,7 @@ export default function AccountAdmin() {
           reloadCourseList={reloadCourseList}
         />
       )}
-      <div className="join w-full bg-white rounded-none text-black-gray container mx-auto flex flex-wrap items-center justify-center lg:justify-end">
+      <div className="join w-full bg-transparent rounded-none text-black-gray container mx-auto flex flex-wrap items-center justify-center lg:justify-end">
         <button
           className="join-item btn"
           onClick={() => handlePageChange(currentPage - 1)}

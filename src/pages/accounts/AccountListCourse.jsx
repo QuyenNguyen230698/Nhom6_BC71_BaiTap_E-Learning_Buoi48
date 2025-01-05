@@ -159,25 +159,25 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
             <table className="table table-xs">
                 <thead>
                     <tr className='text-black-gray text-base'>
-                        <th>Stt</th>
-                        <th>Mã khóa học</th>
-                        <th>Tên khóa học</th>
-                        <th>Hình ảnh</th>
-                        <th>Lượt xem</th>
-                        <th>Người tạo</th>
-                        <th>Thao tác</th>
+                        <th className='w-20 text-center'>Stt</th>
+                        <th className='w-48 text-left'>Mã khóa học</th>
+                        <th className='w-48 text-left'>Tên khóa học</th>
+                        <th className='w-48 text-left'>Hình ảnh</th>
+                        <th className='w-48 text-left'>Lượt xem</th>
+                        <th className='w-48 text-left'>Người tạo</th>
+                        <th className='w-48 text-left'>Thao tác</th>
                     </tr>
                 </thead>
                 <tbody className='w-full'>
                     {(searchuser.length > 0 ? searchuser : listCourse)?.map((user, index) => (
                         <tr key={user.maKhoaHoc}>
                             <th>{index + 1}</th>
-                            <td>{user.maKhoaHoc}</td>
-                            <td>{user.tenKhoaHoc}</td>
-                            <td className='line-clamp-1 max-w-40'>{user.hinhAnh}</td>
-                            <td>{user.luotXem}</td>
-                            <td>{user.ngayTao}</td>
-                            <td>
+                            <td className='w-48 text-left'>{user.maKhoaHoc}</td>
+                            <td className='w-48 text-left'>{user.tenKhoaHoc}</td>
+                            <td className='line-clamp-1 max-w-48 min-w-48 w-48 text-left'>{user.hinhAnh}</td>
+                            <td className='w-48 text-left'>{user.luotXem}</td>
+                            <td className='w-48 text-left'>{user.ngayTao}</td>
+                            <td className='w-48 text-left'>
                                 <div className="flex gap-2">
                                     <button 
                                         onClick={() => {

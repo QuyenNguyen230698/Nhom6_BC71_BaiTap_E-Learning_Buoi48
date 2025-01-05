@@ -39,7 +39,7 @@ export default function Footer() {
 
   return (
     <>
-      <div id='footerID' className='bg-black-gray'>
+      <div id='footerID' className='bg-black-gray overflow-hidden'>
         <div className="grid grid-cols-4 gap-4 p-4 items-stretch md:container mx-auto">
           <div className='flex flex-col items-start justify-start gap-3 w-full col-span-2 md:col-span-1'>
             <h6 data-aos="fade-up" data-aos-delay="100" className='text-white font-bold'>V-LEARNING</h6>
