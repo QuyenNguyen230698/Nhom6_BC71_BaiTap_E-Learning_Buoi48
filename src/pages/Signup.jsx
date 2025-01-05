@@ -46,8 +46,13 @@ export default function Signup() {
       message.error("Vui lòng nhập email!")
       return
     }
-    if (formData.matKhau.length < 8 || !/[A-Z]/.test(formData.matKhau)) {
-      message.error("Mật khẩu không đủ mạnh!")
+    if (
+      formData.matKhau.length < 6 || 
+      !/[A-Z]/.test(formData.matKhau) || 
+      !/[!@#$%^&*(),.?":{}|<>]/.test(formData.matKhau) ||
+      !/[0-9]/.test(formData.matKhau)
+    ) {
+      message.error("Mật khẩu phải có ít nhất 6 ký tự, 1 chữ hoa, 1 ký tự đặc biệt và 1 chữ số!")
       return
     }
     if (formData.soDT.length !== 10) {
