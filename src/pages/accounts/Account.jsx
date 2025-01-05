@@ -89,12 +89,29 @@ export default function Account() {
         }));
         message.success("Cập nhật thông tin thành công");
         dispatch(turnOffLoading())
-        setFormData({});
+        setFormData({
+          taiKhoan: '',
+          matKhau: '',
+          hoTen: '',
+          soDT: '',
+          maNhom: 'GP01', // Giá trị mặc định
+          email: '',
+          maLoaiNguoiDung:''
+        });
       })
       .then(() => {
         closeModal();
       })
       .catch(error => {
+        setFormData({
+          taiKhoan: '',
+          matKhau: '',
+          hoTen: '',
+          soDT: '',
+          maNhom: 'GP01', // Giá trị mặc định
+          email: '',
+          maLoaiNguoiDung:''
+        });
         dispatch(turnOffLoading())
         message.error("Có lỗi xảy ra khi cập nhật thông tin");
       });
