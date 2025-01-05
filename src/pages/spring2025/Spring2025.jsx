@@ -4,7 +4,7 @@ import CardBanner from "../../components/card/CardBanner";
 export default function Spring2025() {
   const dataBanner = {
     title: 'Chúc mừng năm mới',
-    subTitle: 'Học Tập Đúng Xu Hướng - Bứt Phá Mọi Giới Hạn',
+    subTitle: 'Khai Xuân Đón Lộc - CODE Thăng Hoa',
     description: '',
     img: 'https://res.cloudinary.com/dmd3qqgum/image/upload/v1736044683/att.-wy_QJ6zHSeZmtwBP_mxpJaMNqyvsLWb_pUt-ene_kg_njtscb.jpg'
   };
