@@ -3,9 +3,11 @@ import axios from 'axios';
 import { message } from 'antd';
 import { useDispatch } from 'react-redux';
 import { turnOffLoading, turnOnLoading } from '../redux/loadingSlice';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Footer() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -36,6 +38,9 @@ export default function Footer() {
       console.error('Error:', error);
     }
   };
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <>
@@ -62,25 +67,25 @@ export default function Footer() {
           </div>
           <div className='flex flex-col items-start justify-start gap-3 w-full col-span-2 md:col-span-1'>
             <h6 data-aos="fade-up" data-aos-delay="100" className='text-white font-bold uppercase'>Liên kết</h6>
-            <p data-aos="fade-up" data-aos-delay="200" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
-              <span>Trang chủ</span></p>
-              <p data-aos="fade-up" data-aos-delay="300" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
-              <span>Dịch vụ</span></p>
-              <p data-aos="fade-up" data-aos-delay="400" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
-              <span>Nhóm</span></p>
-              <p data-aos="fade-up" data-aos-delay="500" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
-              <span>Blog</span></p>
+            <p onClick={scrollToTop} data-aos="fade-up" data-aos-delay="200" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'> 
+            <NavLink to="/">Trang chủ</NavLink> </p>
+              <p onClick={scrollToTop} data-aos="fade-up" data-aos-delay="300" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
+              <NavLink to="/event">Dịch vụ</NavLink></p>
+              <p onClick={scrollToTop} data-aos="fade-up" data-aos-delay="400" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
+              <NavLink to="/spring2025">Nhóm</NavLink></p>
+              <p onClick={scrollToTop} data-aos="fade-up" data-aos-delay="500" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
+              <NavLink to="/infoPage ">Blog</NavLink></p>
           </div>
           <div className='flex flex-col items-start justify-start gap-3 w-full col-span-2 md:col-span-1'>
             <h6 data-aos="fade-up" data-aos-delay="100" className='text-white font-bold uppercase'>Khóa học</h6>
-            <p data-aos="fade-up" data-aos-delay="200" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
-              <span>Front End</span></p>
-              <p data-aos="fade-up" data-aos-delay="300" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
-              <span>Back End</span></p>
-              <p data-aos="fade-up" data-aos-delay="400" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
-              <span>Full Stack</span></p>
-              <p data-aos="fade-up" data-aos-delay="500" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
-              <span>Node Js</span></p>
+            <p onClick={scrollToTop} data-aos="fade-up" data-aos-delay="200" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
+              <NavLink to="/searchCourse/FrontEnd">Front End</NavLink></p>
+              <p onClick={scrollToTop} data-aos="fade-up" data-aos-delay="300" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
+              <NavLink to="/searchCourse/BackEnd">Back End</NavLink></p>
+              <p onClick={scrollToTop} data-aos="fade-up" data-aos-delay="400" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
+              <NavLink to="/searchCourse/FullStack">Full Stack</NavLink></p>
+              <p onClick={scrollToTop} data-aos="fade-up" data-aos-delay="500" className='textCollectionItemDescription flex flex-row items-center gap-2 link link-hover hover:text-white'>
+              <NavLink to="/searchCourse/TuDuy">Tư duy lập trình</NavLink></p>
           </div>
           <div className='flex flex-col items-start justify-start gap-3 w-full col-span-4 md:col-span-1'>
             <h6 data-aos="fade-up" data-aos-delay="100" className='text-white font-bold uppercase'>Đăng kí tư vấn</h6>

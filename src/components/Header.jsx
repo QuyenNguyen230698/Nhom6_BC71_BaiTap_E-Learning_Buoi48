@@ -27,6 +27,7 @@ export default function Header() {
         dispatch(turnOffLoading())
       }
     };
+    
 
     fetchCourseCatalog();
 
@@ -45,15 +46,16 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [dispatch, location.pathname]);
 
+
   const renderNavLinks = () => (
     <>    
-      <li className='pt-3'><NavLink onClick={toggleDropdown} to="/">Trang Chủ</NavLink></li>
-      <li><NavLink onClick={toggleDropdown} to="/infoPage">Về Chúng Tôi</NavLink></li>
-      <li><NavLink onClick={toggleDropdown} to="/event">Sự Kiện</NavLink></li>
-      <li><NavLink onClick={toggleDropdown} to="/spring2025">Báo Xuân 2025</NavLink></li>
+      <li onClick={scrollToTop} className='pt-3'><NavLink onClick={toggleDropdown} to="/">Trang Chủ</NavLink></li>
+      <li onClick={scrollToTop}><NavLink onClick={toggleDropdown} to="/infoPage">Về Chúng Tôi</NavLink></li>
+      <li onClick={scrollToTop}><NavLink onClick={toggleDropdown} to="/event">Sự Kiện</NavLink></li>
+      <li onClick={scrollToTop}><NavLink onClick={toggleDropdown} to="/spring2025">Báo Xuân 2025</NavLink></li>
       <li className='font-bold text-yellow-500 p-1' onClick={toggleDropdown}>Danh Mục</li>
       {listCourseCatalog?.map((item, index) => (
-        <li key={index}><NavLink onClick={toggleDropdown} to={`/searchCourse/${item.maDanhMuc}`}>{item.tenDanhMuc}</NavLink></li>
+        <li onClick={scrollToTop} key={index}><NavLink onClick={toggleDropdown} to={`/searchCourse/${item.maDanhMuc}`}>{item.tenDanhMuc}</NavLink></li>
       ))}
     </>
   );
@@ -66,6 +68,10 @@ export default function Header() {
     message.success("Đăng xuất thành công")
     window.location.href = "/login"
   }
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className='h-full w-full'>
