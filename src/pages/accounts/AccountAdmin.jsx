@@ -315,11 +315,13 @@ export default function AccountAdmin() {
           dispatch(turnOffLoading());
           closeModal1()
           message.success("Cập nhật thông tin thành công");
+          setFormData(initialFormData);
         } else {
           reloadUserList();
           dispatch(turnOffLoading());
           closeModal1()
           message.success("Cập nhật thông tin thành công");
+          setFormData(initialFormData);
         }
         dispatch(turnOffLoading());
       })
@@ -327,6 +329,7 @@ export default function AccountAdmin() {
         closeModal1()
       })
       .catch((error) => {
+        setFormData(initialFormData);
         dispatch(turnOffLoading());
         message.error("Có lỗi xảy ra khi cập nhật thông tin");
         console.error(error);
