@@ -159,26 +159,26 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
             <table className="table table-xs">
                 <thead>
                     <tr className='text-black-gray text-base'>
-                        <th className='w-20 text-center'>Stt</th>
-                        <th className='w-48 text-left'>Mã khóa học</th>
-                        <th className='w-48 text-left'>Tên khóa học</th>
-                        <th className='w-48 text-left'>Hình ảnh</th>
-                        <th className='w-48 text-left'>Lượt xem</th>
-                        <th className='w-48 text-left'>Người tạo</th>
-                        <th className='w-48 text-left'>Thao tác</th>
+                        <th className='w-20 text-center animate-fade-right animate-duration-500 animate-delay-300'>Stt</th>
+                        <th className='w-48 text-left animate-fade-right animate-duration-500 animate-delay-300'>Mã khóa học</th>
+                        <th className='w-48 text-left animate-fade-right animate-duration-500 animate-delay-300'>Tên khóa học</th>
+                        <th className='w-48 text-left animate-fade-right animate-duration-500 animate-delay-300'>Hình ảnh</th>
+                        <th className='w-48 text-left animate-fade-right animate-duration-500 animate-delay-300'>Lượt xem</th>
+                        <th className='w-48 text-left animate-fade-right animate-duration-500 animate-delay-300'>Người tạo</th>
+                        <th className='w-48 text-left animate-fade-right animate-duration-500 animate-delay-300'>Thao tác</th>
                     </tr>
                 </thead>
                 <tbody className='w-full'>
                     {(searchuser.length > 0 ? searchuser : listCourse)?.map((user, index) => (
                         <tr key={user.maKhoaHoc}>
-                            <th>{index + 1}</th>
-                            <td className='w-48 text-left'>{user.maKhoaHoc}</td>
-                            <td className='w-48 text-left'>{user.tenKhoaHoc}</td>
-                            <td className='line-clamp-1 max-w-48 min-w-48 w-48 text-left'>{user.hinhAnh}</td>
-                            <td className='w-48 text-left'>{user.luotXem}</td>
-                            <td className='w-48 text-left'>{user.ngayTao}</td>
-                            <td className='w-48 text-left'>
-                                <div className="flex gap-2">
+                            <th className='animate-fade-right animate-duration-500 animate-delay-300'>{index + 1}</th>
+                            <td className='w-48 text-left animate-fade-right animate-duration-500 animate-delay-300'>{user.maKhoaHoc}</td>
+                            <td className='w-48 text-left animate-fade-right animate-duration-500 animate-delay-300 '>{user.tenKhoaHoc}</td>
+                            <td className='line-clamp-1 max-w-48 min-w-48 w-48 text-left animate-fade-right animate-duration-500 animate-delay-300'>{user.hinhAnh}</td>
+                            <td className='w-48 text-left animate-fade-right animate-duration-500 animate-delay-300'>{user.luotXem}</td>
+                            <td className='w-48 text-left animate-fade-right animate-duration-500 animate-delay-300'>{user.ngayTao}</td>
+                            <td className='w-48 text-left animate-fade-right animate-duration-500 animate-delay-300'>
+                                <div className="flex gap-2 animate-fade-right animate-duration-500 animate-delay-300">
                                     <button 
                                         onClick={() => {
                                             showIndex(user.maKhoaHoc);

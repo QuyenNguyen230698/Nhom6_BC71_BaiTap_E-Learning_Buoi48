@@ -9,26 +9,26 @@ export default function AccountListUser({currentItems,indexOfFirstItem,handleEdi
         <table className="table table-xs">
             <thead>
                 <tr className='text-black-gray text-base'>
-                    <th>Stt</th>
-                    <th>Tài khoản</th>
-                    <th>Họ tên</th>
-                    <th>Email</th>
-                    <th>Số điện thoại</th>
-                    <th>Loại người dùng</th>
-                    <th>Thao tác</th>
+                    <th className='animate-fade-right animate-duration-500 animate-delay-300'>Stt</th>
+                    <th className='animate-fade-right animate-duration-500 animate-delay-300'>Tài khoản</th>
+                    <th className='animate-fade-right animate-duration-500 animate-delay-300'>Họ tên</th>
+                    <th className='animate-fade-right animate-duration-500 animate-delay-300'>Email</th>
+                    <th className='animate-fade-right animate-duration-500 animate-delay-300'>Số điện thoại</th>
+                    <th className='animate-fade-right animate-duration-500 animate-delay-300'>Loại người dùng</th>
+                    <th className='animate-fade-right animate-duration-500 animate-delay-300'>Thao tác</th>
                 </tr>
             </thead>
             <tbody>
             {(searchuser.length > 0 ? searchuser : currentItems)?.map((user, index) => (
                     <tr key={user.taiKhoan}>
-                        <th>{indexOfFirstItem + index + 1}</th>
-                        <td>{user.taiKhoan}</td>
-                        <td>{user.hoTen}</td>
-                        <td>{user.email}</td>
-                        <td>{user.soDt}</td>
-                        <td>{user.maLoaiNguoiDung}</td>
+                        <th className='animate-fade-right animate-duration-500 animate-delay-300'>{indexOfFirstItem + index + 1}</th>
+                        <td className='animate-fade-right animate-duration-500 animate-delay-300'>{user.taiKhoan}</td>
+                        <td className='animate-fade-right animate-duration-500 animate-delay-300'>{user.hoTen}</td>
+                        <td className='animate-fade-right animate-duration-500 animate-delay-300'>{user.email}</td>
+                        <td className='animate-fade-right animate-duration-500 animate-delay-300'>{user.soDt}</td>
+                        <td className='animate-fade-right animate-duration-500 animate-delay-300'>{user.maLoaiNguoiDung}</td>
                         <td>
-                            <div className="flex gap-2">
+                            <div className="flex gap-2 animate-fade-right animate-duration-500 animate-delay-300">
                                 <button type='button'
                                     onClick={() => handleEditUserClick(user.taiKhoan)} 
                                     className="btn btn-warning btn-xs"

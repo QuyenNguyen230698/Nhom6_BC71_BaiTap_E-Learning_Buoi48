@@ -442,7 +442,7 @@ export default function AccountAdmin() {
 
   return (
     <div className="py-20 flex flex-col gap-6 w-full h-full bg-home">
-      <div className="w-full flex overflow-x-auto items-center container mx-auto gap-2 px-3">
+      <div className="w-full flex overflow-x-auto items-center container mx-auto gap-2 px-3 animate-fade-right animate-duration-500 animate-delay-300">
         <button onClick={handleAddUserClick} className="btn btn-success">
           Thêm Người Dùng
         </button>
