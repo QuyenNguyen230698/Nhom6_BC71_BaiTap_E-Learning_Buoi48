@@ -64,7 +64,11 @@ export default {
   animation: {
     fadeIn: "fadeIn 1s ease-in-out", // Custom animation
   },
-  plugins: [require("@tailwindcss/typography"), require("daisyui")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("daisyui"),
+    require("tailwindcss-animated")
+  ],
   daisyui: {
     themes: [{
       light: {

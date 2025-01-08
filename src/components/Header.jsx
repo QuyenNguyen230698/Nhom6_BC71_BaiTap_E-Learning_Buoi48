@@ -49,13 +49,13 @@ export default function Header() {
 
   const renderNavLinks = () => (
     <>    
-      <li onClick={scrollToTop} className='pt-3'><NavLink onClick={toggleDropdown} to="/">Trang Chủ</NavLink></li>
-      <li onClick={scrollToTop}><NavLink onClick={toggleDropdown} to="/infoPage">Về Chúng Tôi</NavLink></li>
-      <li onClick={scrollToTop}><NavLink onClick={toggleDropdown} to="/event">Sự Kiện</NavLink></li>
-      <li onClick={scrollToTop}><NavLink onClick={toggleDropdown} to="/spring2025">Báo Xuân 2025</NavLink></li>
-      <li className='font-bold text-yellow-500 p-1' onClick={toggleDropdown}>Danh Mục</li>
+      <li onClick={scrollToTop} className='pt-3 ml-2 animate-fade-right animate-duration-500 animate-delay-300'><NavLink onClick={toggleDropdown} to="/">Trang Chủ</NavLink></li>
+      <li onClick={scrollToTop} className='ml-2 animate-fade-right animate-duration-500 animate-delay-300'><NavLink onClick={toggleDropdown} to="/infoPage">Về Chúng Tôi</NavLink></li>
+      <li onClick={scrollToTop} className='ml-2 animate-fade-right animate-duration-500 animate-delay-300'><NavLink onClick={toggleDropdown} to="/event">Sự Kiện</NavLink></li>
+      <li onClick={scrollToTop} className='ml-2 animate-fade-right animate-duration-500 animate-delay-300'><NavLink onClick={toggleDropdown} to="/spring2025">Báo Xuân 2025</NavLink></li>
+      <li className='font-bold text-yellow-500 p-1 ml-2 animate-fade-right animate-duration-500 animate-delay-300' onClick={toggleDropdown}>Danh Mục</li>
       {listCourseCatalog?.map((item, index) => (
-        <li onClick={scrollToTop} key={index}><NavLink onClick={toggleDropdown} to={`/searchCourse/${item.maDanhMuc}`}>{item.tenDanhMuc}</NavLink></li>
+        <li onClick={scrollToTop} key={index} className='ml-2 animate-fade-right animate-duration-500 animate-delay-300'><NavLink onClick={toggleDropdown} to={`/searchCourse/${item.maDanhMuc}`}>{item.tenDanhMuc}</NavLink></li>
       ))}
     </>
   );
