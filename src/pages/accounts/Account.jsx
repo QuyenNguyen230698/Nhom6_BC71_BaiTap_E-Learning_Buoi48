@@ -149,7 +149,7 @@ export default function Account() {
 
   return (
     <div className='py-32 flex flex-col w-full h-full bg-home'>
-      <div className='w-full flex flex-col lg:flex-row justify-center container mx-auto gap-6 px-6'>
+      <div className='w-full flex flex-col lg:flex-row justify-center container mx-auto gap-6 px-6 animate-fade-right animate-duration-500 animate-delay-300'>
         {users.maLoaiNguoiDung === "GV" ? (
           <button 
             className="btn btn-outline btn-error" 
@@ -174,18 +174,18 @@ export default function Account() {
       {showPersonalInfo ? (
         <div className='w-full container mx-auto max-w-4xl h-full py-10 px-4 flex flex-col'>
           <div className='flex flex-col lg:flex-row w-full lg:justify-between lg:items-center py-2 border-b border-black'>
-          <p className='text-black-gray text-lg font-bold'>Email: {users.email}</p>
-          <p className='text-black-gray text-lg font-bold'>Họ Tên: {users.hoTen}</p>
+          <p className='text-black-gray text-lg font-bold animate-fade-right animate-duration-500 animate-delay-300'>Email: {users.email}</p>
+          <p className='text-black-gray text-lg font-bold animate-fade-right animate-duration-500 animate-delay-300'>Họ Tên: {users.hoTen}</p>
           </div>
           <div className='flex flex-col lg:flex-row w-full lg:justify-between lg:items-center py-2 border-b border-black'>
-          <p className='text-black-gray text-lg font-bold'>Tài Khoản: {users.taiKhoan}</p>
-          <p className='text-black-gray text-lg font-bold'>Tên Loại Người Dùng: {users.maLoaiNguoiDung === "HV" ? "Học Viên" : users.maLoaiNguoiDung === "GV" ? "Giáo Viên" : users.tenLoaiNguoiDung}</p>
+          <p className='text-black-gray text-lg font-bold animate-fade-right animate-duration-500 animate-delay-300'>Tài Khoản: {users.taiKhoan}</p>
+          <p className='text-black-gray text-lg font-bold animate-fade-right animate-duration-500 animate-delay-300'>Tên Loại Người Dùng: {users.maLoaiNguoiDung === "HV" ? "Học Viên" : users.maLoaiNguoiDung === "GV" ? "Giáo Viên" : users.tenLoaiNguoiDung}</p>
           </div>
           <div className='flex flex-col lg:flex-row w-full lg:justify-between lg:items-center py-2 border-b border-black'>
-          <p className='text-black-gray text-lg font-bold'>Số ĐT: {users.soDT}</p>
-          <p className='text-black-gray text-lg font-bold'>Mã Loại Người Dùng: GP01</p>
+          <p className='text-black-gray text-lg font-bold animate-fade-right animate-duration-500 animate-delay-300'>Số ĐT: {users.soDT}</p>
+          <p className='text-black-gray text-lg font-bold animate-fade-right animate-duration-500 animate-delay-300'>Mã Loại Người Dùng: GP01</p>
           </div>
-          <div className='w-full flex justify-end items-end py-2'>
+          <div className='w-full flex justify-end items-end py-2 animate-fade-right animate-duration-500 animate-delay-300'>
             <button className='btn btn-warning text-white' onClick={()=>document.getElementById('my_modal_1').showModal()}>Cập nhật thông tin</button>
           </div>
         </div>
@@ -195,16 +195,16 @@ export default function Account() {
             courseSignup.map((course, index) => (
               <div key={index} className='course-item flex flex-row justify-between items-center py-2 border-b border-black'>
                 <div className='w-4/6 py-2'>
-                  <p className='text-black-gray text-lg font-bold'>Tên Khóa Học: {course.tenKhoaHoc}</p>
-                  <p className='text-black-gray text-lg text-justify line-clamp-4 lg:line-clamp-none'>Mô Tả: {course.moTa}</p>
+                  <p className='text-black-gray text-lg font-bold animate-fade-right animate-duration-500 animate-delay-300'>Tên Khóa Học: {course.tenKhoaHoc}</p>
+                  <p className='text-black-gray text-lg text-justify line-clamp-4 lg:line-clamp-none animate-fade-right animate-duration-500 animate-delay-300'>Mô Tả: {course.moTa}</p>
                 </div>
-                <div className='w-fit py-2'>
+                <div className='w-fit py-2 animate-fade-right animate-duration-500 animate-delay-300'>
                   <button onClick={() => handleDeleteSignupCourse(course.maKhoaHoc)} className='btn btn-warning text-white'>Huỷ đăng ký khóa học</button>
                 </div>
               </div>
             ))
           ) : (
-            <p className='text-center text-black-gray text-lg font-bold'>Bạn chưa đăng ký khóa học nào!</p>
+            <p className='text-center text-black-gray text-lg font-bold animate-fade-right animate-duration-500 animate-delay-300'>Bạn chưa đăng ký khóa học nào!</p>
           )}
         </div>
       )}
