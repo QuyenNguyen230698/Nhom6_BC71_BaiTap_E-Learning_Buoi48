@@ -154,7 +154,7 @@ export default function AccountListCourse({ listCourse,onButtonClick,searchuser,
     };
 
     return (
-        <div data-aos="fade-up" data-aos-delay="100" className="overflow-x-auto w-full px-6 mx-auto">
+        <div className="overflow-x-auto w-full px-6 mx-auto">
 
             <table className="table table-xs">
                 <thead>
