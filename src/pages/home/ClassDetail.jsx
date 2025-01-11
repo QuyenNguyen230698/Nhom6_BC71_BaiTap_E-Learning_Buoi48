@@ -60,13 +60,15 @@ export default function ClassDetail() {
             maKhoaHoc: maKhoaHoc,
             taiKhoan: dataUser.taiKhoan
           });
-          adminService.registerCourse(formData).then((result) => {
-            dispatch(turnOffLoading())
-          }).catch((err) => {
-            console.log(err)
-            dispatch(turnOffLoading())
-            message.error("Bạn đã đăng ký khóa học này rồi")
-          });
+setTimeout(() => {
+    adminService.registerCourse(formData).then((result) => {
+        dispatch(turnOffLoading())
+      }).catch((err) => {
+        console.log(err)
+        dispatch(turnOffLoading())
+        message.error("Bạn đã đăng ký khóa học này rồi")
+      });
+}, 1);
     }
 
     useEffect(() => {
