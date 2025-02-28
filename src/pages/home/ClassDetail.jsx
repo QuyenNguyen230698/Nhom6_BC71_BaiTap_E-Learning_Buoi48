@@ -29,7 +29,7 @@ export default function ClassDetail() {
 
           //payment
           const paymentFetch = async () => {
-            const data =  await fetch(`https://14.225.204.233:8000/payment/process`,{
+            const data =  await fetch(`http://14.225.204.233:8000/payment/process`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
