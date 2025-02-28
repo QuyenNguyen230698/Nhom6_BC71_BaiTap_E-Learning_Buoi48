@@ -26,7 +26,7 @@ export default function Return() {
     }
 
     try {
-      const response = await fetch("https://api.jobspeeds.com/payment/status", {
+      const response = await fetch("https://14.225.204.233:8000/payment/status", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
